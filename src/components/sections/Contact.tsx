@@ -314,12 +314,12 @@ const Contact = memo(() => {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-teal/5" />
                 <div className="text-center p-6 relative z-10">
                   <Icon icon="mdi:map-marker-radius" className="w-16 h-16 text-primary/50 mx-auto mb-3" />
-                  <p className="text-muted-foreground text-sm">
-                    Located in Colombo, Sri Lanka
-                  </p>
-                  <p className="text-muted-foreground text-xs mt-1">
-                    Serving clients nationwide
-                  </p>
+                <p className="text-muted-foreground text-sm">
+                  Located in Mount Lavinia, Sri Lanka
+                </p>
+                <p className="text-muted-foreground text-xs mt-1">
+                  Serving clients nationwide
+                </p>
                 </div>
               </div>
             </div>

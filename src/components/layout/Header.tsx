@@ -2,12 +2,11 @@ import { useState, useEffect, memo } from 'react';
 import { Icon } from '@iconify/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
-import { navLinks, serviceDropdownLinks } from '@/utils/constants';
+import { navLinks } from '@/utils/constants';
 
 const Header = memo(() => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isServicesOpen, setIsServicesOpen] = useState(false);
   
   const activeSection = useScrollSpy({
     sectionIds: ['home', 'services', 'secretarial', 'taxation', 'accountancy', 'contact'],
@@ -30,14 +29,10 @@ const Header = memo(() => {
       window.scrollTo({ top: offsetTop, behavior: 'smooth' });
     }
     setIsMobileMenuOpen(false);
-    setIsServicesOpen(false);
   };
 
   const isActive = (href: string) => {
     const sectionId = href.replace('#', '');
-    if (sectionId === 'services') {
-      return ['services', 'secretarial', 'taxation', 'accountancy'].includes(activeSection);
-    }
     return activeSection === sectionId;
   };
 
@@ -60,80 +55,34 @@ const Header = memo(() => {
           <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
             <Icon icon="mdi:domain" className="w-6 h-6 text-primary-foreground" />
           </div>
-          <span className="font-heading font-bold text-xl text-foreground hidden sm:block">
-            Corporate<span className="text-primary">Services</span>
-          </span>
+          <div className="hidden sm:block">
+            <span className="font-heading font-bold text-lg text-foreground leading-tight block">
+              Qualified
+            </span>
+            <span className="text-xs text-muted-foreground">Corporate Secretary</span>
+          </div>
         </a>
 
         {/* Desktop Navigation */}
-        <ul className="hidden md:flex items-center gap-8">
+        <ul className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
-            <li key={link.name} className="relative">
-              {link.hasDropdown ? (
-                <div
-                  className="relative"
-                  onMouseEnter={() => setIsServicesOpen(true)}
-                  onMouseLeave={() => setIsServicesOpen(false)}
-                >
-                  <button
-                    onClick={() => scrollToSection(link.href)}
-                    className={`flex items-center gap-1 font-medium transition-colors ${
-                      isActive(link.href)
-                        ? 'text-primary'
-                        : 'text-foreground hover:text-primary'
-                    }`}
-                  >
-                    {link.name}
-                    <Icon
-                      icon="mdi:chevron-down"
-                      className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`}
-                    />
-                  </button>
-                  
-                  <AnimatePresence>
-                    {isServicesOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 pt-2 w-56"
-                      >
-                        <ul className="bg-card rounded-lg shadow-xl border border-border overflow-hidden">
-                          {serviceDropdownLinks.map((dropdownLink) => (
-                            <li key={dropdownLink.name}>
-                              <button
-                                onClick={() => scrollToSection(dropdownLink.href)}
-                                className="w-full px-4 py-3 text-left text-sm font-medium text-foreground hover:bg-secondary hover:text-primary transition-colors flex items-center gap-2"
-                              >
-                                <Icon icon="mdi:chevron-right" className="w-4 h-4" />
-                                {dropdownLink.name}
-                              </button>
-                            </li>
-                          ))}
-                        </ul>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ) : (
-                <button
-                  onClick={() => scrollToSection(link.href)}
-                  className={`font-medium transition-colors relative ${
-                    isActive(link.href)
-                      ? 'text-primary'
-                      : 'text-foreground hover:text-primary'
-                  }`}
-                >
-                  {link.name}
-                  {isActive(link.href) && (
-                    <motion.span
-                      layoutId="activeIndicator"
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
-                    />
-                  )}
-                </button>
-              )}
+            <li key={link.name}>
+              <button
+                onClick={() => scrollToSection(link.href)}
+                className={`font-medium transition-colors relative text-sm ${
+                  isActive(link.href)
+                    ? 'text-primary'
+                    : 'text-foreground hover:text-primary'
+                }`}
+              >
+                {link.name}
+                {isActive(link.href) && (
+                  <motion.span
+                    layoutId="activeIndicator"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
+                  />
+                )}
+              </button>
             </li>
           ))}
           <li>
@@ -141,7 +90,8 @@ const Header = memo(() => {
               onClick={() => scrollToSection('#contact')}
               className="btn-hero-primary text-sm"
             >
-              Get Started
+              <Icon icon="mdi:phone-outline" className="w-4 h-4" />
+              Contact
             </button>
           </li>
         </ul>
@@ -169,50 +119,14 @@ const Header = memo(() => {
             <ul className="container-custom py-4 space-y-2">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  {link.hasDropdown ? (
-                    <div className="space-y-2">
-                      <button
-                        onClick={() => setIsServicesOpen(!isServicesOpen)}
-                        className="w-full flex items-center justify-between py-2 font-medium text-foreground"
-                      >
-                        {link.name}
-                        <Icon
-                          icon="mdi:chevron-down"
-                          className={`w-5 h-5 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`}
-                        />
-                      </button>
-                      <AnimatePresence>
-                        {isServicesOpen && (
-                          <motion.ul
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="pl-4 space-y-1"
-                          >
-                            {serviceDropdownLinks.map((dropdownLink) => (
-                              <li key={dropdownLink.name}>
-                                <button
-                                  onClick={() => scrollToSection(dropdownLink.href)}
-                                  className="w-full py-2 text-left text-muted-foreground hover:text-primary transition-colors"
-                                >
-                                  {dropdownLink.name}
-                                </button>
-                              </li>
-                            ))}
-                          </motion.ul>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => scrollToSection(link.href)}
-                      className={`w-full py-2 text-left font-medium ${
-                        isActive(link.href) ? 'text-primary' : 'text-foreground'
-                      }`}
-                    >
-                      {link.name}
-                    </button>
-                  )}
+                  <button
+                    onClick={() => scrollToSection(link.href)}
+                    className={`w-full py-2 text-left font-medium ${
+                      isActive(link.href) ? 'text-primary' : 'text-foreground'
+                    }`}
+                  >
+                    {link.name}
+                  </button>
                 </li>
               ))}
               <li className="pt-2">
@@ -220,7 +134,8 @@ const Header = memo(() => {
                   onClick={() => scrollToSection('#contact')}
                   className="btn-hero-primary w-full"
                 >
-                  Get Started
+                  <Icon icon="mdi:phone-outline" className="w-4 h-4" />
+                  Contact
                 </button>
               </li>
             </ul>
