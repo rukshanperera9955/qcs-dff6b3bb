@@ -226,12 +226,6 @@ export const accountancyServices: ServiceItem[] = [
 
 // Navigation Links
 export const navLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'Services', href: '#services', hasDropdown: true },
-  { name: 'Contact Us', href: '#contact' },
-];
-
-export const serviceDropdownLinks = [
   { name: 'Secretarial Services', href: '#secretarial' },
   { name: 'Taxation Services', href: '#taxation' },
   { name: 'Accountancy Services', href: '#accountancy' },
@@ -239,15 +233,14 @@ export const serviceDropdownLinks = [
 
 // Company Info
 export const companyInfo = {
-  name: 'Corporate Services Sri Lanka',
+  name: 'Qualified Corporate Secretary',
   tagline: 'Your Trusted Partner in Business',
-  address: 'Colombo, Sri Lanka',
-  phone: '+94 11 XXX XXXX',
-  email: 'info@corporateservices.lk',
+  address: 'No: 44A, Dhakshinarama Road, Mount Lavinia, Sri Lanka',
+  phone: '0777 611 006 / 0707 611 006',
+  email: 'wneranga@hotmail.com',
   socialLinks: [
     { name: 'Facebook', icon: 'mdi:facebook', url: '#' },
     { name: 'LinkedIn', icon: 'mdi:linkedin', url: '#' },
-    { name: 'Twitter', icon: 'mdi:twitter', url: '#' },
-    { name: 'WhatsApp', icon: 'mdi:whatsapp', url: '#' },
+    { name: 'WhatsApp', icon: 'mdi:whatsapp', url: 'https://wa.me/94777611006' },
   ],
 };

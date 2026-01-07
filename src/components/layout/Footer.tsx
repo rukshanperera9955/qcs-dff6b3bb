@@ -1,7 +1,7 @@
 import { memo, useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { companyInfo, serviceDropdownLinks } from '@/utils/constants';
+import { companyInfo, navLinks } from '@/utils/constants';
 
 const Footer = memo(() => {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -46,9 +46,12 @@ const Footer = memo(() => {
               <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
                 <Icon icon="mdi:domain" className="w-6 h-6 text-primary-foreground" />
               </div>
-              <span className="font-heading font-bold text-xl">
-                Corporate<span className="text-gold">Services</span>
-              </span>
+              <div>
+                <span className="font-heading font-bold text-lg block leading-tight">
+                  Qualified
+                </span>
+                <span className="text-xs text-muted-foreground">Corporate Secretary</span>
+              </div>
             </div>
             <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
               Your trusted partner for corporate secretarial, taxation, and accountancy services in Sri Lanka.
@@ -91,7 +94,7 @@ const Footer = memo(() => {
           <div>
             <h3 className="font-heading font-semibold text-lg mb-4">Our Services</h3>
             <ul className="space-y-3">
-              {serviceDropdownLinks.map((link) => (
+              {navLinks.map((link) => (
                 <li key={link.name}>
                   <button
                     onClick={() => scrollToSection(link.href)}
