@@ -142,20 +142,20 @@ const Contact = memo(() => {
         </motion.div>
 
         {/* Main Contact Section */}
-        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-stretch">
           {/* Left Side - Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-2 space-y-8"
+            className="lg:col-span-2 flex flex-col"
           >
-            <div>
-              <h3 className="font-heading text-2xl font-bold text-foreground mb-4">
+            <div className="bg-card rounded-3xl border border-border p-6 md:p-8 shadow-xl flex-1 flex flex-col">
+              <h3 className="font-heading text-2xl font-bold text-foreground mb-6">
                 Why Work With Us?
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-4 flex-1">
                 {[
                   { icon: 'mdi:shield-check-outline', text: 'Trusted by 500+ businesses across Sri Lanka' },
                   { icon: 'mdi:clock-fast', text: 'Quick response within 24 hours' },
@@ -177,24 +177,24 @@ const Contact = memo(() => {
                   </motion.div>
                 ))}
               </div>
-            </div>
 
-            {/* Social Links */}
-            <div className="pt-6 border-t border-border">
-              <h4 className="font-semibold text-foreground mb-4">Follow Us</h4>
-              <div className="flex gap-3">
-                {companyInfo.socialLinks.map((social) => (
-                  <a
-                    key={social.name}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-11 h-11 rounded-xl bg-secondary flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"
-                    aria-label={social.name}
-                  >
-                    <Icon icon={social.icon} className="w-5 h-5" />
-                  </a>
-                ))}
+              {/* Social Links */}
+              <div className="pt-6 border-t border-border mt-auto">
+                <h4 className="font-semibold text-foreground mb-4">Follow Us</h4>
+                <div className="flex gap-3">
+                  {companyInfo.socialLinks.map((social) => (
+                    <a
+                      key={social.name}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-11 h-11 rounded-xl bg-secondary flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"
+                      aria-label={social.name}
+                    >
+                      <Icon icon={social.icon} className="w-5 h-5" />
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </motion.div>
@@ -205,9 +205,9 @@ const Contact = memo(() => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-3"
+            className="lg:col-span-3 flex"
           >
-            <div className="bg-card rounded-3xl border border-border p-6 md:p-8 shadow-xl">
+            <div className="bg-card rounded-3xl border border-border p-6 md:p-8 shadow-xl flex-1 flex flex-col">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
                   <Icon icon="mdi:pencil-outline" className="w-6 h-6 text-primary" />
@@ -220,7 +220,7 @@ const Contact = memo(() => {
                 </div>
               </div>
               
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 flex-1 flex flex-col">
                 <div className="grid sm:grid-cols-2 gap-5">
                   {/* Name */}
                   <div>
@@ -340,7 +340,7 @@ const Contact = memo(() => {
                 </div>
 
                 {/* Message */}
-                <div>
+                <div className="flex-1 flex flex-col">
                   <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                     Your Message
                   </label>
@@ -348,7 +348,7 @@ const Contact = memo(() => {
                     {...register('message')}
                     id="message"
                     rows={4}
-                    className="w-full px-4 py-3.5 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none"
+                    className="w-full px-4 py-3.5 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none flex-1 min-h-[120px]"
                     placeholder="Tell us about your requirements..."
                   />
                   {errors.message && (
@@ -359,7 +359,8 @@ const Contact = memo(() => {
                   )}
                 </div>
 
-                {/* Submit Button */}
+                {/* Submit Button - pushed to bottom */}
+                <div className="mt-auto pt-2">
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -377,6 +378,7 @@ const Contact = memo(() => {
                     </>
                   )}
                 </button>
+                </div>
               </form>
             </div>
           </motion.div>

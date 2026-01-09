@@ -34,20 +34,20 @@ const SecretarialServices = memo(() => {
         </motion.div>
 
         {/* Modern Grid Layout */}
-        <div className="grid lg:grid-cols-12 gap-8">
+        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
           {/* Category Navigation - Left Side */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-4"
+            className="lg:col-span-4 flex"
           >
-            <div className="bg-card rounded-2xl border border-border p-4 sticky top-24 shadow-sm">
+            <div className="bg-card rounded-2xl border border-border p-4 shadow-sm w-full flex flex-col">
               <h3 className="font-heading font-semibold text-foreground px-3 py-2 mb-2">
                 Service Categories
               </h3>
-              <nav className="space-y-1">
+              <nav className="space-y-1 flex-1">
                 {secretarialServices.map((category, index) => (
                   <button
                     key={index}
@@ -87,14 +87,14 @@ const SecretarialServices = memo(() => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-8"
+            className="lg:col-span-8 flex flex-col"
           >
             <motion.div
               key={activeCategory}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-card rounded-2xl border border-border overflow-hidden shadow-sm"
+              className="bg-card rounded-2xl border border-border overflow-hidden shadow-sm flex-1 flex flex-col"
             >
               {/* Header */}
               <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-transparent p-6 md:p-8 border-b border-border">
