@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Hero from '@/components/sections/Hero';
+import ParticleBackground from '@/components/ParticleBackground';
 
 // Lazy load below-the-fold sections for better performance
 const ServicesOverview = lazy(() => import('@/components/sections/ServicesOverview'));
@@ -19,7 +20,8 @@ const SectionLoader = () => (
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      <ParticleBackground />
       <Header />
       
       <main>
