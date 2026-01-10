@@ -71,7 +71,7 @@ const Contact = memo(() => {
   };
 
   return (
-    <section id="contact" className="section-padding bg-background relative overflow-hidden">
+    <section id="contact" className="section-padding bg-background/80 backdrop-blur-sm relative overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-gold/5" />
       <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />

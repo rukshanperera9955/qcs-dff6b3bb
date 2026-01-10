@@ -5,7 +5,7 @@ import { accountancyServices } from '@/utils/constants';
 
 const AccountancyServices = memo(() => {
   return (
-    <section id="accountancy" className="section-padding bg-secondary/30 relative overflow-hidden">
+    <section id="accountancy" className="section-padding bg-secondary/20 backdrop-blur-sm relative overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute top-1/3 right-0 w-80 h-80 bg-teal/5 rounded-full blur-3xl" />
       <div className="absolute bottom-1/3 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />

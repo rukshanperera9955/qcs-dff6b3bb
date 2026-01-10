@@ -33,15 +33,15 @@ const secretarialIcons = [
 
 const ParticleBackground = memo(() => {
   const particles: Particle[] = useMemo(() => {
-    return Array.from({ length: 20 }, (_, i) => ({
+    return Array.from({ length: 35 }, (_, i) => ({
       id: i,
       icon: secretarialIcons[i % secretarialIcons.length],
-      size: Math.random() * 16 + 12,
+      size: Math.random() * 24 + 16,
       x: Math.random() * 100,
       y: Math.random() * 100,
       duration: Math.random() * 20 + 30,
       delay: Math.random() * 10,
-      opacity: Math.random() * 0.06 + 0.02,
+      opacity: Math.random() * 0.12 + 0.06,
     }));
   }, []);
 
@@ -83,36 +83,66 @@ const ParticleBackground = memo(() => {
       ))}
       
       {/* Floating geometric shapes */}
-      {[...Array(8)].map((_, i) => (
+      {[...Array(15)].map((_, i) => (
         <motion.div
           key={`shape-${i}`}
           className="absolute"
           style={{
-            left: `${10 + i * 12}%`,
+            left: `${5 + i * 6.5}%`,
             top: `${Math.random() * 80 + 10}%`,
           }}
           animate={{
-            y: [0, -20, 0],
+            y: [0, -30, 0],
             rotate: [0, 360],
-            scale: [1, 1.1, 1],
+            scale: [1, 1.2, 1],
           }}
           transition={{
-            duration: 25 + i * 5,
+            duration: 25 + i * 3,
             repeat: Infinity,
-            delay: i * 2,
+            delay: i * 1.5,
             ease: 'linear',
           }}
         >
           <div
             className={`${
-              i % 3 === 0 
-                ? 'w-3 h-3 rounded-full bg-primary/5' 
-                : i % 3 === 1 
-                  ? 'w-4 h-4 rotate-45 bg-gold/5' 
-                  : 'w-2 h-6 bg-teal/5 rounded-full'
+              i % 4 === 0 
+                ? 'w-4 h-4 rounded-full bg-primary/10' 
+                : i % 4 === 1 
+                  ? 'w-5 h-5 rotate-45 bg-gold/10' 
+                  : i % 4 === 2
+                    ? 'w-3 h-8 bg-teal/10 rounded-full'
+                    : 'w-6 h-6 rounded-lg bg-primary/8 rotate-12'
             }`}
           />
         </motion.div>
+      ))}
+      
+      {/* Large floating circles */}
+      {[...Array(6)].map((_, i) => (
+        <motion.div
+          key={`circle-${i}`}
+          className="absolute rounded-full"
+          style={{
+            left: `${15 + i * 15}%`,
+            top: `${20 + (i % 3) * 25}%`,
+            width: `${80 + i * 20}px`,
+            height: `${80 + i * 20}px`,
+            background: i % 2 === 0 
+              ? 'radial-gradient(circle, hsl(var(--primary) / 0.06) 0%, transparent 70%)' 
+              : 'radial-gradient(circle, hsl(var(--gold) / 0.06) 0%, transparent 70%)',
+          }}
+          animate={{
+            y: [0, -20, 0],
+            x: [0, 10, -10, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 20 + i * 5,
+            repeat: Infinity,
+            delay: i * 3,
+            ease: 'easeInOut',
+          }}
+        />
       ))}
     </div>
   );
