@@ -43,7 +43,7 @@ const SecretarialServices = memo(() => {
             transition={{ duration: 0.5 }}
             className="lg:col-span-4 flex"
           >
-            <div className="bg-card rounded-2xl border border-border p-4 shadow-sm w-full flex flex-col">
+            <div className="backdrop-blur-xl bg-card/60 rounded-2xl border border-border/50 p-4 shadow-2xl shadow-primary/5 w-full flex flex-col hover:border-primary/40 hover:shadow-primary/10 transition-all duration-500">
               <h3 className="font-heading font-semibold text-foreground px-3 py-2 mb-2">
                 Service Categories
               </h3>
@@ -94,7 +94,7 @@ const SecretarialServices = memo(() => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-card rounded-2xl border border-border overflow-hidden shadow-sm flex-1 flex flex-col"
+              className="backdrop-blur-xl bg-card/60 rounded-2xl border border-border/50 overflow-hidden shadow-2xl shadow-primary/5 flex-1 flex flex-col hover:border-primary/40 hover:shadow-primary/10 transition-all duration-500"
             >
               {/* Header */}
               <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-transparent p-6 md:p-8 border-b border-border">
@@ -172,7 +172,7 @@ const SecretarialServices = memo(() => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1, duration: 0.3 }}
-                className="bg-card rounded-xl border border-border p-4 text-center"
+                className="backdrop-blur-xl bg-card/60 rounded-xl border border-border/50 p-4 text-center shadow-lg shadow-primary/5 hover:border-primary/40 hover:shadow-primary/10 transition-all duration-500"
               >
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-2">
                   <Icon icon="mdi:domain" className="w-5 h-5 text-primary" />
@@ -185,7 +185,7 @@ const SecretarialServices = memo(() => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2, duration: 0.3 }}
-                className="bg-card rounded-xl border border-border p-4 text-center"
+                className="backdrop-blur-xl bg-card/60 rounded-xl border border-border/50 p-4 text-center shadow-lg shadow-gold/5 hover:border-gold/40 hover:shadow-gold/10 transition-all duration-500"
               >
                 <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center mx-auto mb-2">
                   <Icon icon="mdi:clock-check-outline" className="w-5 h-5 text-gold" />
@@ -198,7 +198,7 @@ const SecretarialServices = memo(() => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3, duration: 0.3 }}
-                className="bg-card rounded-xl border border-border p-4 text-center"
+                className="backdrop-blur-xl bg-card/60 rounded-xl border border-border/50 p-4 text-center shadow-lg shadow-teal/5 hover:border-teal/40 hover:shadow-teal/10 transition-all duration-500"
               >
                 <div className="w-10 h-10 rounded-lg bg-teal/10 flex items-center justify-center mx-auto mb-2">
                   <Icon icon="mdi:star-outline" className="w-5 h-5 text-teal" />

@@ -86,7 +86,7 @@ const TaxationServices = memo(() => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="bg-card rounded-2xl border border-border p-6 md:p-8 shadow-sm"
+            className="backdrop-blur-xl bg-card/60 rounded-2xl border border-border/50 p-6 md:p-8 shadow-2xl shadow-gold/5 hover:border-gold/40 hover:shadow-gold/10 transition-all duration-500"
           >
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {activeData.map((service, index) => (
@@ -95,7 +95,7 @@ const TaxationServices = memo(() => {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: index * 0.05, duration: 0.3 }}
-                  className="group p-4 rounded-xl bg-secondary/50 hover:bg-secondary border border-transparent hover:border-gold/20 transition-all duration-300"
+                  className="group p-4 rounded-xl backdrop-blur-sm bg-secondary/30 hover:bg-secondary/50 border border-border/30 hover:border-gold/50 hover:shadow-lg hover:shadow-gold/10 transition-all duration-500"
                 >
                   <div className="flex items-start gap-3">
                     <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0 group-hover:bg-gold/20 transition-colors">

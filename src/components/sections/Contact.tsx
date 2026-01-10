@@ -112,7 +112,11 @@ const Contact = memo(() => {
               href={method.href}
               target={method.label === 'WhatsApp' ? '_blank' : undefined}
               rel={method.label === 'WhatsApp' ? 'noopener noreferrer' : undefined}
-              className="group relative bg-card rounded-2xl border border-border p-6 hover:border-primary/50 hover:shadow-lg transition-all duration-300 overflow-hidden"
+              className={`group relative rounded-2xl p-6 transition-all duration-500 overflow-hidden backdrop-blur-xl bg-card/40 border border-border/50 hover:shadow-2xl ${
+                method.color === 'primary' ? 'hover:border-primary/60 hover:shadow-primary/20' :
+                method.color === 'gold' ? 'hover:border-gold/60 hover:shadow-gold/20' :
+                'hover:border-teal/60 hover:shadow-teal/20'
+              }`}
             >
               <div className={`absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
                 method.color === 'primary' ? 'from-primary/5 to-transparent' :
@@ -151,7 +155,7 @@ const Contact = memo(() => {
             transition={{ duration: 0.5 }}
             className="lg:col-span-2 flex flex-col"
           >
-            <div className="bg-card rounded-3xl border border-border p-6 md:p-8 shadow-xl flex-1 flex flex-col">
+            <div className="backdrop-blur-xl bg-card/60 rounded-3xl border border-border/50 p-6 md:p-8 shadow-2xl shadow-primary/5 flex-1 flex flex-col hover:border-primary/40 hover:shadow-primary/10 transition-all duration-500">
               <h3 className="font-heading text-2xl font-bold text-foreground mb-6">
                 Why Work With Us?
               </h3>
@@ -207,7 +211,7 @@ const Contact = memo(() => {
             transition={{ duration: 0.5 }}
             className="lg:col-span-3 flex"
           >
-            <div className="bg-card rounded-3xl border border-border p-6 md:p-8 shadow-xl flex-1 flex flex-col">
+            <div className="backdrop-blur-xl bg-card/60 rounded-3xl border border-border/50 p-6 md:p-8 shadow-2xl shadow-primary/5 flex-1 flex flex-col hover:border-primary/40 hover:shadow-primary/10 transition-all duration-500">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
                   <Icon icon="mdi:pencil-outline" className="w-6 h-6 text-primary" />
