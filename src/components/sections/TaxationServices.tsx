@@ -21,7 +21,7 @@ const TaxationServices = memo(() => {
   const activeData = tabs.find((tab) => tab.id === activeTab)?.data || [];
 
   return (
-    <section id="taxation" className="section-padding bg-background relative overflow-hidden">
+    <section id="taxation" className="section-padding bg-background/80 backdrop-blur-sm relative overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-teal/5 rounded-full blur-3xl" />

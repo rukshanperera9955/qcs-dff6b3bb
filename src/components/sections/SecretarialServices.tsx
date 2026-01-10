@@ -7,7 +7,7 @@ const SecretarialServices = memo(() => {
   const [activeCategory, setActiveCategory] = useState(0);
 
   return (
-    <section id="secretarial" className="section-padding bg-secondary/30 relative overflow-hidden">
+    <section id="secretarial" className="section-padding bg-secondary/20 backdrop-blur-sm relative overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute top-1/4 right-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 left-0 w-56 h-56 bg-gold/5 rounded-full blur-3xl" />
