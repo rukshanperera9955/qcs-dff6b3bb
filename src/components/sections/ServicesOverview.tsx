@@ -27,28 +27,32 @@ const ServicesOverview = memo(() => {
         return {
           bg: 'bg-primary/10',
           text: 'text-primary',
-          border: 'group-hover:border-primary/30',
+          border: 'group-hover:border-primary/50',
+          shadow: 'group-hover:shadow-primary/20',
           icon: 'bg-primary',
         };
       case 'gold':
         return {
           bg: 'bg-gold/10',
           text: 'text-gold',
-          border: 'group-hover:border-gold/30',
+          border: 'group-hover:border-gold/50',
+          shadow: 'group-hover:shadow-gold/20',
           icon: 'bg-gold',
         };
       case 'teal':
         return {
           bg: 'bg-teal/10',
           text: 'text-teal',
-          border: 'group-hover:border-teal/30',
+          border: 'group-hover:border-teal/50',
+          shadow: 'group-hover:shadow-teal/20',
           icon: 'bg-teal',
         };
       default:
         return {
           bg: 'bg-primary/10',
           text: 'text-primary',
-          border: 'group-hover:border-primary/30',
+          border: 'group-hover:border-primary/50',
+          shadow: 'group-hover:shadow-primary/20',
           icon: 'bg-primary',
         };
     }
@@ -98,7 +102,7 @@ const ServicesOverview = memo(() => {
               >
                 <button
                   onClick={() => scrollToSection(`#${service.id}`)}
-                  className={`w-full text-left card-service h-full border-2 border-transparent ${colors.border} transition-all duration-300`}
+                  className={`w-full text-left h-full p-6 backdrop-blur-xl bg-card/60 rounded-2xl border border-border/50 ${colors.border} ${colors.shadow} transition-all duration-500 shadow-lg hover:shadow-2xl`}
                 >
                   <div className={`w-14 h-14 rounded-xl ${colors.icon} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
                     <Icon icon={service.icon} className="w-7 h-7 text-primary-foreground" />

@@ -125,7 +125,7 @@ const Hero = memo(() => {
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-6 -right-6 bg-background p-4 rounded-xl shadow-xl"
+                className="absolute -top-6 -right-6 backdrop-blur-xl bg-background/80 p-4 rounded-xl shadow-2xl shadow-primary/20 border border-background/50"
               >
                 <Icon icon="mdi:file-document-check" className="w-8 h-8 text-primary" />
               </motion.div>
@@ -133,7 +133,7 @@ const Hero = memo(() => {
               <motion.div
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                className="absolute -bottom-4 -left-4 bg-background p-4 rounded-xl shadow-xl"
+                className="absolute -bottom-4 -left-4 backdrop-blur-xl bg-background/80 p-4 rounded-xl shadow-2xl shadow-gold/20 border border-background/50"
               >
                 <Icon icon="mdi:calculator-variant" className="w-8 h-8 text-gold" />
               </motion.div>

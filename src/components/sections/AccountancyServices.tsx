@@ -42,7 +42,7 @@ const AccountancyServices = memo(() => {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               className="group"
             >
-              <div className="h-full bg-card rounded-xl p-6 border border-border shadow-sm hover:shadow-lg hover:border-teal/20 transition-all duration-300">
+              <div className="h-full backdrop-blur-xl bg-card/60 rounded-xl p-6 border border-border/50 shadow-lg shadow-teal/5 hover:shadow-2xl hover:border-teal/50 hover:shadow-teal/15 transition-all duration-500">
                 <div className="w-14 h-14 rounded-xl bg-teal/10 flex items-center justify-center mb-5 group-hover:bg-teal/20 group-hover:scale-110 transition-all duration-300">
                   <Icon
                     icon={service.icon || 'mdi:book-open-outline'}
@@ -72,7 +72,7 @@ const AccountancyServices = memo(() => {
           transition={{ delay: 0.3, duration: 0.5 }}
           className="mt-12 max-w-4xl mx-auto"
         >
-          <div className="bg-card rounded-2xl border border-border p-6 md:p-8 shadow-sm">
+          <div className="backdrop-blur-xl bg-card/60 rounded-2xl border border-border/50 p-6 md:p-8 shadow-2xl shadow-teal/5 hover:border-teal/40 hover:shadow-teal/10 transition-all duration-500">
             <h3 className="font-heading font-semibold text-foreground text-xl mb-6 text-center">
               Why Choose Our Accountancy Services?
             </h3>
@@ -85,7 +85,7 @@ const AccountancyServices = memo(() => {
                 'Cloud-based accounting solutions',
                 'Regular financial health reviews',
               ].map((feature, index) => (
-                <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-secondary/50">
+                <div key={index} className="flex items-center gap-3 p-3 rounded-lg backdrop-blur-sm bg-secondary/30 border border-border/30 hover:border-teal/40 transition-all duration-300">
                   <Icon icon="mdi:check-circle" className="w-5 h-5 text-teal flex-shrink-0" />
                   <span className="text-foreground text-sm">{feature}</span>
                 </div>
