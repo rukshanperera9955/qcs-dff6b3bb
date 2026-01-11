@@ -1,5 +1,4 @@
 import { memo, useMemo } from 'react';
-import { motion } from 'framer-motion';
 
 interface Particle {
   id: number;
@@ -33,38 +32,41 @@ const secretarialIcons = [
 
 const ParticleBackground = memo(() => {
   const particles: Particle[] = useMemo(() => {
-    return Array.from({ length: 35 }, (_, i) => ({
+    return Array.from({ length: 25 }, (_, i) => ({
       id: i,
       icon: secretarialIcons[i % secretarialIcons.length],
-      size: Math.random() * 24 + 16,
+      size: Math.random() * 28 + 20,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      duration: Math.random() * 20 + 30,
+      duration: Math.random() * 20 + 25,
       delay: Math.random() * 10,
-      opacity: Math.random() * 0.12 + 0.06,
+      opacity: Math.random() * 0.15 + 0.1,
+    }));
+  }, []);
+
+  const shapes = useMemo(() => {
+    return Array.from({ length: 12 }, (_, i) => ({
+      id: i,
+      x: 5 + i * 8,
+      y: Math.random() * 80 + 10,
+      duration: 20 + i * 2,
+      delay: i * 1.2,
+      type: i % 4,
     }));
   }, []);
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+      {/* CSS-animated icon particles */}
       {particles.map((particle) => (
-        <motion.div
+        <div
           key={particle.id}
-          className="absolute"
+          className="absolute animate-float"
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
-          }}
-          animate={{
-            y: [0, -30, 0],
-            x: [0, 15, -15, 0],
-            rotate: [0, 10, -10, 0],
-          }}
-          transition={{
-            duration: particle.duration,
-            repeat: Infinity,
-            delay: particle.delay,
-            ease: 'easeInOut',
+            animationDuration: `${particle.duration}s`,
+            animationDelay: `${particle.delay}s`,
           }}
         >
           <svg
@@ -74,73 +76,51 @@ const ParticleBackground = memo(() => {
             className="text-primary"
             style={{ opacity: particle.opacity }}
           >
-            <path
-              fill="currentColor"
-              d={particle.icon}
-            />
+            <path fill="currentColor" d={particle.icon} />
           </svg>
-        </motion.div>
+        </div>
       ))}
       
-      {/* Floating geometric shapes */}
-      {[...Array(15)].map((_, i) => (
-        <motion.div
-          key={`shape-${i}`}
-          className="absolute"
+      {/* Geometric shapes with CSS animation */}
+      {shapes.map((shape) => (
+        <div
+          key={`shape-${shape.id}`}
+          className="absolute animate-float-rotate"
           style={{
-            left: `${5 + i * 6.5}%`,
-            top: `${Math.random() * 80 + 10}%`,
-          }}
-          animate={{
-            y: [0, -30, 0],
-            rotate: [0, 360],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 25 + i * 3,
-            repeat: Infinity,
-            delay: i * 1.5,
-            ease: 'linear',
+            left: `${shape.x}%`,
+            top: `${shape.y}%`,
+            animationDuration: `${shape.duration}s`,
+            animationDelay: `${shape.delay}s`,
           }}
         >
           <div
             className={`${
-              i % 4 === 0 
-                ? 'w-4 h-4 rounded-full bg-primary/10' 
-                : i % 4 === 1 
-                  ? 'w-5 h-5 rotate-45 bg-gold/10' 
-                  : i % 4 === 2
-                    ? 'w-3 h-8 bg-teal/10 rounded-full'
-                    : 'w-6 h-6 rounded-lg bg-primary/8 rotate-12'
+              shape.type === 0 
+                ? 'w-5 h-5 rounded-full bg-primary/20' 
+                : shape.type === 1 
+                  ? 'w-6 h-6 rotate-45 bg-gold/15' 
+                  : shape.type === 2
+                    ? 'w-4 h-10 bg-teal/15 rounded-full'
+                    : 'w-7 h-7 rounded-lg bg-primary/15 rotate-12'
             }`}
           />
-        </motion.div>
+        </div>
       ))}
       
-      {/* Large floating circles */}
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={`circle-${i}`}
-          className="absolute rounded-full"
+      {/* Large gradient orbs */}
+      {[...Array(5)].map((_, i) => (
+        <div
+          key={`orb-${i}`}
+          className="absolute rounded-full animate-pulse-slow"
           style={{
-            left: `${15 + i * 15}%`,
-            top: `${20 + (i % 3) * 25}%`,
-            width: `${80 + i * 20}px`,
-            height: `${80 + i * 20}px`,
+            left: `${10 + i * 20}%`,
+            top: `${15 + (i % 3) * 30}%`,
+            width: `${100 + i * 25}px`,
+            height: `${100 + i * 25}px`,
             background: i % 2 === 0 
-              ? 'radial-gradient(circle, hsl(var(--primary) / 0.06) 0%, transparent 70%)' 
-              : 'radial-gradient(circle, hsl(var(--gold) / 0.06) 0%, transparent 70%)',
-          }}
-          animate={{
-            y: [0, -20, 0],
-            x: [0, 10, -10, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 20 + i * 5,
-            repeat: Infinity,
-            delay: i * 3,
-            ease: 'easeInOut',
+              ? 'radial-gradient(circle, hsl(var(--primary) / 0.12) 0%, transparent 70%)' 
+              : 'radial-gradient(circle, hsl(var(--gold) / 0.1) 0%, transparent 70%)',
+            animationDelay: `${i * 2}s`,
           }}
         />
       ))}
