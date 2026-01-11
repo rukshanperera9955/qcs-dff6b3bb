@@ -32,25 +32,25 @@ const secretarialIcons = [
 
 const ParticleBackground = memo(() => {
   const particles: Particle[] = useMemo(() => {
-    return Array.from({ length: 25 }, (_, i) => ({
+    return Array.from({ length: 40 }, (_, i) => ({
       id: i,
       icon: secretarialIcons[i % secretarialIcons.length],
-      size: Math.random() * 28 + 20,
+      size: Math.random() * 36 + 28,
       x: Math.random() * 100,
       y: Math.random() * 100,
       duration: Math.random() * 20 + 25,
       delay: Math.random() * 10,
-      opacity: Math.random() * 0.15 + 0.1,
+      opacity: Math.random() * 0.25 + 0.15,
     }));
   }, []);
 
   const shapes = useMemo(() => {
-    return Array.from({ length: 12 }, (_, i) => ({
+    return Array.from({ length: 18 }, (_, i) => ({
       id: i,
-      x: 5 + i * 8,
-      y: Math.random() * 80 + 10,
-      duration: 20 + i * 2,
-      delay: i * 1.2,
+      x: 3 + i * 5.5,
+      y: Math.random() * 85 + 8,
+      duration: 18 + i * 1.5,
+      delay: i * 0.8,
       type: i % 4,
     }));
   }, []);
@@ -96,31 +96,33 @@ const ParticleBackground = memo(() => {
           <div
             className={`${
               shape.type === 0 
-                ? 'w-5 h-5 rounded-full bg-primary/20' 
+                ? 'w-7 h-7 rounded-full bg-primary/30' 
                 : shape.type === 1 
-                  ? 'w-6 h-6 rotate-45 bg-gold/15' 
+                  ? 'w-8 h-8 rotate-45 bg-gold/25' 
                   : shape.type === 2
-                    ? 'w-4 h-10 bg-teal/15 rounded-full'
-                    : 'w-7 h-7 rounded-lg bg-primary/15 rotate-12'
+                    ? 'w-5 h-12 bg-teal/25 rounded-full'
+                    : 'w-9 h-9 rounded-lg bg-primary/25 rotate-12'
             }`}
           />
         </div>
       ))}
       
       {/* Large gradient orbs */}
-      {[...Array(5)].map((_, i) => (
+      {[...Array(8)].map((_, i) => (
         <div
           key={`orb-${i}`}
           className="absolute rounded-full animate-pulse-slow"
           style={{
-            left: `${10 + i * 20}%`,
-            top: `${15 + (i % 3) * 30}%`,
-            width: `${100 + i * 25}px`,
-            height: `${100 + i * 25}px`,
-            background: i % 2 === 0 
-              ? 'radial-gradient(circle, hsl(var(--primary) / 0.12) 0%, transparent 70%)' 
-              : 'radial-gradient(circle, hsl(var(--gold) / 0.1) 0%, transparent 70%)',
-            animationDelay: `${i * 2}s`,
+            left: `${5 + i * 12}%`,
+            top: `${10 + (i % 4) * 22}%`,
+            width: `${120 + i * 30}px`,
+            height: `${120 + i * 30}px`,
+            background: i % 3 === 0 
+              ? 'radial-gradient(circle, hsl(var(--primary) / 0.18) 0%, transparent 70%)' 
+              : i % 3 === 1
+                ? 'radial-gradient(circle, hsl(var(--gold) / 0.15) 0%, transparent 70%)'
+                : 'radial-gradient(circle, hsl(var(--teal) / 0.12) 0%, transparent 70%)',
+            animationDelay: `${i * 1.5}s`,
           }}
         />
       ))}
