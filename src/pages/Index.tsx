@@ -21,31 +21,49 @@ const SectionLoader = () => (
 const Index = () => {
   return (
     <div className="min-h-screen bg-background relative">
+      {/* Attractive Navy Blue Background Overlay */}
+      <div className="fixed inset-0 bg-primary/[0.02] pointer-events-none z-0" />
+      
       <ParticleBackground />
       <Header />
       
-      <main>
+      <main className="relative z-10">
         <Hero />
         
-        <Suspense fallback={<SectionLoader />}>
-          <ServicesOverview />
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoader />}>
-          <SecretarialServices />
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoader />}>
-          <TaxationServices />
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoader />}>
-          <AccountancyServices />
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoader />}>
-          <Contact />
-        </Suspense>
+        {/* Sections with transparent navy dividers */}
+        <div className="relative">
+          {/* Subtle decorative background layer */}
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.03] via-transparent to-primary/[0.03] pointer-events-none" />
+          
+          <Suspense fallback={<SectionLoader />}>
+            <ServicesOverview />
+          </Suspense>
+          
+          {/* Decorative divider */}
+          <div className="h-px bg-primary/10 mx-auto max-w-5xl" />
+          
+          <Suspense fallback={<SectionLoader />}>
+            <SecretarialServices />
+          </Suspense>
+          
+          <div className="h-px bg-primary/10 mx-auto max-w-5xl" />
+          
+          <Suspense fallback={<SectionLoader />}>
+            <TaxationServices />
+          </Suspense>
+          
+          <div className="h-px bg-primary/10 mx-auto max-w-5xl" />
+          
+          <Suspense fallback={<SectionLoader />}>
+            <AccountancyServices />
+          </Suspense>
+          
+          <div className="h-px bg-primary/10 mx-auto max-w-5xl" />
+          
+          <Suspense fallback={<SectionLoader />}>
+            <Contact />
+          </Suspense>
+        </div>
       </main>
       
       <Footer />
