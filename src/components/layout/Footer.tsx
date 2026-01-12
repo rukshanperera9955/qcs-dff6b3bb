@@ -1,7 +1,8 @@
-import { memo, useState, useEffect } from 'react';
+import { memo, useState, useEffect, useCallback, useMemo } from 'react';
 import { Icon } from '@iconify/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { companyInfo, navLinks } from '@/utils/constants';
+import { scrollToSection } from '@/utils/scrollUtils';
 
 const Footer = memo(() => {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -15,25 +16,21 @@ const Footer = memo(() => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToTop = () => {
+  const scrollToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, []);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-    }
-  };
+  const handleScrollToSection = useCallback((href: string) => {
+    scrollToSection(href);
+  }, []);
 
-  const quickLinks = [
+  const quickLinks = useMemo(() => [
     { name: 'Home', href: '#home' },
     { name: 'About Services', href: '#services' },
     { name: 'Contact Us', href: '#contact' },
-  ];
+  ], []);
 
-  const currentYear = new Date().getFullYear();
+  const currentYear = useMemo(() => new Date().getFullYear(), []);
 
   return (
     <footer className="bg-foreground text-background relative">
@@ -79,7 +76,7 @@ const Footer = memo(() => {
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <button
-                    onClick={() => scrollToSection(link.href)}
+                    onClick={() => handleScrollToSection(link.href)}
                     className="text-muted-foreground hover:text-gold transition-colors text-sm flex items-center gap-2"
                   >
                     <Icon icon="mdi:chevron-right" className="w-4 h-4" />
@@ -97,7 +94,7 @@ const Footer = memo(() => {
               {navLinks.map((link) => (
                 <li key={link.name}>
                   <button
-                    onClick={() => scrollToSection(link.href)}
+                    onClick={() => handleScrollToSection(link.href)}
                     className="text-muted-foreground hover:text-gold transition-colors text-sm flex items-center gap-2"
                   >
                     <Icon icon="mdi:chevron-right" className="w-4 h-4" />

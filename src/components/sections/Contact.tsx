@@ -1,21 +1,11 @@
-import { memo, useState } from 'react';
+import { memo, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { companyInfo, mainServices } from '@/utils/constants';
 import { toast } from '@/hooks/use-toast';
-
-const contactSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters').max(100),
-  email: z.string().email('Please enter a valid email address').max(255),
-  phone: z.string().min(6, 'Please enter a valid phone number').max(20),
-  service: z.string().min(1, 'Please select a service'),
-  message: z.string().min(10, 'Message must be at least 10 characters').max(1000),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
+import { contactFormSchema, checkRateLimit, type ContactFormData } from '@/utils/security';
 
 const contactMethods = [
   {
@@ -50,16 +40,22 @@ const Contact = memo(() => {
     reset,
     formState: { errors },
   } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
+    resolver: zodResolver(contactFormSchema),
   });
 
-  const onSubmit = async (data: ContactFormData) => {
+  const onSubmit = useCallback(async (data: ContactFormData) => {
+    if (!checkRateLimit('contact-form')) {
+      toast({
+        title: 'Too Many Requests',
+        description: 'Please wait a moment before submitting again.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
-    // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    console.log('Form submitted:', data);
     
     toast({
       title: 'Message Sent!',
@@ -68,7 +64,7 @@ const Contact = memo(() => {
     
     reset();
     setIsSubmitting(false);
-  };
+  }, [reset]);
 
   return (
     <section id="contact" className="section-padding bg-background/80 backdrop-blur-sm relative overflow-hidden">

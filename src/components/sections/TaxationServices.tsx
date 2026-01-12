@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, useState, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 import {
@@ -18,7 +18,9 @@ const tabs = [
 const TaxationServices = memo(() => {
   const [activeTab, setActiveTab] = useState('individual');
 
-  const activeData = tabs.find((tab) => tab.id === activeTab)?.data || [];
+  const handleTabChange = useCallback((tabId: string) => setActiveTab(tabId), []);
+
+  const activeData = useMemo(() => tabs.find((tab) => tab.id === activeTab)?.data || [], [activeTab]);
 
   return (
     <section id="taxation" className="section-padding bg-background/80 backdrop-blur-sm relative overflow-hidden">
@@ -60,7 +62,7 @@ const TaxationServices = memo(() => {
             {tabs.map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => handleTabChange(tab.id)}
                 className={`relative px-4 py-3 rounded-xl font-medium text-sm transition-all duration-300 flex items-center gap-2 ${
                   activeTab === tab.id
                     ? 'text-gold-foreground'
