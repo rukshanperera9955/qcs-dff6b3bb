@@ -1,10 +1,23 @@
-import { memo, useState } from 'react';
+import { memo, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 import { secretarialServices } from '@/utils/constants';
 
 const SecretarialServices = memo(() => {
   const [activeCategory, setActiveCategory] = useState(0);
+  const tabsContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleTabClick = (index: number) => {
+    setActiveCategory(index);
+    // Scroll the active tab into view on mobile
+    if (tabsContainerRef.current) {
+      const tabElements = tabsContainerRef.current.querySelectorAll('button');
+      const activeTab = tabElements[index];
+      if (activeTab) {
+        activeTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }
+  };
 
   return (
     <section id="secretarial" className="section-padding bg-secondary/20 backdrop-blur-sm relative overflow-hidden">
@@ -33,15 +46,52 @@ const SecretarialServices = memo(() => {
           </p>
         </motion.div>
 
-        {/* Modern Grid Layout */}
+        {/* Mobile Horizontal Tabs */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="lg:hidden mb-6"
+        >
+          <div 
+            ref={tabsContainerRef}
+            className="flex overflow-x-auto gap-2 p-2 bg-secondary/50 rounded-2xl scrollbar-hide"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {secretarialServices.map((category, index) => (
+              <button
+                key={index}
+                onClick={() => handleTabClick(index)}
+                className={`relative px-4 py-3 rounded-xl font-medium text-sm transition-all duration-300 flex items-center gap-2 flex-shrink-0 whitespace-nowrap ${
+                  activeCategory === index
+                    ? 'text-primary-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                {activeCategory === index && (
+                  <motion.div
+                    layoutId="activeSecretarialTabBg"
+                    className="absolute inset-0 bg-primary rounded-xl shadow-md"
+                    transition={{ type: 'spring', bounce: 0.2, duration: 0.5 }}
+                  />
+                )}
+                <Icon icon={category.icon} className="w-5 h-5 relative z-10" />
+                <span className="relative z-10">{category.title}</span>
+              </button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Desktop Grid Layout */}
         <div className="grid lg:grid-cols-12 gap-8 items-stretch">
-          {/* Category Navigation - Left Side */}
+          {/* Category Navigation - Left Side (Desktop Only) */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-4 flex"
+            className="hidden lg:flex lg:col-span-4"
           >
             <div className="backdrop-blur-xl bg-card/60 rounded-2xl border border-border/50 p-4 shadow-2xl shadow-primary/5 w-full flex flex-col hover:border-primary/40 hover:shadow-primary/10 transition-all duration-500">
               <h3 className="font-heading font-semibold text-foreground px-3 py-2 mb-2">
@@ -81,13 +131,13 @@ const SecretarialServices = memo(() => {
             </div>
           </motion.div>
 
-          {/* Service Details - Right Side */}
+          {/* Service Details - Right Side (Full width on mobile) */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-8 flex flex-col"
+            className="lg:col-span-8 col-span-full flex flex-col"
           >
             <motion.div
               key={activeCategory}
