@@ -1,17 +1,24 @@
-import { useState, useEffect, memo, useCallback } from 'react';
-import { Icon } from '@iconify/react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useScrollSpy } from '@/hooks/useScrollSpy';
-import { navLinks } from '@/utils/constants';
-import { scrollToSection as scrollTo } from '@/utils/scrollUtils';
-import ThemeToggle from '@/components/ui/theme-toggle';
+import { useState, useEffect, memo, useCallback } from "react";
+import { Icon } from "@iconify/react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useScrollSpy } from "@/hooks/useScrollSpy";
+import { navLinks } from "@/utils/constants";
+import { scrollToSection as scrollTo } from "@/utils/scrollUtils";
+import ThemeToggle from "@/components/ui/theme-toggle";
 
-const sectionIds = ['home', 'services', 'secretarial', 'taxation', 'accountancy', 'contact'];
+const sectionIds = [
+  "home",
+  "services",
+  "secretarial",
+  "taxation",
+  "accountancy",
+  "contact",
+];
 
 const Header = memo(() => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  
+
   const activeSection = useScrollSpy({
     sectionIds,
     offset: 150,
@@ -22,18 +29,18 @@ const Header = memo(() => {
       setIsScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [isMobileMenuOpen]);
 
@@ -42,18 +49,21 @@ const Header = memo(() => {
     setIsMobileMenuOpen(false);
   }, []);
 
-  const isActive = useCallback((href: string) => {
-    const sectionId = href.replace('#', '');
-    return activeSection === sectionId;
-  }, [activeSection]);
+  const isActive = useCallback(
+    (href: string) => {
+      const sectionId = href.replace("#", "");
+      return activeSection === sectionId;
+    },
+    [activeSection]
+  );
 
   return (
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled 
-            ? 'bg-primary shadow-lg py-2' 
-            : 'bg-primary/95 backdrop-blur-sm py-4'
+          isScrolled
+            ? "header-footer-background shadow-lg py-2"
+            : "header-background-transparent backdrop-blur-sm py-4"
         }`}
       >
         <nav className="container-custom">
@@ -63,7 +73,7 @@ const Header = memo(() => {
               href="#home"
               onClick={(e) => {
                 e.preventDefault();
-                scrollToSection('#home');
+                scrollToSection("#home");
               }}
               className="flex items-center gap-3 group"
               whileHover={{ scale: 1.02 }}
@@ -71,36 +81,45 @@ const Header = memo(() => {
             >
               <div className="relative">
                 <div className="w-11 h-11 rounded-xl bg-gold flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300">
-                  <Icon icon="mdi:domain" className="w-6 h-6 text-gold-foreground" />
+                  <Icon
+                    icon="mdi:domain"
+                    className="w-6 h-6 text-gold-foreground"
+                  />
                 </div>
                 <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-primary-foreground/20 blur-sm" />
               </div>
               <div className="hidden sm:block">
-                <span className="font-heading font-bold text-lg text-primary-foreground leading-tight block">
+                <span className="font-heading font-bold text-lg header-footer-foreground leading-tight block">
                   Qualified
                 </span>
-                <span className="text-xs text-primary-foreground/70">Corporate Secretary</span>
+                <span className="text-xs header-footer-foreground opacity-70">
+                  Corporate Secretary
+                </span>
               </div>
             </motion.a>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center">
-              <div className="flex items-center bg-primary-foreground/10 rounded-full p-1.5 backdrop-blur-sm">
+              <div className="flex items-center bg-white/10 rounded-full p-1.5 backdrop-blur-sm">
                 {navLinks.map((link) => (
                   <button
                     key={link.name}
                     onClick={() => scrollToSection(link.href)}
                     className={`relative px-5 py-2 text-sm font-medium transition-all duration-300 rounded-full ${
                       isActive(link.href)
-                        ? 'text-gold-foreground'
-                        : 'text-primary-foreground/80 hover:text-primary-foreground'
+                        ? "text-gold-foreground"
+                        : "header-footer-foreground opacity-80 hover:opacity-100"
                     }`}
                   >
                     {isActive(link.href) && (
                       <motion.span
                         layoutId="navPill"
                         className="absolute inset-0 bg-gold rounded-full shadow-md"
-                        transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                        transition={{
+                          type: "spring",
+                          bounce: 0.2,
+                          duration: 0.6,
+                        }}
                       />
                     )}
                     <span className="relative z-10">{link.name}</span>
@@ -113,7 +132,7 @@ const Header = memo(() => {
             <div className="hidden lg:flex items-center gap-3">
               <ThemeToggle />
               <motion.button
-                onClick={() => scrollToSection('#contact')}
+                onClick={() => scrollToSection("#contact")}
                 className="flex items-center gap-2 px-5 py-2.5 bg-gold text-gold-foreground rounded-full font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -128,11 +147,14 @@ const Header = memo(() => {
               <ThemeToggle />
               <motion.button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2.5 rounded-xl bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 transition-colors"
+                className="p-2.5 rounded-xl bg-white/10 header-footer-foreground hover:bg-white/20 transition-colors"
                 aria-label="Toggle menu"
                 whileTap={{ scale: 0.9 }}
               >
-                <Icon icon={isMobileMenuOpen ? 'mdi:close' : 'mdi:menu'} className="w-6 h-6" />
+                <Icon
+                  icon={isMobileMenuOpen ? "mdi:close" : "mdi:menu"}
+                  className="w-6 h-6"
+                />
               </motion.button>
             </div>
           </div>
@@ -151,19 +173,21 @@ const Header = memo(() => {
               className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40 lg:hidden"
             />
             <motion.div
-              initial={{ x: '100%' }}
+              initial={{ x: "100%" }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-primary shadow-2xl z-50 lg:hidden"
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="fixed top-0 right-0 h-full w-80 max-w-[85vw] header-footer-background shadow-2xl z-50 lg:hidden"
             >
               <div className="flex flex-col h-full">
                 {/* Mobile Menu Header */}
-                <div className="flex items-center justify-between p-6 border-b border-primary-foreground/10">
-                  <span className="font-heading font-bold text-lg text-primary-foreground">Menu</span>
+                <div className="flex items-center justify-between p-6 border-b border-white/10">
+                  <span className="font-heading font-bold text-lg header-footer-foreground">
+                    Menu
+                  </span>
                   <motion.button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 rounded-xl bg-primary-foreground/10 text-primary-foreground"
+                    className="p-2 rounded-xl bg-white/10 header-footer-foreground"
                     whileTap={{ scale: 0.9 }}
                   >
                     <Icon icon="mdi:close" className="w-5 h-5" />
@@ -184,11 +208,17 @@ const Header = memo(() => {
                           onClick={() => scrollToSection(link.href)}
                           className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-left font-medium transition-all duration-300 ${
                             isActive(link.href)
-                              ? 'bg-gold text-gold-foreground shadow-md'
-                              : 'text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground'
+                              ? "bg-gold text-gold-foreground shadow-md"
+                              : "header-footer-foreground opacity-80 hover:bg-white/10 hover:opacity-100"
                           }`}
                         >
-                          <div className={`w-2 h-2 rounded-full ${isActive(link.href) ? 'bg-gold-foreground' : 'bg-gold'}`} />
+                          <div
+                            className={`w-2 h-2 rounded-full ${
+                              isActive(link.href)
+                                ? "bg-gold-foreground"
+                                : "bg-gold"
+                            }`}
+                          />
                           {link.name}
                         </button>
                       </motion.li>
@@ -197,9 +227,9 @@ const Header = memo(() => {
                 </nav>
 
                 {/* Mobile Menu Footer */}
-                <div className="p-6 border-t border-primary-foreground/10">
+                <div className="p-6 border-t border-white/10">
                   <motion.button
-                    onClick={() => scrollToSection('#contact')}
+                    onClick={() => scrollToSection("#contact")}
                     className="w-full flex items-center justify-center gap-2 px-5 py-3.5 bg-gold text-gold-foreground rounded-xl font-semibold shadow-md"
                     whileTap={{ scale: 0.95 }}
                   >
@@ -216,6 +246,6 @@ const Header = memo(() => {
   );
 });
 
-Header.displayName = 'Header';
+Header.displayName = "Header";
 
 export default Header;
