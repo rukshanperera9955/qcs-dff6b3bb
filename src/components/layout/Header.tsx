@@ -1,15 +1,18 @@
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect, memo, useCallback, useMemo } from 'react';
 import { Icon } from '@iconify/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
 import { navLinks } from '@/utils/constants';
+import { scrollToSection as scrollTo } from '@/utils/scrollUtils';
+
+const sectionIds = ['home', 'services', 'secretarial', 'taxation', 'accountancy', 'contact'];
 
 const Header = memo(() => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const activeSection = useScrollSpy({
-    sectionIds: ['home', 'services', 'secretarial', 'taxation', 'accountancy', 'contact'],
+    sectionIds,
     offset: 150,
   });
 
@@ -22,19 +25,15 @@ const Header = memo(() => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-    }
+  const scrollToSection = useCallback((href: string) => {
+    scrollTo(href);
     setIsMobileMenuOpen(false);
-  };
+  }, []);
 
-  const isActive = (href: string) => {
+  const isActive = useCallback((href: string) => {
     const sectionId = href.replace('#', '');
     return activeSection === sectionId;
-  };
+  }, [activeSection]);
 
   return (
     <header

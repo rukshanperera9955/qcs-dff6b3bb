@@ -1,16 +1,18 @@
-import { memo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 import heroIllustration from '@/assets/hero-illustration.png';
+import { scrollToSection } from '@/utils/scrollUtils';
 
 const Hero = memo(() => {
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-    }
-  };
+  const handleScrollToServices = useCallback(() => scrollToSection('#services'), []);
+  const handleScrollToContact = useCallback(() => scrollToSection('#contact'), []);
+
+  const stats = useMemo(() => [
+    { value: '500+', label: 'Clients Served', icon: 'mdi:account-group' },
+    { value: '15+', label: 'Years Experience', icon: 'mdi:calendar-check' },
+    { value: '100%', label: 'Compliance Rate', icon: 'mdi:shield-check' },
+  ], []);
 
   return (
     <section
@@ -84,7 +86,6 @@ const Hero = memo(() => {
               We offer corporate secretarial services, Accounting Services & Tax Services for Companies, Partnership, Individuals, NGO and Association in Sri Lanka.
             </motion.p>
 
-            {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -92,14 +93,14 @@ const Hero = memo(() => {
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
               <button
-                onClick={() => scrollToSection('#services')}
+                onClick={handleScrollToServices}
                 className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gold text-gold-foreground font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-gold/25 hover:-translate-y-0.5"
               >
                 <Icon icon="mdi:briefcase-outline" className="w-5 h-5" />
                 Our Services
               </button>
               <button
-                onClick={() => scrollToSection('#contact')}
+                onClick={handleScrollToContact}
                 className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent text-primary-foreground font-semibold rounded-lg border-2 border-primary-foreground/20 transition-all duration-300 hover:border-primary-foreground/40 hover:bg-primary-foreground/5 hover:-translate-y-0.5"
               >
                 <Icon icon="mdi:send" className="w-5 h-5" />
@@ -107,18 +108,13 @@ const Hero = memo(() => {
               </button>
             </motion.div>
 
-            {/* Stats */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.5 }}
               className="grid grid-cols-3 gap-4 md:gap-8 mt-14"
             >
-              {[
-                { value: '500+', label: 'Clients Served', icon: 'mdi:account-group' },
-                { value: '15+', label: 'Years Experience', icon: 'mdi:calendar-check' },
-                { value: '100%', label: 'Compliance Rate', icon: 'mdi:shield-check' },
-              ].map((stat, index) => (
+              {stats.map((stat, index) => (
                 <motion.div 
                   key={index}
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -150,12 +146,15 @@ const Hero = memo(() => {
               <div className="absolute -inset-4 border border-primary-foreground/10 rounded-3xl" />
               <div className="absolute -inset-8 border border-primary-foreground/5 rounded-3xl" />
               
-              {/* Main Image */}
               <div className="relative bg-primary-foreground/5 p-3 rounded-2xl">
                 <img
                   src={heroIllustration}
                   alt="Business professionals collaborating in a modern office"
                   className="w-full h-auto rounded-xl"
+                  loading="eager"
+                  fetchPriority="high"
+                  width="600"
+                  height="400"
                 />
               </div>
               
@@ -205,7 +204,6 @@ const Hero = memo(() => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -215,7 +213,7 @@ const Hero = memo(() => {
         <motion.button
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          onClick={() => scrollToSection('#services')}
+          onClick={handleScrollToServices}
           className="group flex flex-col items-center gap-2 text-primary-foreground/50 hover:text-primary-foreground/80 transition-colors"
           aria-label="Scroll to services"
         >

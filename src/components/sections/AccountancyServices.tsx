@@ -1,7 +1,16 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 import { accountancyServices } from '@/utils/constants';
+
+const features = [
+  'Accurate financial record keeping',
+  'Compliance with SLFRS standards',
+  'Timely reporting and submissions',
+  'Experienced accounting professionals',
+  'Cloud-based accounting solutions',
+  'Regular financial health reviews',
+];
 
 const AccountancyServices = memo(() => {
   return (
@@ -77,14 +86,7 @@ const AccountancyServices = memo(() => {
               Why Choose Our Accountancy Services?
             </h3>
             <div className="grid sm:grid-cols-2 gap-4">
-              {[
-                'Accurate financial record keeping',
-                'Compliance with SLFRS standards',
-                'Timely reporting and submissions',
-                'Experienced accounting professionals',
-                'Cloud-based accounting solutions',
-                'Regular financial health reviews',
-              ].map((feature, index) => (
+              {features.map((feature, index) => (
                 <div key={index} className="flex items-center gap-3 p-3 rounded-lg backdrop-blur-sm bg-secondary/30 border border-border/30 hover:border-teal/40 transition-all duration-300">
                   <Icon icon="mdi:check-circle" className="w-5 h-5 text-teal flex-shrink-0" />
                   <span className="text-foreground text-sm">{feature}</span>

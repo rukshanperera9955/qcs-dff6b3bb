@@ -1,27 +1,23 @@
-import { memo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 import { mainServices } from '@/utils/constants';
+import { scrollToSection } from '@/utils/scrollUtils';
 
 const ServicesOverview = memo(() => {
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-    }
-  };
+  const handleScrollToContact = useCallback(() => scrollToSection('#contact'), []);
+  const handleScrollToSection = useCallback((id: string) => scrollToSection(`#${id}`), []);
 
-  const cardVariants = {
+  const cardVariants = useMemo(() => ({
     hidden: { opacity: 0, y: 30 },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
       transition: { delay: i * 0.15, duration: 0.5 },
     }),
-  };
+  }), []);
 
-  const getColorClasses = (color: string) => {
+  const getColorClasses = useCallback((color: string) => {
     switch (color) {
       case 'primary':
         return {
@@ -56,7 +52,7 @@ const ServicesOverview = memo(() => {
           icon: 'bg-primary',
         };
     }
-  };
+  }, []);
 
   return (
     <section id="services" className="section-padding bg-background/80 backdrop-blur-sm relative overflow-hidden">
@@ -101,7 +97,7 @@ const ServicesOverview = memo(() => {
                 className="group"
               >
                 <button
-                  onClick={() => scrollToSection(`#${service.id}`)}
+                  onClick={() => handleScrollToSection(service.id)}
                   className={`w-full text-left h-full p-6 backdrop-blur-xl bg-card/60 rounded-2xl border border-border/50 ${colors.border} ${colors.shadow} transition-all duration-500 shadow-lg hover:shadow-2xl`}
                 >
                   <div className={`w-14 h-14 rounded-xl ${colors.icon} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
@@ -138,7 +134,7 @@ const ServicesOverview = memo(() => {
             Need help choosing the right service?
           </p>
           <button
-            onClick={() => scrollToSection('#contact')}
+            onClick={handleScrollToContact}
             className="btn-hero-primary"
           >
             <Icon icon="mdi:message-text-outline" className="w-5 h-5" />
