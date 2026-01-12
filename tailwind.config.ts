@@ -31,10 +31,6 @@ export default {
           DEFAULT: "hsl(var(--gold))",
           foreground: "hsl(var(--gold-foreground))",
         },
-        teal: {
-          DEFAULT: "hsl(var(--teal))",
-          foreground: "hsl(var(--teal-foreground))",
-        },
         slate: {
           DEFAULT: "hsl(var(--slate))",
           foreground: "hsl(var(--slate-foreground))",
