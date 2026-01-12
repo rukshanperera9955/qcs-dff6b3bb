@@ -1,9 +1,10 @@
-import { useState, useEffect, memo, useCallback, useMemo } from 'react';
+import { useState, useEffect, memo, useCallback } from 'react';
 import { Icon } from '@iconify/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
 import { navLinks } from '@/utils/constants';
 import { scrollToSection as scrollTo } from '@/utils/scrollUtils';
+import ThemeToggle from '@/components/ui/theme-toggle';
 
 const sectionIds = ['home', 'services', 'secretarial', 'taxation', 'accountancy', 'contact'];
 
@@ -93,6 +94,9 @@ const Header = memo(() => {
               Contact
             </button>
           </li>
+          <li>
+            <ThemeToggle />
+          </li>
         </ul>
 
         {/* Mobile Menu Button */}
@@ -128,14 +132,15 @@ const Header = memo(() => {
                   </button>
                 </li>
               ))}
-              <li className="pt-2">
+              <li className="pt-2 flex items-center gap-3">
                 <button
                   onClick={() => scrollToSection('#contact')}
-                  className="btn-hero-primary w-full"
+                  className="btn-hero-primary flex-1"
                 >
                   <Icon icon="mdi:phone-outline" className="w-4 h-4" />
                   Contact
                 </button>
+                <ThemeToggle />
               </li>
             </ul>
           </motion.div>
