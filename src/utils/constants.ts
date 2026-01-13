@@ -34,7 +34,7 @@ export const mainServices = [
     title: 'Accountancy Services',
     icon: 'mdi:chart-line',
     description: 'Professional accounting and bookkeeping services tailored to your business needs.',
-    color: 'teal',
+    color: 'indigo',
   },
 ];
 

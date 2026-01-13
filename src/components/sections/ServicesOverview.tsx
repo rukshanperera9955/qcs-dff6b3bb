@@ -35,13 +35,13 @@ const ServicesOverview = memo(() => {
           shadow: 'group-hover:shadow-gold/20',
           icon: 'bg-gold',
         };
-      case 'teal':
+      case 'indigo':
         return {
-          bg: 'bg-teal/10',
-          text: 'text-teal',
-          border: 'group-hover:border-teal/50',
-          shadow: 'group-hover:shadow-teal/20',
-          icon: 'bg-teal',
+          bg: 'bg-secondary/10',
+          text: 'text-secondary',
+          border: 'group-hover:border-secondary/50',
+          shadow: 'group-hover:shadow-secondary/20',
+          icon: 'bg-secondary',
         };
       default:
         return {
@@ -58,7 +58,7 @@ const ServicesOverview = memo(() => {
     <section id="services" className="section-padding bg-background/80 backdrop-blur-sm relative overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-teal/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
       <div className="container-custom relative z-10">
         {/* Section Header */}
@@ -85,7 +85,7 @@ const ServicesOverview = memo(() => {
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
           {mainServices.map((service, index) => {
             const colors = getColorClasses(service.color);
-            
+
             return (
               <motion.div
                 key={service.id}
@@ -103,15 +103,15 @@ const ServicesOverview = memo(() => {
                   <div className={`w-14 h-14 rounded-xl ${colors.icon} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
                     <Icon icon={service.icon} className="w-7 h-7 text-primary-foreground" />
                   </div>
-                  
+
                   <h3 className="font-heading text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
                     {service.title}
                   </h3>
-                  
+
                   <p className="text-muted-foreground text-sm leading-relaxed mb-4">
                     {service.description}
                   </p>
-                  
+
                   <div className={`inline-flex items-center gap-2 text-sm font-medium ${colors.text}`}>
                     Learn More
                     <Icon icon="mdi:arrow-right" className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

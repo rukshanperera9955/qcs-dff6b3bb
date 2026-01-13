@@ -26,7 +26,7 @@ const TaxationServices = memo(() => {
     <section id="taxation" className="section-padding bg-background/80 backdrop-blur-sm relative overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-teal/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-secondary/5 rounded-full blur-3xl" />
 
       <div className="container-custom relative z-10">
         {/* Section Header */}
@@ -63,11 +63,10 @@ const TaxationServices = memo(() => {
               <button
                 key={tab.id}
                 onClick={() => handleTabChange(tab.id)}
-                className={`relative px-4 py-3 rounded-xl font-medium text-sm transition-all duration-300 flex items-center gap-2 ${
-                  activeTab === tab.id
+                className={`relative px-4 py-3 rounded-xl font-medium text-sm transition-all duration-300 flex items-center gap-2 ${activeTab === tab.id
                     ? 'text-gold-foreground'
                     : 'text-muted-foreground hover:text-foreground'
-                }`}
+                  }`}
               >
                 {activeTab === tab.id && (
                   <motion.div

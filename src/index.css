@@ -4,134 +4,124 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 5-Color Navy Blue Design System */
+/* Purple/Indigo Design System */
 
 @layer base {
   :root {
-    /* 1. Navy Blue - Primary */
-    --primary: 235 66% 7%;
-    --primary-foreground: 220 100% 88%;
+    /* Base Colors - Light Mode */
+    /* Background: Very faint cool white/indigo tint for freshness */
+    --background: 255 100% 99%;
+    /* Nearly white */
+    /* Foreground: Deep Indigo/Slate for high readability */
+    --foreground: 230 35% 15%;
 
-    /* 2. Gold Accent */
-    --gold: 271.48 81.33% 55.88%;
-    --gold-foreground: 235 66% 7%;
+    /* Primary: Vivid Purple (Matches Hero Primary Button) */
+    /* approx #9333ea (purple-600) -> hsl(268, 79%, 56%) */
+    --primary: 268 79% 56%;
+    --primary-foreground: 0 0% 100%;
 
-    /* 3. Slate/Cool Gray */
-    --slate: 220 13% 46%;
-    --slate-foreground: 0 0% 100%;
+    /* Secondary: Indigo (Matches Hero Gradients/Accents) */
+    /* approx #6366f1 (indigo-500) -> hsl(244, 63%, 69%) */
+    --secondary: 244 63% 69%;
+    --secondary-foreground: 0 0% 100%;
 
-    /* 4. Light Gray - Background */
-    --background: 220 20% 97%;
-    --foreground: 222 47% 15%;
+    /* Accent/Gold (Renamed concept to match Prop, keeping var name for code compat) */
+    /* Using a warmer Violet/Pinkish tone for variation or sticking to Purple */
+    --gold: 270 95% 60%;
+    --gold-foreground: 0 0% 100%;
 
-    /* 5. White - Cards/Surfaces */
+    /* Cards/Surfaces */
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 15%;
+    --card-foreground: 230 35% 15%;
 
-    /* Derived from 5 colors */
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 15%;
+    --popover-foreground: 230 35% 15%;
 
-    --secondary: 220 20% 94%;
-    --secondary-foreground: 222 47% 15%;
+    --muted: 240 20% 96%;
+    --muted-foreground: 240 10% 45%;
 
-    --muted: 220 20% 94%;
-    --muted-foreground: 220 13% 46%;
+    --accent: 260 100% 97%;
+    --accent-foreground: 268 79% 56%;
 
-    --accent: 45 93% 47%;
-    --accent-foreground: 222 47% 15%;
-
-    --destructive: 0 72% 51%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 88%;
-    --input: 220 13% 88%;
-    --ring: 222 47% 15%;
+    --border: 240 20% 90%;
+    --input: 240 20% 90%;
+    --ring: 268 79% 56%;
 
-    --radius: 0.75rem;
-
-    /* Shadows using navy */
-    --shadow-sm: 0 1px 2px 0 hsl(222 47% 15% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(222 47% 15% / 0.08),
-      0 2px 4px -2px hsl(222 47% 15% / 0.06);
-    --shadow-lg: 0 10px 15px -3px hsl(222 47% 15% / 0.1),
-      0 4px 6px -4px hsl(222 47% 15% / 0.08);
-    --shadow-xl: 0 20px 25px -5px hsl(222 47% 15% / 0.1),
-      0 8px 10px -6px hsl(222 47% 15% / 0.08);
-    --shadow-glow: 0 0 40px hsl(45 93% 47% / 0.3);
+    --radius: 1rem;
+    /* More rounded to avoid squares */
 
     /* Sidebar */
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 222 47% 15%;
-    --sidebar-primary: 222 47% 15%;
+    --sidebar-background: 255 100% 99%;
+    --sidebar-foreground: 230 35% 15%;
+    --sidebar-primary: 268 79% 56%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 20% 94%;
-    --sidebar-accent-foreground: 222 47% 15%;
-    --sidebar-border: 220 13% 88%;
-    --sidebar-ring: 222 47% 15%;
+    --sidebar-accent: 240 20% 96%;
+    --sidebar-accent-foreground: 230 35% 15%;
+    --sidebar-border: 240 20% 90%;
+    --sidebar-ring: 268 79% 56%;
+
+    --shadow-glow: 0 0 40px hsl(268 79% 56% / 0.3);
   }
 
   .dark {
-    /* Navy Blue - Primary (lighter for dark mode) */
-    --primary: 235 66% 7%;
-    --primary-foreground: 220 100% 88%;
+    /* Background: Deep Slate/Black (Matches Hero #020617) */
+    /* #020617 -> hsl(228, 81%, 5%) */
+    --background: 228 81% 5%;
+    /* Foreground: Off-white/Purple Tint */
+    --foreground: 240 20% 98%;
 
-    /* Gold Accent */
-    --gold: 271.48 81.33% 55.88%;
-    --gold-foreground: 235 66% 7%;
+    --card: 228 50% 10%;
+    --card-foreground: 240 20% 98%;
 
-    /* Slate */
-    --slate: 220 13% 65%;
-    --slate-foreground: 222 47% 11%;
+    --popover: 228 50% 10%;
+    --popover-foreground: 240 20% 98%;
 
-    /* Dark backgrounds */
-    --background: 222 47% 11%;
-    --foreground: 220 20% 97%;
+    /* Primary: Lighter Purple for Dark Mode visibility */
+    --primary: 268 79% 60%;
+    --primary-foreground: 0 0% 100%;
 
-    --card: 222 47% 15%;
-    --card-foreground: 220 20% 97%;
+    /* Secondary: Indigo */
+    --secondary: 244 63% 65%;
+    --secondary-foreground: 0 0% 100%;
 
-    --popover: 222 47% 15%;
-    --popover-foreground: 220 20% 97%;
+    /* Accent/Gold replacement */
+    --gold: 270 90% 65%;
+    --gold-foreground: 0 0% 100%;
 
-    --secondary: 222 47% 20%;
-    --secondary-foreground: 220 20% 97%;
+    --muted: 228 40% 15%;
+    --muted-foreground: 240 20% 70%;
 
-    --muted: 222 47% 20%;
-    --muted-foreground: 220 13% 65%;
+    --accent: 268 79% 20%;
+    --accent-foreground: 240 20% 98%;
 
-    --accent: 45 93% 55%;
-    --accent-foreground: 222 47% 11%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
 
-    --destructive: 0 62% 40%;
-    --destructive-foreground: 220 20% 97%;
+    --border: 228 40% 20%;
+    --input: 228 40% 20%;
+    --ring: 268 79% 60%;
 
-    --border: 222 47% 25%;
-    --input: 222 47% 25%;
-    --ring: 222 47% 65%;
-
-    --sidebar-background: 222 47% 11%;
-    --sidebar-foreground: 220 20% 97%;
-    --sidebar-primary: 222 47% 65%;
-    --sidebar-primary-foreground: 222 47% 11%;
-    --sidebar-accent: 222 47% 20%;
-    --sidebar-accent-foreground: 220 20% 97%;
-    --sidebar-border: 222 47% 25%;
-    --sidebar-ring: 222 47% 65%;
+    --sidebar-background: 228 81% 5%;
+    --sidebar-foreground: 240 20% 98%;
+    --sidebar-primary: 268 79% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 228 40% 15%;
+    --sidebar-accent-foreground: 240 20% 98%;
+    --sidebar-border: 228 40% 20%;
+    --sidebar-ring: 268 79% 60%;
   }
 }
 
-/* Header Static Colors */
+/* Header Static Colors - Updated to Global Palette usage or specific overrides */
 .header-footer-background {
-  background-color: rgb(6 8 29); /* Your chosen color for both themes */
+  @apply bg-background/90 backdrop-blur-md border-b border-border/10;
 }
 
 .header-footer-foreground {
-  color: rgb(194, 199, 255); /* Text color for both themes */
-}
-
-.header-background-transparent {
-  background-color: rgba(0, 0, 0, 0); /* 95% opacity */
+  @apply text-foreground;
 }
 
 @layer base {
@@ -149,16 +139,17 @@
 }
 
 @layer components {
+  /* Updated Base Component Classes */
   .btn-hero {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-semibold rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5;
   }
 
   .btn-hero-primary {
-    @apply btn-hero bg-primary text-primary-foreground hover:bg-primary/90;
+    @apply btn-hero bg-primary text-primary-foreground hover:bg-primary/90 shadow-primary/25;
   }
 
   .btn-hero-gold {
-    @apply btn-hero bg-gold text-gold-foreground hover:bg-gold/90;
+    @apply btn-hero bg-gold text-gold-foreground hover:bg-gold/90 shadow-gold/25;
   }
 
   .section-padding {
@@ -170,15 +161,15 @@
   }
 
   .card-service {
-    @apply bg-card rounded-xl p-6 shadow-md border border-border/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-primary/20;
+    @apply bg-card rounded-2xl p-6 shadow-md border border-border/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-primary/20;
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-gold;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-secondary;
   }
 
   .glass-effect {
-    @apply bg-background/80 backdrop-blur-md;
+    @apply bg-background/80 backdrop-blur-md border border-white/10;
   }
 }
 
@@ -212,6 +203,7 @@
       opacity: 0;
       transform: translateY(30px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -222,6 +214,7 @@
     from {
       opacity: 0;
     }
+
     to {
       opacity: 1;
     }
@@ -232,6 +225,7 @@
       opacity: 0;
       transform: translateX(-20px);
     }
+
     to {
       opacity: 1;
       transform: translateX(0);
@@ -243,12 +237,15 @@
     100% {
       transform: translateY(0) translateX(0);
     }
+
     25% {
       transform: translateY(-20px) translateX(10px);
     }
+
     50% {
       transform: translateY(-10px) translateX(-5px);
     }
+
     75% {
       transform: translateY(-25px) translateX(5px);
     }
@@ -259,6 +256,7 @@
     100% {
       transform: translateY(0) rotate(0deg) scale(1);
     }
+
     50% {
       transform: translateY(-30px) rotate(180deg) scale(1.1);
     }
@@ -270,6 +268,7 @@
       opacity: 0.5;
       transform: scale(1);
     }
+
     50% {
       opacity: 0.8;
       transform: scale(1.15);

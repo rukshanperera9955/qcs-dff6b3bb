@@ -20,7 +20,7 @@ const SecretarialServices = memo(() => {
   };
 
   return (
-    <section id="secretarial" className="section-padding bg-secondary/20 backdrop-blur-sm relative overflow-hidden">
+    <section id="secretarial" className="section-padding bg-background/80 backdrop-blur-sm relative overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute top-1/4 right-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 left-0 w-56 h-56 bg-gold/5 rounded-full blur-3xl" />
@@ -54,7 +54,7 @@ const SecretarialServices = memo(() => {
           transition={{ duration: 0.4 }}
           className="lg:hidden mb-6"
         >
-          <div 
+          <div
             ref={tabsContainerRef}
             className="flex overflow-x-auto gap-2 p-2 bg-secondary/50 rounded-2xl scrollbar-hide"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
@@ -63,11 +63,10 @@ const SecretarialServices = memo(() => {
               <button
                 key={index}
                 onClick={() => handleTabClick(index)}
-                className={`relative px-4 py-3 rounded-xl font-medium text-sm transition-all duration-300 flex items-center gap-2 flex-shrink-0 whitespace-nowrap ${
-                  activeCategory === index
-                    ? 'text-primary-foreground'
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
+                className={`relative px-4 py-3 rounded-xl font-medium text-sm transition-all duration-300 flex items-center gap-2 flex-shrink-0 whitespace-nowrap ${activeCategory === index
+                  ? 'text-primary-foreground'
+                  : 'text-muted-foreground hover:text-foreground'
+                  }`}
               >
                 {activeCategory === index && (
                   <motion.div
@@ -102,24 +101,21 @@ const SecretarialServices = memo(() => {
                   <button
                     key={index}
                     onClick={() => setActiveCategory(index)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-300 ${
-                      activeCategory === index
-                        ? 'bg-primary text-primary-foreground shadow-md'
-                        : 'text-foreground hover:bg-secondary/80'
-                    }`}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-300 ${activeCategory === index
+                      ? 'bg-primary text-primary-foreground shadow-md'
+                      : 'text-foreground hover:bg-secondary/80'
+                      }`}
                   >
                     <div
-                      className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
-                        activeCategory === index
-                          ? 'bg-primary-foreground/20'
-                          : 'bg-primary/10'
-                      }`}
+                      className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${activeCategory === index
+                        ? 'bg-primary-foreground/20'
+                        : 'bg-primary/10'
+                        }`}
                     >
                       <Icon
                         icon={category.icon}
-                        className={`w-5 h-5 ${
-                          activeCategory === index ? 'text-primary-foreground' : 'text-primary'
-                        }`}
+                        className={`w-5 h-5 ${activeCategory === index ? 'text-primary-foreground' : 'text-primary'
+                          }`}
                       />
                     </div>
                     <span className="font-medium text-sm leading-tight">
@@ -180,10 +176,10 @@ const SecretarialServices = memo(() => {
                       transition={{ delay: itemIndex * 0.05, duration: 0.2 }}
                       className="group flex items-start gap-3 p-4 rounded-xl bg-secondary/50 hover:bg-secondary border border-transparent hover:border-border transition-all duration-200"
                     >
-                      <div className="w-6 h-6 rounded-full bg-teal/20 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-teal/30 transition-colors">
+                      <div className="w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-secondary/30 transition-colors">
                         <Icon
                           icon="mdi:check"
-                          className="w-3.5 h-3.5 text-teal"
+                          className="w-3.5 h-3.5 text-secondary"
                         />
                       </div>
                       <span className="text-foreground text-sm font-medium leading-relaxed">
@@ -248,10 +244,10 @@ const SecretarialServices = memo(() => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3, duration: 0.3 }}
-                className="backdrop-blur-xl bg-card/60 rounded-xl border border-border/50 p-4 text-center shadow-lg shadow-teal/5 hover:border-teal/40 hover:shadow-teal/10 transition-all duration-500"
+                className="backdrop-blur-xl bg-card/60 rounded-xl border border-border/50 p-4 text-center shadow-lg shadow-secondary/5 hover:border-secondary/40 hover:shadow-secondary/10 transition-all duration-500"
               >
-                <div className="w-10 h-10 rounded-lg bg-teal/10 flex items-center justify-center mx-auto mb-2">
-                  <Icon icon="mdi:star-outline" className="w-5 h-5 text-teal" />
+                <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center mx-auto mb-2">
+                  <Icon icon="mdi:star-outline" className="w-5 h-5 text-secondary" />
                 </div>
                 <p className="text-2xl font-bold text-foreground">100%</p>
                 <p className="text-xs text-muted-foreground">Client Satisfaction</p>

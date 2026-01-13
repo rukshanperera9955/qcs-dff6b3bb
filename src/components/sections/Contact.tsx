@@ -27,13 +27,13 @@ const contactMethods = [
     label: 'WhatsApp',
     value: 'Chat with us',
     href: `https://wa.me/94777611006`,
-    color: 'teal',
+    color: 'indigo',
   },
 ];
 
 const Contact = memo(() => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const {
     register,
     handleSubmit,
@@ -54,14 +54,14 @@ const Contact = memo(() => {
     }
 
     setIsSubmitting(true);
-    
+
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    
+
     toast({
       title: 'Message Sent!',
       description: 'Thank you for contacting us. We will get back to you soon.',
     });
-    
+
     reset();
     setIsSubmitting(false);
   }, [reset]);
@@ -108,30 +108,26 @@ const Contact = memo(() => {
               href={method.href}
               target={method.label === 'WhatsApp' ? '_blank' : undefined}
               rel={method.label === 'WhatsApp' ? 'noopener noreferrer' : undefined}
-              className={`group relative rounded-2xl p-6 transition-all duration-500 overflow-hidden backdrop-blur-xl bg-card/40 border border-border/50 hover:shadow-2xl ${
-                method.color === 'primary' ? 'hover:border-primary/60 hover:shadow-primary/20' :
-                method.color === 'gold' ? 'hover:border-gold/60 hover:shadow-gold/20' :
-                'hover:border-teal/60 hover:shadow-teal/20'
-              }`}
+              className={`group relative rounded-2xl p-6 transition-all duration-500 overflow-hidden backdrop-blur-xl bg-card/40 border border-border/50 hover:shadow-2xl ${method.color === 'primary' ? 'hover:border-primary/60 hover:shadow-primary/20' :
+                  method.color === 'gold' ? 'hover:border-gold/60 hover:shadow-gold/20' :
+                    'hover:border-secondary/60 hover:shadow-secondary/20'
+                }`}
             >
-              <div className={`absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
-                method.color === 'primary' ? 'from-primary/5 to-transparent' :
-                method.color === 'gold' ? 'from-gold/5 to-transparent' :
-                'from-teal/5 to-transparent'
-              }`} />
+              <div className={`absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${method.color === 'primary' ? 'from-primary/5 to-transparent' :
+                  method.color === 'gold' ? 'from-gold/5 to-transparent' :
+                    'from-secondary/5 to-transparent'
+                }`} />
               <div className="relative z-10 flex flex-col items-center text-center">
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110 ${
-                  method.color === 'primary' ? 'bg-primary/10' :
-                  method.color === 'gold' ? 'bg-gold/10' :
-                  'bg-teal/10'
-                }`}>
-                  <Icon 
-                    icon={method.icon} 
-                    className={`w-7 h-7 ${
-                      method.color === 'primary' ? 'text-primary' :
-                      method.color === 'gold' ? 'text-gold' :
-                      'text-teal'
-                    }`} 
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110 ${method.color === 'primary' ? 'bg-primary/10' :
+                    method.color === 'gold' ? 'bg-gold/10' :
+                      'bg-secondary/10'
+                  }`}>
+                  <Icon
+                    icon={method.icon}
+                    className={`w-7 h-7 ${method.color === 'primary' ? 'text-primary' :
+                        method.color === 'gold' ? 'text-gold' :
+                          'text-secondary'
+                      }`}
                   />
                 </div>
                 <h4 className="font-semibold text-foreground mb-1">{method.label}</h4>
@@ -219,7 +215,7 @@ const Contact = memo(() => {
                   <p className="text-muted-foreground text-sm">We'll get back to you within 24 hours</p>
                 </div>
               </div>
-              
+
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 flex-1 flex flex-col">
                 <div className="grid sm:grid-cols-2 gap-5">
                   {/* Name */}
@@ -361,23 +357,23 @@ const Contact = memo(() => {
 
                 {/* Submit Button - pushed to bottom */}
                 <div className="mt-auto pt-2">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full btn-hero-primary py-4 text-base disabled:opacity-70 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Icon icon="mdi:loading" className="w-5 h-5 animate-spin" />
-                      Sending Message...
-                    </>
-                  ) : (
-                    <>
-                      Send Message
-                      <Icon icon="mdi:arrow-right" className="w-5 h-5" />
-                    </>
-                  )}
-                </button>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full btn-hero-primary py-4 text-base disabled:opacity-70 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Icon icon="mdi:loading" className="w-5 h-5 animate-spin" />
+                        Sending Message...
+                      </>
+                    ) : (
+                      <>
+                        Send Message
+                        <Icon icon="mdi:arrow-right" className="w-5 h-5" />
+                      </>
+                    )}
+                  </button>
                 </div>
               </form>
             </div>

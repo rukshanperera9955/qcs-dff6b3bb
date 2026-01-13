@@ -59,13 +59,7 @@ const Header = memo(() => {
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? "header-footer-background shadow-lg py-2"
-            : "header-background-transparent backdrop-blur-sm py-4"
-        }`}
-      >
+      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 header-footer-background shadow-lg py-2">
         <nav className="container-custom">
           <div className="flex items-center justify-between">
             {/* Logo */}
@@ -100,7 +94,7 @@ const Header = memo(() => {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center">
-              <div className="flex items-center bg-white/10 rounded-full p-1.5 backdrop-blur-sm">
+              <div className="flex items-center bg-accent/50 rounded-full p-1.5 backdrop-blur-sm">
                 {navLinks.map((link) => (
                   <button
                     key={link.name}
@@ -147,7 +141,7 @@ const Header = memo(() => {
               <ThemeToggle />
               <motion.button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2.5 rounded-xl bg-white/10 header-footer-foreground hover:bg-white/20 transition-colors"
+                className="p-2.5 rounded-xl bg-accent header-footer-foreground hover:bg-accent/80 transition-colors"
                 aria-label="Toggle menu"
                 whileTap={{ scale: 0.9 }}
               >
@@ -181,13 +175,13 @@ const Header = memo(() => {
             >
               <div className="flex flex-col h-full">
                 {/* Mobile Menu Header */}
-                <div className="flex items-center justify-between p-6 border-b border-white/10">
+                <div className="flex items-center justify-between p-6 border-b border-border">
                   <span className="font-heading font-bold text-lg header-footer-foreground">
                     Menu
                   </span>
                   <motion.button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 rounded-xl bg-white/10 header-footer-foreground"
+                    className="p-2 rounded-xl bg-accent header-footer-foreground"
                     whileTap={{ scale: 0.9 }}
                   >
                     <Icon icon="mdi:close" className="w-5 h-5" />
@@ -209,7 +203,7 @@ const Header = memo(() => {
                           className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-left font-medium transition-all duration-300 ${
                             isActive(link.href)
                               ? "bg-gold text-gold-foreground shadow-md"
-                              : "header-footer-foreground opacity-80 hover:bg-white/10 hover:opacity-100"
+                              : "header-footer-foreground opacity-80 hover:bg-accent hover:opacity-100"
                           }`}
                         >
                           <div
@@ -227,7 +221,7 @@ const Header = memo(() => {
                 </nav>
 
                 {/* Mobile Menu Footer */}
-                <div className="p-6 border-t border-white/10">
+                <div className="p-6 border-t border-border">
                   <motion.button
                     onClick={() => scrollToSection("#contact")}
                     className="w-full flex items-center justify-center gap-2 px-5 py-3.5 bg-gold text-gold-foreground rounded-xl font-semibold shadow-md"

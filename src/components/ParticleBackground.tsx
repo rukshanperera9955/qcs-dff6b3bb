@@ -80,7 +80,7 @@ const ParticleBackground = memo(() => {
           </svg>
         </div>
       ))}
-      
+
       {/* Geometric shapes with CSS animation */}
       {shapes.map((shape) => (
         <div
@@ -94,19 +94,18 @@ const ParticleBackground = memo(() => {
           }}
         >
           <div
-            className={`${
-              shape.type === 0 
-                ? 'w-7 h-7 rounded-full bg-primary/30' 
-                : shape.type === 1 
-                  ? 'w-8 h-8 rotate-45 bg-gold/25' 
+            className={`${shape.type === 0
+                ? 'w-7 h-7 rounded-full bg-primary/30'
+                : shape.type === 1
+                  ? 'w-8 h-8 rotate-45 bg-gold/25'
                   : shape.type === 2
-                    ? 'w-5 h-12 bg-teal/25 rounded-full'
+                    ? 'w-5 h-12 bg-secondary/25 rounded-full'
                     : 'w-9 h-9 rounded-lg bg-primary/25 rotate-12'
-            }`}
+              }`}
           />
         </div>
       ))}
-      
+
       {/* Large gradient orbs */}
       {[...Array(8)].map((_, i) => (
         <div
@@ -117,11 +116,11 @@ const ParticleBackground = memo(() => {
             top: `${10 + (i % 4) * 22}%`,
             width: `${120 + i * 30}px`,
             height: `${120 + i * 30}px`,
-            background: i % 3 === 0 
-              ? 'radial-gradient(circle, hsl(var(--primary) / 0.18) 0%, transparent 70%)' 
+            background: i % 3 === 0
+              ? 'radial-gradient(circle, hsl(var(--primary) / 0.18) 0%, transparent 70%)'
               : i % 3 === 1
                 ? 'radial-gradient(circle, hsl(var(--gold) / 0.15) 0%, transparent 70%)'
-                : 'radial-gradient(circle, hsl(var(--teal) / 0.12) 0%, transparent 70%)',
+                : 'radial-gradient(circle, hsl(var(--secondary) / 0.12) 0%, transparent 70%)',
             animationDelay: `${i * 1.5}s`,
           }}
         />
