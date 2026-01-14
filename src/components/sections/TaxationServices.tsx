@@ -51,9 +51,9 @@ const TaxationServices = memo(() => {
   return (
     <section
       id="taxation"
-      className="section-padding relative bg-glass overflow-hidden"
+      className="section-padding bg-glass relative overflow-hidden"
     >
-      {/* Optimized Background Decorations */}
+      {/* Optimized Background Decorations - PRESERVED FROM ORIGINAL */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Top Right: Vibrant Secondary (Blue/Cyan) Blob */}
         <div
@@ -73,6 +73,7 @@ const TaxationServices = memo(() => {
         {/* Subtle Grid Pattern to add texture under the glass */}
         <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] [background-size:40px_40px]" />
       </div>
+
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <motion.div
@@ -102,14 +103,14 @@ const TaxationServices = memo(() => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="flex flex-wrap justify-center gap-2 mb-8 p-2 bg-background rounded-2xl"
+            transition={{ duration: 0.5 }}
+            className="flex flex-wrap justify-center gap-2 mb-8 p-2 bg-card/40 backdrop-blur-sm rounded-2xl border border-glass"
           >
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => handleTabChange(tab.id)}
-                className={`relative px-4 py-3 rounded-xl font-medium text-sm transition-all duration-300 flex items-center gap-2 ${
+                className={`relative px-6 py-3 rounded-xl font-medium text-sm transition-all duration-300 flex items-center gap-2 ${
                   activeTab === tab.id
                     ? "text-gold-foreground"
                     : "text-muted-foreground hover:text-foreground"
@@ -118,7 +119,7 @@ const TaxationServices = memo(() => {
                 {activeTab === tab.id && (
                   <motion.div
                     layoutId="activeTabBg"
-                    className="absolute inset-0 bg-gold rounded-xl shadow-md"
+                    className="absolute inset-0 bg-gold rounded-xl shadow-lg shadow-glow-gold-sm"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                   />
                 )}
@@ -135,8 +136,8 @@ const TaxationServices = memo(() => {
             key={activeTab}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="bg-card/40 rounded-2xl border border-glass p-6 md:p-8 shadow-2xl shadow-glow-gold-sm hover:border-gold-medium hover:shadow-glow-gold-md transition-all duration-500"
+            transition={{ duration: 0.5 }}
+            className="bg-card/40 rounded-2xl border border-glass p-6 md:p-8 shadow-lg shadow-glow-secondary-sm hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500"
           >
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {activeData.map((service, index) => (
@@ -145,17 +146,17 @@ const TaxationServices = memo(() => {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: index * 0.05, duration: 0.3 }}
-                  className="group p-4 bg-background rounded-xl backdrop-blur-sm hover:bg-secondary-medium border border-glass-subtle hover:border-gold-strong hover:shadow-lg hover:shadow-glow-gold-md transition-all duration-500"
+                  className="group p-4 rounded-xl backdrop-blur-sm bg-background border border-glass-subtle hover:border-secondary-medium transition-all duration-300"
                 >
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-gold-soft flex items-center justify-center flex-shrink-0 group-hover:bg-gold-subtle transition-colors">
+                    <div className="w-10 h-10 rounded-lg bg-gold-soft flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all duration-300">
                       <Icon
                         icon={service.icon || "mdi:file-document-outline"}
                         className="w-5 h-5 text-gold"
                       />
                     </div>
                     <div>
-                      <h4 className="font-medium text-foreground text-sm leading-snug group-hover:text-gold transition-colors">
+                      <h4 className="font-heading font-medium text-foreground text-sm leading-snug group-hover:text-gold transition-colors">
                         {service.name}
                       </h4>
                     </div>
@@ -167,11 +168,11 @@ const TaxationServices = memo(() => {
 
           {/* Info Note */}
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.4 }}
-            className="mt-6 p-4 bg-gold-soft rounded-xl flex items-start gap-3"
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="mt-6 p-4 bg-card/40 backdrop-blur-sm rounded-xl border border-glass flex items-start gap-3"
           >
             <Icon
               icon="mdi:information-outline"

@@ -20,7 +20,7 @@ const ServicesOverview = memo(() => {
       visible: (i: number) => ({
         opacity: 1,
         y: 0,
-        transition: { delay: i * 0.15, duration: 0.5 },
+        transition: { delay: i * 0.1, duration: 0.5 },
       }),
     }),
     []
@@ -30,35 +30,27 @@ const ServicesOverview = memo(() => {
     switch (color) {
       case "primary":
         return {
-          bg: "bg-primary-soft",
-          text: "text-primary",
-          border: "group-hover:border-primary-strong",
-          shadow: "group-hover:shadow-glow-primary-lg",
-          icon: "bg-primary",
+          bg: "bg-gold-soft",
+          text: "text-gold",
+          hoverText: "group-hover:text-gold",
         };
       case "gold":
         return {
           bg: "bg-gold-soft",
           text: "text-gold",
-          border: "group-hover:border-gold-strong",
-          shadow: "group-hover:shadow-glow-gold-lg",
-          icon: "bg-gold",
+          hoverText: "group-hover:text-gold",
         };
       case "indigo":
         return {
-          bg: "bg-secondary-soft",
-          text: "text-secondary",
-          border: "group-hover:border-secondary-strong",
-          shadow: "group-hover:shadow-glow-secondary-xl",
-          icon: "bg-secondary",
+          bg: "bg-gold-soft",
+          text: "text-gold",
+          hoverText: "group-hover:text-gold",
         };
       default:
         return {
-          bg: "bg-primary-soft",
-          text: "text-primary",
-          border: "group-hover:border-primary-strong",
-          shadow: "group-hover:shadow-glow-primary-lg",
-          icon: "bg-primary",
+          bg: "bg-gold-soft",
+          text: "text-gold",
+          hoverText: "group-hover:text-gold",
         };
     }
   }, []);
@@ -68,7 +60,7 @@ const ServicesOverview = memo(() => {
       id="services"
       className="section-padding bg-glass relative overflow-hidden"
     >
-      {/* Optimized Background Decorations */}
+      {/* Optimized Background Decorations - PRESERVED FROM ORIGINAL */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Top Right: Vibrant Secondary (Blue/Cyan) Blob */}
         <div
@@ -88,6 +80,7 @@ const ServicesOverview = memo(() => {
         {/* Subtle Grid Pattern to add texture under the glass */}
         <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] [background-size:40px_40px]" />
       </div>
+
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <motion.div
@@ -95,9 +88,9 @@ const ServicesOverview = memo(() => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-soft rounded-full text-primary text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gold-soft rounded-full text-gold text-sm font-medium mb-4">
             <Icon icon="mdi:briefcase-outline" className="w-4 h-4" />
             What We Offer
           </div>
@@ -111,7 +104,7 @@ const ServicesOverview = memo(() => {
         </motion.div>
 
         {/* Service Cards */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {mainServices.map((service, index) => {
             const colors = getColorClasses(service.color);
 
@@ -127,18 +120,17 @@ const ServicesOverview = memo(() => {
               >
                 <button
                   onClick={() => handleScrollToSection(service.id)}
-                  className={`w-full text-left h-full p-6 bg-card/40 rounded-2xl border border-glass ${colors.border} ${colors.shadow} transition-all duration-500 shadow-lg hover:shadow-2xl`}
+                  className="w-full text-left h-full bg-card/40 rounded-xl p-6 border border-glass shadow-lg shadow-glow-secondary-sm hover:shadow-2xl hover:border-secondary-strong hover:shadow-glow-secondary-lg transition-all duration-500"
                 >
                   <div
-                    className={`w-14 h-14 rounded-xl ${colors.icon} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}
+                    className={`w-14 h-14 rounded-xl ${colors.bg} flex items-center justify-center mb-5 group-hover:bg-secondary-subtle group-hover:scale-110 transition-all duration-300`}
                   >
-                    <Icon
-                      icon={service.icon}
-                      className="w-7 h-7 text-primary-foreground"
-                    />
+                    <Icon icon={service.icon} className="w-7 h-7 text-gold" />
                   </div>
 
-                  <h3 className="font-heading text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
+                  <h3
+                    className={`font-heading text-lg font-semibold text-foreground mb-2 ${colors.hoverText} transition-colors`}
+                  >
                     {service.title}
                   </h3>
 
@@ -166,7 +158,7 @@ const ServicesOverview = memo(() => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.5 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
           className="text-center mt-12"
         >
           <p className="text-muted-foreground mb-4">

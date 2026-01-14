@@ -25,7 +25,7 @@ const Hero = memo(() => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center bg-background pt-20 overflow-hidden"
+      className="relative min-h-screen flex items-center bg-background/80 pt-20 overflow-hidden"
     >
       {/* --- HIGH-END GRAPHIC BACKGROUND --- */}
       <div className="absolute inset-0 z-0">
