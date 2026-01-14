@@ -191,6 +191,210 @@
   .glass-effect {
     @apply bg-background/80 backdrop-blur-md border border-primary-foreground/10;
   }
+
+  /* --- New Global Color Classes --- */
+
+  /* Surfaces / Backgrounds */
+  .bg-glass {
+    @apply bg-background/80 backdrop-blur-sm;
+  }
+  .bg-glass-card {
+    @apply bg-card/60 backdrop-blur-xl;
+  }
+
+  .bg-primary-fade {
+    @apply bg-primary/5;
+  }
+  .bg-primary-soft {
+    @apply bg-primary/10;
+  }
+  .bg-primary-subtle {
+    @apply bg-primary/20;
+  }
+
+  .bg-secondary-fade {
+    @apply bg-secondary/5;
+  }
+  .bg-secondary-soft {
+    @apply bg-secondary/10;
+  }
+  .bg-secondary-subtle {
+    @apply bg-secondary/20;
+  }
+  .bg-secondary-muted {
+    @apply bg-secondary/30;
+  }
+  .bg-secondary-medium {
+    @apply bg-secondary/50;
+  }
+  .bg-secondary-heavy {
+    @apply bg-secondary/80;
+  }
+
+  .bg-gold-fade {
+    @apply bg-gold/5;
+  }
+  .bg-gold-soft {
+    @apply bg-gold/10;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.27);
+    backdrop-filter: blur(35px);
+    -webkit-backdrop-filter: blur(35px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 0 0px 0px rgba(255, 255, 255, 0);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.8),
+      transparent
+    );
+  }
+
+  .glass-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.8),
+      transparent,
+      rgba(255, 255, 255, 0.3)
+    );
+  }
+
+  /* Borders */
+  .border-glass-faint {
+    @apply border-border/10;
+  }
+  .border-glass-subtle {
+    @apply border-border/30;
+  }
+  .border-glass {
+    @apply border-border/50;
+  }
+
+  .border-primary-soft {
+    @apply border-primary/30;
+  }
+  .border-primary-medium {
+    @apply border-primary/40;
+  }
+  .border-primary-strong {
+    @apply border-primary/50;
+  }
+  .border-primary-heavy {
+    @apply border-primary/60;
+  }
+
+  .border-secondary-soft {
+    @apply border-secondary/30;
+  }
+  .border-secondary-medium {
+    @apply border-secondary/40;
+  }
+  .border-secondary-strong {
+    @apply border-secondary/50;
+  }
+  .border-secondary-heavy {
+    @apply border-secondary/60;
+  }
+
+  .border-gold-medium {
+    @apply border-gold/40;
+  }
+  .border-gold-strong {
+    @apply border-gold/50;
+  }
+  .border-gold-heavy {
+    @apply border-gold/60;
+  }
+
+  .bg-gold-subtle {
+    @apply bg-gold/20;
+  }
+
+  /* Shadows */
+  .shadow-glow-primary-sm {
+    @apply shadow-primary/5;
+  }
+  .shadow-glow-primary-md {
+    @apply shadow-primary/10;
+  }
+  .shadow-glow-primary-lg {
+    @apply shadow-primary/20;
+  }
+  .shadow-glow-primary-xl {
+    @apply shadow-primary/25;
+  }
+
+  .shadow-glow-secondary-sm {
+    @apply shadow-secondary/5;
+  }
+  .shadow-glow-secondary-md {
+    @apply shadow-secondary/10;
+  }
+  .shadow-glow-secondary-lg {
+    @apply shadow-secondary/15;
+  }
+  .shadow-glow-secondary-xl {
+    @apply shadow-secondary/20;
+  }
+
+  .shadow-glow-gold-sm {
+    @apply shadow-gold/5;
+  }
+  .shadow-glow-gold-md {
+    @apply shadow-gold/10;
+  }
+  .shadow-glow-gold-lg {
+    @apply shadow-gold/20;
+  }
+  .shadow-glow-gold-xl {
+    @apply shadow-gold/25;
+  }
+
+  /* Gradients */
+  .gradient-fade-primary {
+    @apply from-primary/5;
+  }
+  .gradient-fade-gold {
+    @apply from-gold/5;
+  }
+  .gradient-fade-secondary {
+    @apply from-secondary/5;
+  }
+
+  .gradient-glow-soft {
+    @apply bg-gradient-to-br from-primary/20 to-secondary/20;
+  }
+
+  /* Strokes */
+  .stroke-primary-soft {
+    @apply stroke-primary/10;
+  }
+  .stroke-secondary-soft {
+    @apply stroke-secondary/10;
+  }
 }
 
 @layer utilities {

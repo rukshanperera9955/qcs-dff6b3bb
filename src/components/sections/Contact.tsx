@@ -1,33 +1,37 @@
-import { memo, useState, useCallback } from 'react';
-import { motion } from 'framer-motion';
-import { Icon } from '@iconify/react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { companyInfo, mainServices } from '@/utils/constants';
-import { toast } from '@/hooks/use-toast';
-import { contactFormSchema, checkRateLimit, type ContactFormData } from '@/utils/security';
+import { memo, useState, useCallback } from "react";
+import { motion } from "framer-motion";
+import { Icon } from "@iconify/react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { companyInfo, mainServices } from "@/utils/constants";
+import { toast } from "@/hooks/use-toast";
+import {
+  contactFormSchema,
+  checkRateLimit,
+  type ContactFormData,
+} from "@/utils/security";
 
 const contactMethods = [
   {
-    icon: 'mdi:email-outline',
-    label: 'Email Us',
+    icon: "mdi:email-outline",
+    label: "Email Us",
     value: companyInfo.email,
     href: `mailto:${companyInfo.email}`,
-    color: 'primary',
+    color: "primary",
   },
   {
-    icon: 'mdi:phone-outline',
-    label: 'Call Us',
+    icon: "mdi:phone-outline",
+    label: "Call Us",
     value: companyInfo.phone,
-    href: `tel:${companyInfo.phone.split(' / ')[0].replace(/\s/g, '')}`,
-    color: 'gold',
+    href: `tel:${companyInfo.phone.split(" / ")[0].replace(/\s/g, "")}`,
+    color: "gold",
   },
   {
-    icon: 'mdi:whatsapp',
-    label: 'WhatsApp',
-    value: 'Chat with us',
+    icon: "mdi:whatsapp",
+    label: "WhatsApp",
+    value: "Chat with us",
     href: `https://wa.me/94777611006`,
-    color: 'indigo',
+    color: "indigo",
   },
 ];
 
@@ -43,35 +47,42 @@ const Contact = memo(() => {
     resolver: zodResolver(contactFormSchema),
   });
 
-  const onSubmit = useCallback(async (data: ContactFormData) => {
-    if (!checkRateLimit('contact-form')) {
+  const onSubmit = useCallback(
+    async (data: ContactFormData) => {
+      if (!checkRateLimit("contact-form")) {
+        toast({
+          title: "Too Many Requests",
+          description: "Please wait a moment before submitting again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      setIsSubmitting(true);
+
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
       toast({
-        title: 'Too Many Requests',
-        description: 'Please wait a moment before submitting again.',
-        variant: 'destructive',
+        title: "Message Sent!",
+        description:
+          "Thank you for contacting us. We will get back to you soon.",
       });
-      return;
-    }
 
-    setIsSubmitting(true);
-
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    toast({
-      title: 'Message Sent!',
-      description: 'Thank you for contacting us. We will get back to you soon.',
-    });
-
-    reset();
-    setIsSubmitting(false);
-  }, [reset]);
+      reset();
+      setIsSubmitting(false);
+    },
+    [reset]
+  );
 
   return (
-    <section id="contact" className="section-padding bg-background/80 backdrop-blur-sm relative overflow-hidden">
+    <section
+      id="contact"
+      className="section-padding bg-glass relative overflow-hidden"
+    >
       {/* Background Decorations */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-gold/5" />
-      <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-10 w-72 h-72 bg-gold/10 rounded-full blur-3xl" />
+      <div className="absolute inset-0 bg-gradient-to-br gradient-fade-primary via-transparent to-gold/5" />
+      <div className="absolute top-20 right-10 w-72 h-72 bg-primary-soft rounded-full blur-3xl" />
+      <div className="absolute bottom-20 left-10 w-72 h-72 bg-gold-soft rounded-full blur-3xl" />
 
       <div className="container-custom relative z-10">
         {/* Section Header */}
@@ -82,7 +93,7 @@ const Contact = memo(() => {
           transition={{ duration: 0.5 }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-soft rounded-full text-primary text-sm font-medium mb-4">
             <Icon icon="mdi:message-text-outline" className="w-4 h-4" />
             Get In Touch
           </div>
@@ -90,7 +101,8 @@ const Contact = memo(() => {
             Let's Start a <span className="gradient-text">Conversation</span>
           </h2>
           <p className="text-muted-foreground text-lg">
-            Ready to streamline your corporate services? We're here to help you every step of the way.
+            Ready to streamline your corporate services? We're here to help you
+            every step of the way.
           </p>
         </motion.div>
 
@@ -106,31 +118,51 @@ const Contact = memo(() => {
             <a
               key={method.label}
               href={method.href}
-              target={method.label === 'WhatsApp' ? '_blank' : undefined}
-              rel={method.label === 'WhatsApp' ? 'noopener noreferrer' : undefined}
-              className={`group relative rounded-2xl p-6 transition-all duration-500 overflow-hidden backdrop-blur-xl bg-card/40 border border-border/50 hover:shadow-2xl ${method.color === 'primary' ? 'hover:border-primary/60 hover:shadow-primary/20' :
-                  method.color === 'gold' ? 'hover:border-gold/60 hover:shadow-gold/20' :
-                    'hover:border-secondary/60 hover:shadow-secondary/20'
-                }`}
+              target={method.label === "WhatsApp" ? "_blank" : undefined}
+              rel={
+                method.label === "WhatsApp" ? "noopener noreferrer" : undefined
+              }
+              className={`group relative rounded-2xl p-6 transition-all duration-500 overflow-hidden backdrop-blur-xl bg-card/40 border border-glass hover:shadow-2xl ${
+                method.color === "primary"
+                  ? "hover:border-primary-heavy hover:shadow-glow-primary-lg"
+                  : method.color === "gold"
+                  ? "hover:border-gold-heavy hover:shadow-glow-gold-lg"
+                  : "hover:border-secondary-heavy hover:shadow-glow-secondary-xl"
+              }`}
             >
-              <div className={`absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${method.color === 'primary' ? 'from-primary/5 to-transparent' :
-                  method.color === 'gold' ? 'from-gold/5 to-transparent' :
-                    'from-secondary/5 to-transparent'
-                }`} />
+              <div
+                className={`absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+                  method.color === "primary"
+                    ? "gradient-fade-primary to-transparent"
+                    : method.color === "gold"
+                    ? "gradient-fade-gold to-transparent"
+                    : "gradient-fade-secondary to-transparent"
+                }`}
+              />
               <div className="relative z-10 flex flex-col items-center text-center">
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110 ${method.color === 'primary' ? 'bg-primary/10' :
-                    method.color === 'gold' ? 'bg-gold/10' :
-                      'bg-secondary/10'
-                  }`}>
+                <div
+                  className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110 ${
+                    method.color === "primary"
+                      ? "bg-primary-soft"
+                      : method.color === "gold"
+                      ? "bg-gold-soft"
+                      : "bg-secondary-soft"
+                  }`}
+                >
                   <Icon
                     icon={method.icon}
-                    className={`w-7 h-7 ${method.color === 'primary' ? 'text-primary' :
-                        method.color === 'gold' ? 'text-gold' :
-                          'text-secondary'
-                      }`}
+                    className={`w-7 h-7 ${
+                      method.color === "primary"
+                        ? "text-primary"
+                        : method.color === "gold"
+                        ? "text-gold"
+                        : "text-secondary"
+                    }`}
                   />
                 </div>
-                <h4 className="font-semibold text-foreground mb-1">{method.label}</h4>
+                <h4 className="font-semibold text-foreground mb-1">
+                  {method.label}
+                </h4>
                 <p className="text-muted-foreground text-sm">{method.value}</p>
               </div>
             </a>
@@ -147,16 +179,28 @@ const Contact = memo(() => {
             transition={{ duration: 0.5 }}
             className="lg:col-span-2 flex flex-col"
           >
-            <div className="backdrop-blur-xl bg-card/60 rounded-3xl border border-border/50 p-6 md:p-8 shadow-2xl shadow-primary/5 flex-1 flex flex-col hover:border-primary/40 hover:shadow-primary/10 transition-all duration-500">
+            <div className="bg-glass-card rounded-3xl border border-glass p-6 md:p-8 shadow-2xl shadow-glow-primary-sm flex-1 flex flex-col hover:border-primary-medium hover:shadow-glow-primary-md transition-all duration-500">
               <h3 className="font-heading text-2xl font-bold text-foreground mb-6">
                 Why Work With Us?
               </h3>
               <div className="space-y-4 flex-1">
                 {[
-                  { icon: 'mdi:shield-check-outline', text: 'Trusted by 500+ businesses across Sri Lanka' },
-                  { icon: 'mdi:clock-fast', text: 'Quick response within 24 hours' },
-                  { icon: 'mdi:account-group-outline', text: 'Expert team with 15+ years experience' },
-                  { icon: 'mdi:file-document-check-outline', text: 'Full compliance with local regulations' },
+                  {
+                    icon: "mdi:shield-check-outline",
+                    text: "Trusted by 500+ businesses across Sri Lanka",
+                  },
+                  {
+                    icon: "mdi:clock-fast",
+                    text: "Quick response within 24 hours",
+                  },
+                  {
+                    icon: "mdi:account-group-outline",
+                    text: "Expert team with 15+ years experience",
+                  },
+                  {
+                    icon: "mdi:file-document-check-outline",
+                    text: "Full compliance with local regulations",
+                  },
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -166,7 +210,7 @@ const Contact = memo(() => {
                     transition={{ duration: 0.4, delay: index * 0.1 }}
                     className="flex items-center gap-3"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-primary-soft flex items-center justify-center flex-shrink-0">
                       <Icon icon={item.icon} className="w-5 h-5 text-primary" />
                     </div>
                     <p className="text-muted-foreground">{item.text}</p>
@@ -176,7 +220,9 @@ const Contact = memo(() => {
 
               {/* Social Links */}
               <div className="pt-6 border-t border-border mt-auto">
-                <h4 className="font-semibold text-foreground mb-4">Follow Us</h4>
+                <h4 className="font-semibold text-foreground mb-4">
+                  Follow Us
+                </h4>
                 <div className="flex gap-3">
                   {companyInfo.socialLinks.map((social) => (
                     <a
@@ -203,24 +249,35 @@ const Contact = memo(() => {
             transition={{ duration: 0.5 }}
             className="lg:col-span-3 flex"
           >
-            <div className="backdrop-blur-xl bg-card/60 rounded-3xl border border-border/50 p-6 md:p-8 shadow-2xl shadow-primary/5 flex-1 flex flex-col hover:border-primary/40 hover:shadow-primary/10 transition-all duration-500">
+            <div className="bg-glass-card rounded-3xl border border-glass p-6 md:p-8 shadow-2xl shadow-glow-primary-sm flex-1 flex flex-col hover:border-primary-medium hover:shadow-glow-primary-md transition-all duration-500">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
-                  <Icon icon="mdi:pencil-outline" className="w-6 h-6 text-primary" />
+                <div className="w-12 h-12 rounded-2xl bg-primary-soft flex items-center justify-center">
+                  <Icon
+                    icon="mdi:pencil-outline"
+                    className="w-6 h-6 text-primary"
+                  />
                 </div>
                 <div>
                   <h3 className="font-heading font-semibold text-foreground text-xl">
                     Send Us a Message
                   </h3>
-                  <p className="text-muted-foreground text-sm">We'll get back to you within 24 hours</p>
+                  <p className="text-muted-foreground text-sm">
+                    We'll get back to you within 24 hours
+                  </p>
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 flex-1 flex flex-col">
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="space-y-5 flex-1 flex flex-col"
+              >
                 <div className="grid sm:grid-cols-2 gap-5">
                   {/* Name */}
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-foreground mb-2"
+                    >
                       Full Name
                     </label>
                     <div className="relative">
@@ -229,10 +286,10 @@ const Contact = memo(() => {
                         className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground"
                       />
                       <input
-                        {...register('name')}
+                        {...register("name")}
                         type="text"
                         id="name"
-                        className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+                        className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary transition-all"
                         placeholder="John Doe"
                       />
                     </div>
@@ -246,7 +303,10 @@ const Contact = memo(() => {
 
                   {/* Email */}
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-foreground mb-2"
+                    >
                       Email Address
                     </label>
                     <div className="relative">
@@ -255,10 +315,10 @@ const Contact = memo(() => {
                         className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground"
                       />
                       <input
-                        {...register('email')}
+                        {...register("email")}
                         type="email"
                         id="email"
-                        className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+                        className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary transition-all"
                         placeholder="john@example.com"
                       />
                     </div>
@@ -274,7 +334,10 @@ const Contact = memo(() => {
                 <div className="grid sm:grid-cols-2 gap-5">
                   {/* Phone */}
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-medium text-foreground mb-2"
+                    >
                       Phone Number
                     </label>
                     <div className="relative">
@@ -283,10 +346,10 @@ const Contact = memo(() => {
                         className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground"
                       />
                       <input
-                        {...register('phone')}
+                        {...register("phone")}
                         type="tel"
                         id="phone"
-                        className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+                        className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary transition-all"
                         placeholder="+94 77 XXX XXXX"
                       />
                     </div>
@@ -300,7 +363,10 @@ const Contact = memo(() => {
 
                   {/* Service */}
                   <div>
-                    <label htmlFor="service" className="block text-sm font-medium text-foreground mb-2">
+                    <label
+                      htmlFor="service"
+                      className="block text-sm font-medium text-foreground mb-2"
+                    >
                       Service Interest
                     </label>
                     <div className="relative">
@@ -309,9 +375,9 @@ const Contact = memo(() => {
                         className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground"
                       />
                       <select
-                        {...register('service')}
+                        {...register("service")}
                         id="service"
-                        className="w-full pl-12 pr-10 py-3.5 rounded-xl border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all appearance-none cursor-pointer"
+                        className="w-full pl-12 pr-10 py-3.5 rounded-xl border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary transition-all appearance-none cursor-pointer"
                       >
                         <option value="">Select a service</option>
                         {mainServices.map((service) => (
@@ -337,14 +403,17 @@ const Contact = memo(() => {
 
                 {/* Message */}
                 <div className="flex-1 flex flex-col">
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-foreground mb-2"
+                  >
                     Your Message
                   </label>
                   <textarea
-                    {...register('message')}
+                    {...register("message")}
                     id="message"
                     rows={4}
-                    className="w-full px-4 py-3.5 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none flex-1 min-h-[120px]"
+                    className="w-full px-4 py-3.5 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary transition-all resize-none flex-1 min-h-[120px]"
                     placeholder="Tell us about your requirements..."
                   />
                   {errors.message && (
@@ -364,7 +433,10 @@ const Contact = memo(() => {
                   >
                     {isSubmitting ? (
                       <>
-                        <Icon icon="mdi:loading" className="w-5 h-5 animate-spin" />
+                        <Icon
+                          icon="mdi:loading"
+                          className="w-5 h-5 animate-spin"
+                        />
                         Sending Message...
                       </>
                     ) : (
@@ -384,6 +456,6 @@ const Contact = memo(() => {
   );
 });
 
-Contact.displayName = 'Contact';
+Contact.displayName = "Contact";
 
 export default Contact;

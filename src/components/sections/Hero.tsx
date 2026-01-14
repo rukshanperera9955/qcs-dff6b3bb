@@ -30,8 +30,8 @@ const Hero = memo(() => {
       {/* --- HIGH-END GRAPHIC BACKGROUND --- */}
       <div className="absolute inset-0 z-0">
         {/* Animated Mesh Gradient - Swapped to Purple/Indigo */}
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary/10 rounded-full blur-[120px]" />
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary-soft rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary-soft rounded-full blur-[120px]" />
 
         {/* Tech Grid */}
         <div
@@ -64,9 +64,7 @@ const Hero = memo(() => {
               className="text-5xl md:text-7xl font-extrabold text-foreground leading-[1.05] mb-8"
             >
               Corporate, Partnership <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-secondary">
-                & Individual Services
-              </span>{" "}
+              <span className="gradient-text">& Individual Services</span>{" "}
               <br />
               in Sri Lanka
             </motion.h1>
@@ -90,7 +88,7 @@ const Hero = memo(() => {
             >
               <button
                 onClick={handleScrollToServices}
-                className="group relative overflow-hidden px-8 py-4 bg-primary text-primary-foreground font-bold rounded-full transition-all hover:pr-12 hover:bg-primary/90 active:scale-95 shadow-lg shadow-primary/20"
+                className="group relative overflow-hidden px-8 py-4 bg-primary text-primary-foreground font-bold rounded-full transition-all hover:pr-12 hover:bg-primary/90 active:scale-95 shadow-lg shadow-glow-primary-lg"
               >
                 <span className="relative z-10">Our Services</span>
                 <Icon
@@ -101,7 +99,7 @@ const Hero = memo(() => {
 
               <button
                 onClick={handleScrollToContact}
-                className="px-8 py-4 border border-border text-foreground font-bold rounded-full hover:bg-foreground/5 hover:border-primary/50 transition-all active:scale-95"
+                className="px-8 py-4 border border-border text-foreground font-bold rounded-full hover:bg-foreground/5 hover:border-primary-strong transition-all active:scale-95"
               >
                 Contact Us
               </button>
@@ -131,7 +129,7 @@ const Hero = memo(() => {
           <div className="lg:col-span-5 relative">
             <div className="relative w-full aspect-square max-w-[500px] mx-auto">
               {/* Main Graphic Backdrop - Purple Glow */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-[40px] blur-3xl opacity-30 animate-pulse" />
+              <div className="absolute inset-0 gradient-glow-soft rounded-[40px] blur-3xl opacity-30 animate-pulse" />
 
               {/* THE "SECRETARIAL MATRIX" GRAPHIC */}
               <div className="relative z-10 w-full h-full flex items-center justify-center">
@@ -143,7 +141,7 @@ const Hero = memo(() => {
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
-                  className="absolute top-10 right-0 p-5 bg-card/80 backdrop-blur-xl border border-primary/30 rounded-3xl shadow-2xl z-20 w-52"
+                  className="absolute top-10 right-0 p-5 bg-glass-card border border-primary-soft rounded-3xl shadow-2xl z-20 w-52"
                 >
                   <div className="h-2 w-12 bg-primary rounded-full mb-3" />
                   <div className="text-[10px] text-primary font-black uppercase mb-1">
@@ -156,7 +154,7 @@ const Hero = memo(() => {
                     {[1, 2, 3, 4, 5].map((i) => (
                       <div
                         key={i}
-                        className="h-1 w-full bg-primary/20 rounded-full"
+                        className="h-1 w-full bg-primary-subtle rounded-full"
                       />
                     ))}
                   </div>
@@ -170,7 +168,7 @@ const Hero = memo(() => {
                     delay: 0.5,
                     ease: "easeInOut",
                   }}
-                  className="absolute bottom-10 left-0 p-5 bg-card/80 backdrop-blur-xl border border-secondary/30 rounded-3xl shadow-2xl z-20 w-52"
+                  className="absolute bottom-10 left-0 p-5 bg-glass-card border border-secondary-soft rounded-3xl shadow-2xl z-20 w-52"
                 >
                   <Icon
                     icon="mdi:calculator"
@@ -186,7 +184,7 @@ const Hero = memo(() => {
                     {[40, 70, 50, 90, 60].map((h, i) => (
                       <div
                         key={i}
-                        className="w-full bg-secondary/40 rounded-t-sm"
+                        className="w-full bg-secondary-medium rounded-t-sm"
                         style={{ height: `${h}%` }}
                       />
                     ))}
@@ -198,7 +196,7 @@ const Hero = memo(() => {
                   <div className="absolute inset-0 bg-primary blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity" />
                   <motion.div
                     whileHover={{ scale: 1.05 }}
-                    className="relative w-48 h-56 bg-card border-2 border-primary/50 rounded-[60px] flex flex-col items-center justify-center overflow-hidden"
+                    className="relative w-48 h-56 bg-card border-2 border-primary-strong rounded-[60px] flex flex-col items-center justify-center overflow-hidden"
                   >
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.1),transparent)]" />
                     <Icon
@@ -221,7 +219,7 @@ const Hero = memo(() => {
                     cy="50%"
                     r="40%"
                     fill="none"
-                    stroke="hsl(var(--primary)/0.1)"
+                    stroke="hsl(var(--primary)/0.5)"
                     strokeWidth="1"
                     strokeDasharray="10 20"
                     className="animate-[spin_40s_linear_infinite]"
@@ -231,7 +229,7 @@ const Hero = memo(() => {
                     cy="50%"
                     r="45%"
                     fill="none"
-                    stroke="hsl(var(--secondary)/0.1)"
+                    stroke="hsl(var(--secondary)/0.5)"
                     strokeWidth="1"
                     strokeDasharray="5 15"
                     className="animate-[spin_30s_linear_infinite_reverse]"

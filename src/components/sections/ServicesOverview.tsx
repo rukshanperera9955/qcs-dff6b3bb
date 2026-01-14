@@ -1,64 +1,76 @@
-import { memo, useCallback, useMemo } from 'react';
-import { motion } from 'framer-motion';
-import { Icon } from '@iconify/react';
-import { mainServices } from '@/utils/constants';
-import { scrollToSection } from '@/utils/scrollUtils';
+import { memo, useCallback, useMemo } from "react";
+import { motion } from "framer-motion";
+import { Icon } from "@iconify/react";
+import { mainServices } from "@/utils/constants";
+import { scrollToSection } from "@/utils/scrollUtils";
 
 const ServicesOverview = memo(() => {
-  const handleScrollToContact = useCallback(() => scrollToSection('#contact'), []);
-  const handleScrollToSection = useCallback((id: string) => scrollToSection(`#${id}`), []);
+  const handleScrollToContact = useCallback(
+    () => scrollToSection("#contact"),
+    []
+  );
+  const handleScrollToSection = useCallback(
+    (id: string) => scrollToSection(`#${id}`),
+    []
+  );
 
-  const cardVariants = useMemo(() => ({
-    hidden: { opacity: 0, y: 30 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.15, duration: 0.5 },
+  const cardVariants = useMemo(
+    () => ({
+      hidden: { opacity: 0, y: 30 },
+      visible: (i: number) => ({
+        opacity: 1,
+        y: 0,
+        transition: { delay: i * 0.15, duration: 0.5 },
+      }),
     }),
-  }), []);
+    []
+  );
 
   const getColorClasses = useCallback((color: string) => {
     switch (color) {
-      case 'primary':
+      case "primary":
         return {
-          bg: 'bg-primary/10',
-          text: 'text-primary',
-          border: 'group-hover:border-primary/50',
-          shadow: 'group-hover:shadow-primary/20',
-          icon: 'bg-primary',
+          bg: "bg-primary-soft",
+          text: "text-primary",
+          border: "group-hover:border-primary-strong",
+          shadow: "group-hover:shadow-glow-primary-lg",
+          icon: "bg-primary",
         };
-      case 'gold':
+      case "gold":
         return {
-          bg: 'bg-gold/10',
-          text: 'text-gold',
-          border: 'group-hover:border-gold/50',
-          shadow: 'group-hover:shadow-gold/20',
-          icon: 'bg-gold',
+          bg: "bg-gold-soft",
+          text: "text-gold",
+          border: "group-hover:border-gold-strong",
+          shadow: "group-hover:shadow-glow-gold-lg",
+          icon: "bg-gold",
         };
-      case 'indigo':
+      case "indigo":
         return {
-          bg: 'bg-secondary/10',
-          text: 'text-secondary',
-          border: 'group-hover:border-secondary/50',
-          shadow: 'group-hover:shadow-secondary/20',
-          icon: 'bg-secondary',
+          bg: "bg-secondary-soft",
+          text: "text-secondary",
+          border: "group-hover:border-secondary-strong",
+          shadow: "group-hover:shadow-glow-secondary-xl",
+          icon: "bg-secondary",
         };
       default:
         return {
-          bg: 'bg-primary/10',
-          text: 'text-primary',
-          border: 'group-hover:border-primary/50',
-          shadow: 'group-hover:shadow-primary/20',
-          icon: 'bg-primary',
+          bg: "bg-primary-soft",
+          text: "text-primary",
+          border: "group-hover:border-primary-strong",
+          shadow: "group-hover:shadow-glow-primary-lg",
+          icon: "bg-primary",
         };
     }
   }, []);
 
   return (
-    <section id="services" className="section-padding bg-background/80 backdrop-blur-sm relative overflow-hidden">
+    <section
+      id="services"
+      className="section-padding bg-glass relative overflow-hidden"
+    >
       {/* Background Decorations */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary-fade rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary-fade rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
       <div className="container-custom relative z-10">
         {/* Section Header */}
@@ -69,7 +81,7 @@ const ServicesOverview = memo(() => {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-soft rounded-full text-primary text-sm font-medium mb-4">
             <Icon icon="mdi:briefcase-outline" className="w-4 h-4" />
             What We Offer
           </div>
@@ -77,7 +89,8 @@ const ServicesOverview = memo(() => {
             Our Professional <span className="gradient-text">Services</span>
           </h2>
           <p className="text-muted-foreground text-lg">
-            Comprehensive business solutions tailored for companies, partnerships, individuals, NGOs, and associations across Sri Lanka.
+            Comprehensive business solutions tailored for companies,
+            partnerships, individuals, NGOs, and associations across Sri Lanka.
           </p>
         </motion.div>
 
@@ -98,10 +111,15 @@ const ServicesOverview = memo(() => {
               >
                 <button
                   onClick={() => handleScrollToSection(service.id)}
-                  className={`w-full text-left h-full p-6 backdrop-blur-xl bg-card/60 rounded-2xl border border-border/50 ${colors.border} ${colors.shadow} transition-all duration-500 shadow-lg hover:shadow-2xl`}
+                  className={`w-full text-left h-full p-6 bg-glass-card rounded-2xl border border-glass ${colors.border} ${colors.shadow} transition-all duration-500 shadow-lg hover:shadow-2xl`}
                 >
-                  <div className={`w-14 h-14 rounded-xl ${colors.icon} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
-                    <Icon icon={service.icon} className="w-7 h-7 text-primary-foreground" />
+                  <div
+                    className={`w-14 h-14 rounded-xl ${colors.icon} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    <Icon
+                      icon={service.icon}
+                      className="w-7 h-7 text-primary-foreground"
+                    />
                   </div>
 
                   <h3 className="font-heading text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
@@ -112,9 +130,14 @@ const ServicesOverview = memo(() => {
                     {service.description}
                   </p>
 
-                  <div className={`inline-flex items-center gap-2 text-sm font-medium ${colors.text}`}>
+                  <div
+                    className={`inline-flex items-center gap-2 text-sm font-medium ${colors.text}`}
+                  >
                     Learn More
-                    <Icon icon="mdi:arrow-right" className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <Icon
+                      icon="mdi:arrow-right"
+                      className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                    />
                   </div>
                 </button>
               </motion.div>
@@ -133,10 +156,7 @@ const ServicesOverview = memo(() => {
           <p className="text-muted-foreground mb-4">
             Need help choosing the right service?
           </p>
-          <button
-            onClick={handleScrollToContact}
-            className="btn-hero-primary"
-          >
+          <button onClick={handleScrollToContact} className="btn-hero-primary">
             <Icon icon="mdi:message-text-outline" className="w-5 h-5" />
             Get Free Consultation
           </button>
@@ -146,6 +166,6 @@ const ServicesOverview = memo(() => {
   );
 });
 
-ServicesOverview.displayName = 'ServicesOverview';
+ServicesOverview.displayName = "ServicesOverview";
 
 export default ServicesOverview;
