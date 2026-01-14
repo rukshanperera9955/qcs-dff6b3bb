@@ -64,6 +64,16 @@
     --sidebar-ring: 268 79% 56%;
 
     --shadow-glow: 0 0 40px hsl(268 79% 56% / 0.3);
+
+    /* Slate */
+    --slate: 215 16% 47%;
+    --slate-foreground: 0 0% 100%;
+
+    /* Grid Line */
+    --grid-line: 0 0% 100%;
+
+    /* Overlay */
+    --overlay: 0 0% 0%;
   }
 
   .dark {
@@ -73,7 +83,7 @@
     /* Foreground: Off-white/Purple Tint */
     --foreground: 240 20% 98%;
 
-    --card: 228 50% 10%;
+    --card: 228 8% 10%;
     --card-foreground: 240 20% 98%;
 
     --popover: 228 50% 10%;
@@ -112,6 +122,16 @@
     --sidebar-accent-foreground: 240 20% 98%;
     --sidebar-border: 228 40% 20%;
     --sidebar-ring: 268 79% 60%;
+
+    /* Slate */
+    --slate: 215 16% 47%;
+    --slate-foreground: 0 0% 100%;
+
+    /* Grid Line */
+    --grid-line: 0 0% 100%;
+
+    /* Overlay */
+    --overlay: 0 0% 0%;
   }
 }
 
@@ -165,11 +185,11 @@
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-secondary;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-secondary;
   }
 
   .glass-effect {
-    @apply bg-background/80 backdrop-blur-md border border-white/10;
+    @apply bg-background/80 backdrop-blur-md border border-primary-foreground/10;
   }
 }
 

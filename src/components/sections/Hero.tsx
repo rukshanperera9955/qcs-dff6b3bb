@@ -37,7 +37,7 @@ const Hero = memo(() => {
         <div
           className="absolute inset-0 opacity-[0.05]"
           style={{
-            backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(hsl(var(--grid-line)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--grid-line)) 1px, transparent 1px)`,
             backgroundSize: "50px 50px",
           }}
         />
