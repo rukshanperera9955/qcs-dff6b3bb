@@ -30,7 +30,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background relative">
       {/* Attractive Navy Blue Background Overlay */}
-      <div className="fixed inset-0 bg-primary/[0.02] pointer-events-none z-0" />
+      {/* <div className="fixed inset-0 bg-primary/[0.01] pointer-events-none z-0" /> */}
 
       <ParticleBackground />
       <Header />
@@ -47,26 +47,17 @@ const Index = () => {
             <ServicesOverview />
           </Suspense>
 
-          {/* Decorative divider */}
-          <div className="h-px bg-primary/10 mx-auto max-w-5xl" />
-
           <Suspense fallback={<SectionLoader />}>
             <SecretarialServices />
           </Suspense>
-
-          <div className="h-px bg-primary/10 mx-auto max-w-5xl" />
 
           <Suspense fallback={<SectionLoader />}>
             <TaxationServices />
           </Suspense>
 
-          <div className="h-px bg-primary/10 mx-auto max-w-5xl" />
-
           <Suspense fallback={<SectionLoader />}>
             <AccountancyServices />
           </Suspense>
-
-          <div className="h-px bg-primary/10 mx-auto max-w-5xl" />
 
           <Suspense fallback={<SectionLoader />}>
             <Contact />

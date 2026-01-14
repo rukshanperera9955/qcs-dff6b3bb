@@ -90,7 +90,7 @@
     --popover-foreground: 240 20% 98%;
 
     /* Primary: Lighter Purple for Dark Mode visibility */
-    --primary: 268 79% 60%;
+    --primary: 240, 100%, 65%;
     --primary-foreground: 0 0% 100%;
 
     /* Secondary: Indigo */
@@ -98,7 +98,7 @@
     --secondary-foreground: 0 0% 100%;
 
     /* Accent/Gold replacement */
-    --gold: 270 90% 65%;
+    --gold: 240, 100%, 65%;
     --gold-foreground: 0 0% 100%;
 
     --muted: 228 40% 15%;
@@ -198,8 +198,55 @@
   .bg-glass {
     @apply bg-background/80 backdrop-blur-sm;
   }
+  /*
   .bg-glass-card {
     @apply bg-card/60 backdrop-blur-xl;
+  }
+    */
+  .bg-glass-card {
+    /* 1. Ultra-Low Opacity: Only 10% to let background colors pop through */
+    background: hsl(var(--background) / 0.1);
+
+    /* 2. Optimized Blur: 20px-30px is the "sweet spot" for performance and realism */
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+
+    /* 3. Dynamic Border: Uses primary color for a subtle brand-themed "rim" */
+    border: 1px solid hsl(var(--primary) / 0.2);
+    border-radius: var(--radius);
+
+    /* 4. Layered Shadows: A soft outer glow + a sharp inner highlight */
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.3),
+      inset 0 1px 1px hsl(var(--primary) / 0.3);
+
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  /* 5. Refractive Top Edge: Simulates light hitting the top of the glass */
+  .bg-glass-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary) / 0.4) 0%,
+      transparent 40%,
+      transparent 100%
+    );
+    mask: linear-gradient(#fff, #fff) content-box, linear-gradient(#fff, #fff);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+    padding: 1px; /* The thickness of the glow border */
+    pointer-events: none;
+  }
+
+  /* 6. Hover State: Makes the glass "feel" interactive */
+  .bg-glass-card:hover {
+    background: hsl(var(--background) / 0.15);
+    border-color: hsl(var(--primary) / 0.4);
+    transform: translateY(-2px);
   }
 
   .bg-primary-fade {

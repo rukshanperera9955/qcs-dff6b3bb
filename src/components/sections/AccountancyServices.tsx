@@ -18,10 +18,26 @@ const AccountancyServices = memo(() => {
       id="accountancy"
       className="section-padding bg-glass relative overflow-hidden"
     >
-      {/* Background Decorations */}
-      <div className="absolute top-1/3 right-0 w-80 h-80 bg-secondary-fade rounded-full blur-3xl" />
-      <div className="absolute bottom-1/3 left-0 w-64 h-64 bg-primary-fade rounded-full blur-3xl" />
+      {/* Optimized Background Decorations */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Top Right: Vibrant Secondary (Blue/Cyan) Blob */}
+        <div
+          className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-secondary/20 rounded-full blur-[120px] animate-float"
+          style={{ animationDuration: "15s" }}
+        />
 
+        {/* Middle Left: Primary (Purple/Blue) Blob */}
+        <div
+          className="absolute top-[20%] left-[-10%] w-[450px] h-[450px] bg-primary/20 rounded-full blur-[100px] animate-float-rotate"
+          style={{ animationDuration: "20s" }}
+        />
+
+        {/* Bottom Right: Gold Accent Blob */}
+        <div className="absolute bottom-[-5%] right-[10%] w-[400px] h-[400px] bg-gold/15 rounded-full blur-[110px] animate-pulse-slow" />
+
+        {/* Subtle Grid Pattern to add texture under the glass */}
+        <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] [background-size:40px_40px]" />
+      </div>
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <motion.div
@@ -31,12 +47,12 @@ const AccountancyServices = memo(() => {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary-soft rounded-full text-secondary text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gold-soft rounded-full text-gold text-sm font-medium mb-4">
             <Icon icon="mdi:chart-line" className="w-4 h-4" />
             Financial Management
           </div>
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Accountancy <span className="text-secondary">Services</span>
+            Accountancy <span className="text-gold">Services</span>
           </h2>
           <p className="text-muted-foreground text-lg">
             Professional accounting and bookkeeping services to keep your
@@ -55,15 +71,15 @@ const AccountancyServices = memo(() => {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               className="group"
             >
-              <div className="h-full bg-glass-card rounded-xl p-6 border border-glass shadow-lg shadow-glow-secondary-sm hover:shadow-2xl hover:border-secondary-strong hover:shadow-glow-secondary-lg transition-all duration-500">
-                <div className="w-14 h-14 rounded-xl bg-secondary-soft flex items-center justify-center mb-5 group-hover:bg-secondary-subtle group-hover:scale-110 transition-all duration-300">
+              <div className="h-full bg-card/40 rounded-xl p-6 border border-glass shadow-lg shadow-glow-secondary-sm hover:shadow-2xl hover:border-secondary-strong hover:shadow-glow-secondary-lg transition-all duration-500">
+                <div className="w-14 h-14 rounded-xl bg-gold-soft flex items-center justify-center mb-5 group-hover:bg-secondary-subtle group-hover:scale-110 transition-all duration-300">
                   <Icon
                     icon={service.icon || "mdi:book-open-outline"}
-                    className="w-7 h-7 text-secondary"
+                    className="w-7 h-7 text-gold"
                   />
                 </div>
 
-                <h3 className="font-heading font-semibold text-foreground text-lg mb-2 group-hover:text-secondary transition-colors">
+                <h3 className="font-heading font-semibold text-foreground text-lg mb-2 group-hover:text-gold transition-colors">
                   {service.name}
                 </h3>
 
@@ -85,7 +101,7 @@ const AccountancyServices = memo(() => {
           transition={{ delay: 0.3, duration: 0.5 }}
           className="mt-12 max-w-4xl mx-auto"
         >
-          <div className="bg-glass-card rounded-2xl border border-glass p-6 md:p-8 shadow-2xl shadow-glow-secondary-sm hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500">
+          <div className="bg-card/40 rounded-2xl border border-glass p-6 md:p-8 shadow-2xl shadow-glow-secondary-sm hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500">
             <h3 className="font-heading font-semibold text-foreground text-xl mb-6 text-center">
               Why Choose Our Accountancy Services?
             </h3>
@@ -93,11 +109,11 @@ const AccountancyServices = memo(() => {
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-3 p-3 rounded-lg backdrop-blur-sm bg-secondary-muted border border-glass-subtle hover:border-secondary-medium transition-all duration-300"
+                  className="flex items-center gap-3 p-3 rounded-lg backdrop-blur-sm bg-background border border-glass-subtle hover:border-secondary-medium transition-all duration-300"
                 >
                   <Icon
                     icon="mdi:check-circle"
-                    className="w-5 h-5 text-secondary flex-shrink-0"
+                    className="w-5 h-5 text-gold flex-shrink-0"
                   />
                   <span className="text-foreground text-sm">{feature}</span>
                 </div>

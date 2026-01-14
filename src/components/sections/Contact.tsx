@@ -17,7 +17,7 @@ const contactMethods = [
     label: "Email Us",
     value: companyInfo.email,
     href: `mailto:${companyInfo.email}`,
-    color: "primary",
+    color: "gold",
   },
   {
     icon: "mdi:phone-outline",
@@ -31,7 +31,7 @@ const contactMethods = [
     label: "WhatsApp",
     value: "Chat with us",
     href: `https://wa.me/94777611006`,
-    color: "indigo",
+    color: "gold",
   },
 ];
 
@@ -230,7 +230,7 @@ const Contact = memo(() => {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-11 h-11 rounded-xl bg-secondary flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"
+                      className="w-11 h-11 rounded-xl bg-gold flex items-center justify-center text-primary-foreground hover:bg-primary transition-all duration-300 hover:scale-110"
                       aria-label={social.name}
                     >
                       <Icon icon={social.icon} className="w-5 h-5" />

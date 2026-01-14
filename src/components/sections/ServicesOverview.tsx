@@ -68,10 +68,26 @@ const ServicesOverview = memo(() => {
       id="services"
       className="section-padding bg-glass relative overflow-hidden"
     >
-      {/* Background Decorations */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary-fade rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary-fade rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+      {/* Optimized Background Decorations */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Top Right: Vibrant Secondary (Blue/Cyan) Blob */}
+        <div
+          className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-secondary/20 rounded-full blur-[120px] animate-float"
+          style={{ animationDuration: "15s" }}
+        />
 
+        {/* Middle Left: Primary (Purple/Blue) Blob */}
+        <div
+          className="absolute top-[20%] left-[-10%] w-[450px] h-[450px] bg-primary/20 rounded-full blur-[100px] animate-float-rotate"
+          style={{ animationDuration: "20s" }}
+        />
+
+        {/* Bottom Right: Gold Accent Blob */}
+        <div className="absolute bottom-[-5%] right-[10%] w-[400px] h-[400px] bg-gold/15 rounded-full blur-[110px] animate-pulse-slow" />
+
+        {/* Subtle Grid Pattern to add texture under the glass */}
+        <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] [background-size:40px_40px]" />
+      </div>
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <motion.div
@@ -111,7 +127,7 @@ const ServicesOverview = memo(() => {
               >
                 <button
                   onClick={() => handleScrollToSection(service.id)}
-                  className={`w-full text-left h-full p-6 bg-glass-card rounded-2xl border border-glass ${colors.border} ${colors.shadow} transition-all duration-500 shadow-lg hover:shadow-2xl`}
+                  className={`w-full text-left h-full p-6 bg-card/40 rounded-2xl border border-glass ${colors.border} ${colors.shadow} transition-all duration-500 shadow-lg hover:shadow-2xl`}
                 >
                   <div
                     className={`w-14 h-14 rounded-xl ${colors.icon} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}

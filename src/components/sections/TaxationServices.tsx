@@ -51,12 +51,28 @@ const TaxationServices = memo(() => {
   return (
     <section
       id="taxation"
-      className="section-padding bg-glass relative overflow-hidden"
+      className="section-padding relative bg-glass overflow-hidden"
     >
-      {/* Background Decorations */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold-fade rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-secondary-fade rounded-full blur-3xl" />
+      {/* Optimized Background Decorations */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Top Right: Vibrant Secondary (Blue/Cyan) Blob */}
+        <div
+          className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-secondary/20 rounded-full blur-[120px] animate-float"
+          style={{ animationDuration: "15s" }}
+        />
 
+        {/* Middle Left: Primary (Purple/Blue) Blob */}
+        <div
+          className="absolute top-[20%] left-[-10%] w-[450px] h-[450px] bg-primary/20 rounded-full blur-[100px] animate-float-rotate"
+          style={{ animationDuration: "20s" }}
+        />
+
+        {/* Bottom Right: Gold Accent Blob */}
+        <div className="absolute bottom-[-5%] right-[10%] w-[400px] h-[400px] bg-gold/15 rounded-full blur-[110px] animate-pulse-slow" />
+
+        {/* Subtle Grid Pattern to add texture under the glass */}
+        <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] [background-size:40px_40px]" />
+      </div>
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <motion.div
@@ -87,7 +103,7 @@ const TaxationServices = memo(() => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
-            className="flex flex-wrap justify-center gap-2 mb-8 p-2 bg-secondary-medium rounded-2xl"
+            className="flex flex-wrap justify-center gap-2 mb-8 p-2 bg-background rounded-2xl"
           >
             {tabs.map((tab) => (
               <button
@@ -120,7 +136,7 @@ const TaxationServices = memo(() => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="bg-glass-card rounded-2xl border border-glass p-6 md:p-8 shadow-2xl shadow-glow-gold-sm hover:border-gold-medium hover:shadow-glow-gold-md transition-all duration-500"
+            className="bg-card/40 rounded-2xl border border-glass p-6 md:p-8 shadow-2xl shadow-glow-gold-sm hover:border-gold-medium hover:shadow-glow-gold-md transition-all duration-500"
           >
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {activeData.map((service, index) => (
@@ -129,7 +145,7 @@ const TaxationServices = memo(() => {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: index * 0.05, duration: 0.3 }}
-                  className="group p-4 rounded-xl backdrop-blur-sm bg-secondary-muted hover:bg-secondary-medium border border-glass-subtle hover:border-gold-strong hover:shadow-lg hover:shadow-glow-gold-md transition-all duration-500"
+                  className="group p-4 bg-background rounded-xl backdrop-blur-sm hover:bg-secondary-medium border border-glass-subtle hover:border-gold-strong hover:shadow-lg hover:shadow-glow-gold-md transition-all duration-500"
                 >
                   <div className="flex items-start gap-3">
                     <div className="w-10 h-10 rounded-lg bg-gold-soft flex items-center justify-center flex-shrink-0 group-hover:bg-gold-subtle transition-colors">
