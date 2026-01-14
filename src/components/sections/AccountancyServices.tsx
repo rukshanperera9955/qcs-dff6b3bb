@@ -51,8 +51,8 @@ const AccountancyServices = memo(() => {
             <Icon icon="mdi:chart-line" className="w-4 h-4" />
             Financial Management
           </div>
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Accountancy <span className="text-gold">Services</span>
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            Accountancy <span className="gradient-text">Services</span>
           </h2>
           <p className="text-muted-foreground text-lg">
             Professional accounting and bookkeeping services to keep your

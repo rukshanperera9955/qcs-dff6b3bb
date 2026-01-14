@@ -185,7 +185,9 @@
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-secondary;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-gold;
+    background-size: 200% auto;
+    animation: textGradientMove 4s linear infinite;
   }
 
   .glass-effect {
@@ -543,6 +545,17 @@
     50% {
       opacity: 0.8;
       transform: scale(1.15);
+    }
+  }
+  @keyframes textGradientMove {
+    0% {
+      background-position: 0% center;
+    }
+    50% {
+      background-position: 100% center;
+    }
+    100% {
+      background-position: 0% center;
     }
   }
 }

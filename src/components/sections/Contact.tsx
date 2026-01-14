@@ -112,7 +112,7 @@ const Contact = memo(() => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="grid sm:grid-cols-3 gap-4 mb-16"
+          className="grid sm:grid-cols-3 gap-4 mb-16 "
         >
           {contactMethods.map((method, index) => (
             <a
@@ -179,7 +179,7 @@ const Contact = memo(() => {
             transition={{ duration: 0.5 }}
             className="lg:col-span-2 flex flex-col"
           >
-            <div className="bg-glass-card rounded-3xl border border-glass p-6 md:p-8 shadow-2xl shadow-glow-primary-sm flex-1 flex flex-col hover:border-primary-medium hover:shadow-glow-primary-md transition-all duration-500">
+            <div className="bg-card/40 rounded-3xl border border-glass p-6 md:p-8 shadow-2xl shadow-glow-primary-sm flex-1 flex flex-col hover:border-primary-medium hover:shadow-glow-primary-md transition-all duration-500">
               <h3 className="font-heading text-2xl font-bold text-foreground mb-6">
                 Why Work With Us?
               </h3>
@@ -249,7 +249,7 @@ const Contact = memo(() => {
             transition={{ duration: 0.5 }}
             className="lg:col-span-3 flex"
           >
-            <div className="bg-glass-card rounded-3xl border border-glass p-6 md:p-8 shadow-2xl shadow-glow-primary-sm flex-1 flex flex-col hover:border-primary-medium hover:shadow-glow-primary-md transition-all duration-500">
+            <div className="bg-card/40 rounded-3xl border border-glass p-6 md:p-8 shadow-2xl shadow-glow-primary-sm flex-1 flex flex-col hover:border-primary-medium hover:shadow-glow-primary-md transition-all duration-500">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 rounded-2xl bg-primary-soft flex items-center justify-center">
                   <Icon

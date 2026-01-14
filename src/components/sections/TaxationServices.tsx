@@ -86,8 +86,8 @@ const TaxationServices = memo(() => {
             <Icon icon="mdi:calculator-variant-outline" className="w-4 h-4" />
             Tax Compliance
           </div>
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Taxation <span className="text-gold">Services</span>
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            Taxation <span className="gradient-text">Services</span>
           </h2>
           <p className="text-muted-foreground text-lg">
             Expert tax advisory and compliance services tailored for
