@@ -7,7 +7,7 @@ import { componentTagger } from "lovable-tagger";
 export default defineConfig(({ mode }) => ({
   // ADD THIS LINE:
   // If we are in production (GitHub Pages), use the repo name.
-  // For local dev or Vercel, it stays as '/'
+  // For local dev or Vercel, it stays as'/'
   base: mode === "production" ? "/qcs-dff6b3bb/" : "/",
 
   server: {
