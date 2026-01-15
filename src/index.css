@@ -8,75 +8,8 @@
 
 @layer base {
   :root {
-    /* Base Colors - Light Mode */
-    /* Background: Very faint cool white/indigo tint for freshness */
-    --background: 255 100% 99%;
-    /* Nearly white */
-    /* Foreground: Deep Indigo/Slate for high readability */
-    --foreground: 230 35% 15%;
+    /* Base Colors - Dark Mode Enforced */
 
-    /* Primary: Vivid Purple (Matches Hero Primary Button) */
-    /* approx #9333ea (purple-600) -> hsl(268, 79%, 56%) */
-    --primary: 268 79% 56%;
-    --primary-foreground: 0 0% 100%;
-
-    /* Secondary: Indigo (Matches Hero Gradients/Accents) */
-    /* approx #6366f1 (indigo-500) -> hsl(244, 63%, 69%) */
-    --secondary: 244 63% 69%;
-    --secondary-foreground: 0 0% 100%;
-
-    /* Accent/Gold (Renamed concept to match Prop, keeping var name for code compat) */
-    /* Using a warmer Violet/Pinkish tone for variation or sticking to Purple */
-    --gold: 270 95% 60%;
-    --gold-foreground: 0 0% 100%;
-
-    /* Cards/Surfaces */
-    --card: 0 0% 100%;
-    --card-foreground: 230 35% 15%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 230 35% 15%;
-
-    --muted: 240 20% 96%;
-    --muted-foreground: 240 10% 45%;
-
-    --accent: 260 100% 97%;
-    --accent-foreground: 268 79% 56%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 240 20% 90%;
-    --input: 240 20% 90%;
-    --ring: 268 79% 56%;
-
-    --radius: 1rem;
-    /* More rounded to avoid squares */
-
-    /* Sidebar */
-    --sidebar-background: 255 100% 99%;
-    --sidebar-foreground: 230 35% 15%;
-    --sidebar-primary: 268 79% 56%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 20% 96%;
-    --sidebar-accent-foreground: 230 35% 15%;
-    --sidebar-border: 240 20% 90%;
-    --sidebar-ring: 268 79% 56%;
-
-    --shadow-glow: 0 0 40px hsl(268 79% 56% / 0.3);
-
-    /* Slate */
-    --slate: 215 16% 47%;
-    --slate-foreground: 0 0% 100%;
-
-    /* Grid Line */
-    --grid-line: 0 0% 100%;
-
-    /* Overlay */
-    --overlay: 0 0% 0%;
-  }
-
-  .dark {
     /* Background: Deep Slate/Black (Matches Hero #020617) */
     /* #020617 -> hsl(228, 81%, 5%) */
     --background: 228 81% 5%;
@@ -90,7 +23,7 @@
     --popover-foreground: 240 20% 98%;
 
     /* Primary: Lighter Purple for Dark Mode visibility */
-    --primary: 240, 100%, 65%;
+    --primary: 240 100% 65%;
     --primary-foreground: 0 0% 100%;
 
     /* Secondary: Indigo */
@@ -98,7 +31,7 @@
     --secondary-foreground: 0 0% 100%;
 
     /* Accent/Gold replacement */
-    --gold: 240, 100%, 65%;
+    --gold: 240 100% 65%;
     --gold-foreground: 0 0% 100%;
 
     --muted: 228 40% 15%;
@@ -114,6 +47,9 @@
     --input: 228 40% 20%;
     --ring: 268 79% 60%;
 
+    --radius: 1rem;
+
+    /* Sidebar */
     --sidebar-background: 228 81% 5%;
     --sidebar-foreground: 240 20% 98%;
     --sidebar-primary: 268 79% 60%;
@@ -132,6 +68,8 @@
 
     /* Overlay */
     --overlay: 0 0% 0%;
+
+    --shadow-glow: 0 0 40px hsl(268 79% 56% / 0.3);
   }
 }
 

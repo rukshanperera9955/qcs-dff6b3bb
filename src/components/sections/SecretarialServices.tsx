@@ -28,7 +28,7 @@ const SecretarialServices = memo(() => {
       id="secretarial"
       className="section-padding bg-glass relative overflow-hidden"
     >
-      {/* Background Decorations */}
+      {/* Background Decorations - PRESERVED FROM ORIGINAL */}
       <div className="absolute top-1/4 right-0 w-72 h-72 bg-primary-fade rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 left-0 w-56 h-56 bg-gold-fade rounded-full blur-3xl" />
 
@@ -41,7 +41,7 @@ const SecretarialServices = memo(() => {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-soft rounded-full text-primary text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gold-soft rounded-full text-gold text-sm font-medium mb-4">
             <Icon icon="mdi:file-document-edit-outline" className="w-4 h-4" />
             Corporate Solutions
           </div>
@@ -59,28 +59,28 @@ const SecretarialServices = memo(() => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.5 }}
           className="lg:hidden mb-6"
         >
           <div
             ref={tabsContainerRef}
-            className="flex overflow-x-auto gap-2 p-2 rounded-2xl scrollbar-hide"
+            className="flex overflow-x-auto gap-2 p-2 bg-card/40 backdrop-blur-sm rounded-2xl border border-glass scrollbar-hide"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {secretarialServices.map((category, index) => (
               <button
                 key={index}
                 onClick={() => handleTabClick(index)}
-                className={`relative px-4 py-3 rounded-xl font-medium text-sm transition-all duration-300 flex items-center gap-2 flex-shrink-0 whitespace-nowrap ${
+                className={`relative px-6 py-3 rounded-xl font-medium text-sm transition-all duration-300 flex items-center gap-2 flex-shrink-0 whitespace-nowrap ${
                   activeCategory === index
-                    ? "text-primary-foreground"
+                    ? "text-gold-foreground"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {activeCategory === index && (
                   <motion.div
                     layoutId="activeSecretarialTabBg"
-                    className="absolute inset-0 bg-primary rounded-xl shadow-md"
+                    className="absolute inset-0 bg-gold rounded-xl shadow-lg shadow-glow-gold-sm"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                   />
                 )}
@@ -92,7 +92,7 @@ const SecretarialServices = memo(() => {
         </motion.div>
 
         {/* Desktop Grid Layout */}
-        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+        <div className="grid lg:grid-cols-12 gap-6 items-stretch max-w-6xl mx-auto">
           {/* Category Navigation - Left Side (Desktop Only) */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -101,38 +101,38 @@ const SecretarialServices = memo(() => {
             transition={{ duration: 0.5 }}
             className="hidden lg:flex lg:col-span-4"
           >
-            <div className="bg-card/40 rounded-2xl border border-glass p-4 shadow-2xl shadow-glow-primary-sm w-full flex flex-col hover:border-primary-medium hover:shadow-glow-primary-md transition-all duration-500">
-              <h3 className="font-heading font-semibold text-foreground px-3 py-2 mb-2">
+            <div className="bg-card/40 rounded-xl border border-glass p-6 shadow-lg shadow-glow-secondary-sm w-full flex flex-col hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500">
+              <h3 className="font-heading font-semibold text-foreground text-lg mb-5">
                 Service Categories
               </h3>
-              <nav className="space-y-1 flex-1">
+              <nav className="space-y-2 flex-1">
                 {secretarialServices.map((category, index) => (
                   <button
                     key={index}
                     onClick={() => setActiveCategory(index)}
-                    className={`w-full flex items-center bg-background gap-3 px-4 py-3 rounded-xl text-left transition-all duration-300 ${
+                    className={`group w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-300 ${
                       activeCategory === index
-                        ? "bg-primary text-primary-foreground shadow-md"
-                        : "text-foreground hover:bg-secondary-heavy"
+                        ? "bg-gold text-gold-foreground shadow-lg shadow-glow-gold-sm"
+                        : "bg-background hover:bg-secondary-subtle"
                     }`}
                   >
                     <div
-                      className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
+                      className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
                         activeCategory === index
-                          ? "bg-primary-foreground/20"
-                          : "bg-primary-soft"
+                          ? "bg-gold-foreground/20 scale-110"
+                          : "bg-gold-soft group-hover:bg-secondary-subtle"
                       }`}
                     >
                       <Icon
                         icon={category.icon}
                         className={`w-5 h-5 ${
                           activeCategory === index
-                            ? "text-primary-foreground"
-                            : "text-primary"
+                            ? "text-gold-foreground"
+                            : "text-gold"
                         }`}
                       />
                     </div>
-                    <span className="font-medium text-sm leading-tight">
+                    <span className="font-heading font-medium text-sm leading-tight">
                       {category.title}
                     </span>
                   </button>
@@ -153,23 +153,23 @@ const SecretarialServices = memo(() => {
               key={activeCategory}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="bg-card/40 rounded-2xl border border-glass overflow-hidden shadow-2xl shadow-glow-primary-sm flex-1 flex flex-col hover:border-primary-medium hover:shadow-glow-primary-md transition-all duration-500"
+              transition={{ duration: 0.5 }}
+              className="bg-card/40 rounded-xl border border-glass overflow-hidden shadow-lg shadow-glow-secondary-sm flex-1 flex flex-col hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500"
             >
               {/* Header */}
-              <div className="bg-background p-6 md:p-8 border-b border-border">
+              <div className="p-6 md:p-8 border-b border-glass">
                 <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 rounded-xl bg-primary-subtle flex items-center justify-center flex-shrink-0">
+                  <div className="w-14 h-14 rounded-xl bg-gold-soft flex items-center justify-center flex-shrink-0">
                     <Icon
                       icon={secretarialServices[activeCategory].icon}
-                      className="w-7 h-7 text-primary"
+                      className="w-7 h-7 text-gold"
                     />
                   </div>
                   <div>
-                    <h3 className="font-heading font-bold text-foreground text-xl md:text-2xl mb-2">
+                    <h3 className="font-heading font-semibold text-foreground text-xl md:text-2xl mb-2">
                       {secretarialServices[activeCategory].title}
                     </h3>
-                    <p className="text-muted-foreground">
+                    <p className="text-muted-foreground text-sm leading-relaxed">
                       {secretarialServices[activeCategory].description}
                     </p>
                   </div>
@@ -178,7 +178,7 @@ const SecretarialServices = memo(() => {
 
               {/* Services List */}
               <div className="p-6 md:p-8">
-                <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
+                <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-5">
                   What's Included
                 </h4>
                 <div className="grid sm:grid-cols-2 gap-3">
@@ -188,16 +188,14 @@ const SecretarialServices = memo(() => {
                         key={itemIndex}
                         initial={{ opacity: 0, y: 5 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: itemIndex * 0.05, duration: 0.2 }}
-                        className="group flex items-start gap-3 p-4 rounded-xl bg-background  hover:bg-secondary border border-transparent hover:border-border transition-all duration-200"
+                        transition={{ delay: itemIndex * 0.05, duration: 0.3 }}
+                        className="flex items-start gap-3 p-3 rounded-lg backdrop-blur-sm bg-background border border-glass-subtle hover:border-secondary-medium transition-all duration-300"
                       >
-                        <div className="w-6 h-6 rounded-full bg-secondary-subtle flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-secondary-muted transition-colors">
-                          <Icon
-                            icon="mdi:check"
-                            className="w-3.5 h-3.5 text-secondary"
-                          />
-                        </div>
-                        <span className="text-foreground text-sm font-medium leading-relaxed">
+                        <Icon
+                          icon="mdi:check-circle"
+                          className="w-5 h-5 text-gold flex-shrink-0 mt-0.5"
+                        />
+                        <span className="text-foreground text-sm leading-relaxed">
                           {item.name}
                         </span>
                       </motion.div>
@@ -206,7 +204,7 @@ const SecretarialServices = memo(() => {
                 </div>
 
                 {/* CTA */}
-                <div className="mt-8 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="mt-8 pt-6 border-t border-glass flex flex-col sm:flex-row items-center justify-between gap-4">
                   <p className="text-muted-foreground text-sm text-center sm:text-left">
                     Need help with{" "}
                     {secretarialServices[activeCategory].title.toLowerCase()}?
@@ -237,11 +235,11 @@ const SecretarialServices = memo(() => {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.1, duration: 0.3 }}
-                className="bg-card/40 rounded-xl border border-glass p-4 text-center shadow-lg shadow-glow-primary-sm hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500"
+                transition={{ delay: 0.1, duration: 0.5 }}
+                className="bg-card/40 rounded-xl border border-glass p-4 text-center shadow-lg shadow-glow-secondary-sm hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500"
               >
                 <div className="w-10 h-10 rounded-lg bg-gold-soft flex items-center justify-center mx-auto mb-2">
-                  <Icon icon="mdi:domain" className="w-5 h-5 text-primary" />
+                  <Icon icon="mdi:domain" className="w-5 h-5 text-gold" />
                 </div>
                 <p className="text-2xl font-bold text-foreground">500+</p>
                 <p className="text-xs text-muted-foreground">
@@ -252,8 +250,8 @@ const SecretarialServices = memo(() => {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.2, duration: 0.3 }}
-                className="bg-card/40 rounded-xl border border-glass p-4 text-center shadow-lg shadow-glow-gold-sm hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500"
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="bg-card/40 rounded-xl border border-glass p-4 text-center shadow-lg shadow-glow-secondary-sm hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500"
               >
                 <div className="w-10 h-10 rounded-lg bg-gold-soft flex items-center justify-center mx-auto mb-2">
                   <Icon
@@ -270,7 +268,7 @@ const SecretarialServices = memo(() => {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.3, duration: 0.3 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
                 className="bg-card/40 rounded-xl border border-glass p-4 text-center shadow-lg shadow-glow-secondary-sm hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500"
               >
                 <div className="w-10 h-10 rounded-lg bg-gold-soft flex items-center justify-center mx-auto mb-2">

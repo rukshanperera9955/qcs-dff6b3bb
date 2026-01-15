@@ -79,7 +79,7 @@ const Contact = memo(() => {
       id="contact"
       className="section-padding bg-glass relative overflow-hidden"
     >
-      {/* Background Decorations */}
+      {/* Background Decorations - PRESERVED FROM ORIGINAL */}
       <div className="absolute inset-0 bg-gradient-to-br gradient-fade-primary via-transparent to-gold/5" />
       <div className="absolute top-20 right-10 w-72 h-72 bg-primary-soft rounded-full blur-3xl" />
       <div className="absolute bottom-20 left-10 w-72 h-72 bg-gold-soft rounded-full blur-3xl" />
@@ -91,9 +91,9 @@ const Contact = memo(() => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center max-w-2xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-soft rounded-full text-primary text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gold-soft rounded-full text-gold text-sm font-medium mb-4">
             <Icon icon="mdi:message-text-outline" className="w-4 h-4" />
             Get In Touch
           </div>
@@ -112,75 +112,51 @@ const Contact = memo(() => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="grid sm:grid-cols-3 gap-4 mb-16 "
+          className="grid sm:grid-cols-3 gap-6 mb-12 max-w-5xl mx-auto"
         >
           {contactMethods.map((method, index) => (
-            <a
+            <motion.a
               key={method.label}
               href={method.href}
               target={method.label === "WhatsApp" ? "_blank" : undefined}
               rel={
                 method.label === "WhatsApp" ? "noopener noreferrer" : undefined
               }
-              className={`group relative rounded-2xl p-6 transition-all duration-500 overflow-hidden backdrop-blur-xl bg-card/40 border border-glass hover:shadow-2xl ${
-                method.color === "primary"
-                  ? "hover:border-primary-heavy hover:shadow-glow-primary-lg"
-                  : method.color === "gold"
-                  ? "hover:border-gold-heavy hover:shadow-glow-gold-lg"
-                  : "hover:border-secondary-heavy hover:shadow-glow-secondary-xl"
-              }`}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              className="group"
             >
-              <div
-                className={`absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
-                  method.color === "primary"
-                    ? "gradient-fade-primary to-transparent"
-                    : method.color === "gold"
-                    ? "gradient-fade-gold to-transparent"
-                    : "gradient-fade-secondary to-transparent"
-                }`}
-              />
-              <div className="relative z-10 flex flex-col items-center text-center">
-                <div
-                  className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110 ${
-                    method.color === "primary"
-                      ? "bg-primary-soft"
-                      : method.color === "gold"
-                      ? "bg-gold-soft"
-                      : "bg-secondary-soft"
-                  }`}
-                >
-                  <Icon
-                    icon={method.icon}
-                    className={`w-7 h-7 ${
-                      method.color === "primary"
-                        ? "text-primary"
-                        : method.color === "gold"
-                        ? "text-gold"
-                        : "text-secondary"
-                    }`}
-                  />
+              <div className="h-full bg-card/40 rounded-xl p-6 border border-glass shadow-lg shadow-glow-secondary-sm hover:shadow-2xl hover:border-secondary-strong hover:shadow-glow-secondary-lg transition-all duration-500">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-14 h-14 rounded-xl bg-gold-soft flex items-center justify-center mb-5 group-hover:bg-secondary-subtle group-hover:scale-110 transition-all duration-300">
+                    <Icon icon={method.icon} className="w-7 h-7 text-gold" />
+                  </div>
+                  <h4 className="font-heading font-semibold text-foreground text-lg mb-2 group-hover:text-gold transition-colors">
+                    {method.label}
+                  </h4>
+                  <p className="text-muted-foreground text-sm">
+                    {method.value}
+                  </p>
                 </div>
-                <h4 className="font-semibold text-foreground mb-1">
-                  {method.label}
-                </h4>
-                <p className="text-muted-foreground text-sm">{method.value}</p>
               </div>
-            </a>
+            </motion.a>
           ))}
         </motion.div>
 
         {/* Main Contact Section */}
-        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-stretch">
+        <div className="grid lg:grid-cols-5 gap-6 lg:gap-8 items-stretch max-w-6xl mx-auto">
           {/* Left Side - Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-2 flex flex-col"
+            className="lg:col-span-2"
           >
-            <div className="bg-card/40 rounded-3xl border border-glass p-6 md:p-8 shadow-2xl shadow-glow-primary-sm flex-1 flex flex-col hover:border-primary-medium hover:shadow-glow-primary-md transition-all duration-500">
-              <h3 className="font-heading text-2xl font-bold text-foreground mb-6">
+            <div className="h-full bg-card/40 rounded-xl border border-glass p-6 md:p-8 shadow-lg shadow-glow-secondary-sm hover:shadow-2xl hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500 flex flex-col">
+              <h3 className="font-heading text-xl font-semibold text-foreground mb-6">
                 Why Work With Us?
               </h3>
               <div className="space-y-4 flex-1">
@@ -202,25 +178,22 @@ const Contact = memo(() => {
                     text: "Full compliance with local regulations",
                   },
                 ].map((item, index) => (
-                  <motion.div
+                  <div
                     key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                    className="flex items-center gap-3"
+                    className="flex items-center gap-3 p-3 rounded-lg backdrop-blur-sm bg-background border border-glass-subtle hover:border-secondary-medium transition-all duration-300"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-primary-soft flex items-center justify-center flex-shrink-0">
-                      <Icon icon={item.icon} className="w-5 h-5 text-primary" />
-                    </div>
-                    <p className="text-muted-foreground">{item.text}</p>
-                  </motion.div>
+                    <Icon
+                      icon={item.icon}
+                      className="w-5 h-5 text-gold flex-shrink-0"
+                    />
+                    <span className="text-foreground text-sm">{item.text}</span>
+                  </div>
                 ))}
               </div>
 
               {/* Social Links */}
-              <div className="pt-6 border-t border-border mt-auto">
-                <h4 className="font-semibold text-foreground mb-4">
+              <div className="pt-6 border-t border-glass mt-6">
+                <h4 className="font-heading font-semibold text-foreground text-base mb-4">
                   Follow Us
                 </h4>
                 <div className="flex gap-3">
@@ -230,7 +203,7 @@ const Contact = memo(() => {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-11 h-11 rounded-xl bg-gold flex items-center justify-center text-primary-foreground hover:bg-primary transition-all duration-300 hover:scale-110"
+                      className="w-11 h-11 rounded-xl bg-gold-soft flex items-center justify-center text-gold hover:bg-secondary-subtle hover:text-secondary hover:scale-110 transition-all duration-300"
                       aria-label={social.name}
                     >
                       <Icon icon={social.icon} className="w-5 h-5" />
@@ -247,21 +220,21 @@ const Contact = memo(() => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-3 flex"
+            className="lg:col-span-3"
           >
-            <div className="bg-card/40 rounded-3xl border border-glass p-6 md:p-8 shadow-2xl shadow-glow-primary-sm flex-1 flex flex-col hover:border-primary-medium hover:shadow-glow-primary-md transition-all duration-500">
+            <div className="h-full bg-card/40 rounded-xl border border-glass p-6 md:p-8 shadow-lg shadow-glow-secondary-sm hover:shadow-2xl hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500 flex flex-col">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-primary-soft flex items-center justify-center">
+                <div className="w-14 h-14 rounded-xl bg-gold-soft flex items-center justify-center">
                   <Icon
                     icon="mdi:pencil-outline"
-                    className="w-6 h-6 text-primary"
+                    className="w-7 h-7 text-gold"
                   />
                 </div>
                 <div>
                   <h3 className="font-heading font-semibold text-foreground text-xl">
                     Send Us a Message
                   </h3>
-                  <p className="text-muted-foreground text-sm">
+                  <p className="text-muted-foreground text-sm leading-relaxed">
                     We'll get back to you within 24 hours
                   </p>
                 </div>
@@ -289,7 +262,7 @@ const Contact = memo(() => {
                         {...register("name")}
                         type="text"
                         id="name"
-                        className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary transition-all"
+                        className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-secondary transition-all"
                         placeholder="John Doe"
                       />
                     </div>
@@ -318,7 +291,7 @@ const Contact = memo(() => {
                         {...register("email")}
                         type="email"
                         id="email"
-                        className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary transition-all"
+                        className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-secondary transition-all"
                         placeholder="john@example.com"
                       />
                     </div>
@@ -349,7 +322,7 @@ const Contact = memo(() => {
                         {...register("phone")}
                         type="tel"
                         id="phone"
-                        className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary transition-all"
+                        className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-secondary transition-all"
                         placeholder="+94 77 XXX XXXX"
                       />
                     </div>
@@ -377,7 +350,7 @@ const Contact = memo(() => {
                       <select
                         {...register("service")}
                         id="service"
-                        className="w-full pl-12 pr-10 py-3.5 rounded-xl border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary transition-all appearance-none cursor-pointer"
+                        className="w-full pl-12 pr-10 py-3.5 rounded-xl border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-secondary transition-all appearance-none cursor-pointer"
                       >
                         <option value="">Select a service</option>
                         {mainServices.map((service) => (
@@ -413,7 +386,7 @@ const Contact = memo(() => {
                     {...register("message")}
                     id="message"
                     rows={4}
-                    className="w-full px-4 py-3.5 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary transition-all resize-none flex-1 min-h-[120px]"
+                    className="w-full px-4 py-3.5 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-secondary transition-all resize-none flex-1 min-h-[120px]"
                     placeholder="Tell us about your requirements..."
                   />
                   {errors.message && (
@@ -424,7 +397,7 @@ const Contact = memo(() => {
                   )}
                 </div>
 
-                {/* Submit Button - pushed to bottom */}
+                {/* Submit Button */}
                 <div className="mt-auto pt-2">
                   <button
                     type="submit"

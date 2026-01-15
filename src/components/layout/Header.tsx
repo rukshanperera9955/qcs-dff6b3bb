@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
 import { navLinks } from "@/utils/constants";
 import { scrollToSection as scrollTo } from "@/utils/scrollUtils";
-import ThemeToggle from "@/components/ui/theme-toggle";
 
 const sectionIds = [
   "home",
@@ -124,7 +123,6 @@ const Header = memo(() => {
 
             {/* Desktop Actions */}
             <div className="hidden lg:flex items-center gap-3">
-              <ThemeToggle />
               <motion.button
                 onClick={() => scrollToSection("#contact")}
                 className="flex items-center gap-2 px-5 py-2.5 bg-gold text-gold-foreground rounded-full font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-300"
@@ -138,7 +136,6 @@ const Header = memo(() => {
 
             {/* Mobile Menu Button */}
             <div className="flex items-center gap-2 lg:hidden">
-              <ThemeToggle />
               <motion.button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="p-2.5 rounded-xl bg-accent header-footer-foreground hover:bg-accent/80 transition-colors"
