@@ -30,7 +30,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background relative">
       {/* Attractive Navy Blue Background Overlay */}
-      {/* <div className="fixed inset-0 bg-primary/[0.01] pointer-events-none z-0" /> */}
 
       <ParticleBackground />
       <Header />

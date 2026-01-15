@@ -15,8 +15,8 @@ const Hero = memo(() => {
 
   const stats = useMemo(
     () => [
-      { value: "500+", label: "Clients Served", icon: "mdi:account-group" },
-      { value: "15+", label: "Years Experience", icon: "mdi:calendar-check" },
+      { value: "100+", label: "Clients Served", icon: "mdi:account-group" },
+      { value: "10+", label: "Years Experience", icon: "mdi:calendar-check" },
       { value: "100%", label: "Compliance Rate", icon: "mdi:shield-check" },
     ],
     []
