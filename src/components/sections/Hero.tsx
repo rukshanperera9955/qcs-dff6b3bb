@@ -1,249 +1,255 @@
-import { useState, useEffect, memo, useCallback } from "react";
+import { memo, useCallback, useMemo } from "react";
+import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useScrollSpy } from "@/hooks/useScrollSpy";
-import { navLinks } from "@/utils/constants";
-import { scrollToSection as scrollTo } from "@/utils/scrollUtils";
+import { scrollToSection } from "@/utils/scrollUtils";
 
-const sectionIds = [
-  "home",
-  "services",
-  "secretarial",
-  "taxation",
-  "accountancy",
-  "contact",
-];
+const Hero = memo(() => {
+  const handleScrollToServices = useCallback(
+    () => scrollToSection("#services"),
+    []
+  );
+  const handleScrollToContact = useCallback(
+    () => scrollToSection("#contact"),
+    []
+  );
 
-const Header = memo(() => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const activeSection = useScrollSpy({
-    sectionIds,
-    offset: 150,
-  });
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isMobileMenuOpen]);
-
-  const scrollToSection = useCallback((href: string) => {
-    scrollTo(href);
-    setIsMobileMenuOpen(false);
-  }, []);
-
-  const isActive = useCallback(
-    (href: string) => {
-      const sectionId = href.replace("#", "");
-      return activeSection === sectionId;
-    },
-    [activeSection]
+  const stats = useMemo(
+    () => [
+      { value: "100+", label: "Clients Served", icon: "mdi:account-group" },
+      { value: "10+", label: "Years Experience", icon: "mdi:calendar-check" },
+      { value: "100%", label: "Compliance Rate", icon: "mdi:shield-check" },
+    ],
+    []
   );
 
   return (
-    <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 header-footer-background shadow-lg ${
-          isScrolled ? "py-2" : "py-4"
-        }`}
-      >
-        <nav className="container-custom px-4 md:px-6">
-          <div className="flex items-center justify-between">
-            {/* Logo Section - Consistent across all screens */}
-            <motion.a
-              href="#home"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection("#home");
-              }}
-              className="flex items-center gap-3 group shrink-0"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center bg-background/80 pt-20 overflow-hidden"
+    >
+      {/* --- HIGH-END GRAPHIC BACKGROUND --- */}
+      <div className="absolute inset-0 z-0">
+        {/* Animated Mesh Gradient - Swapped to Purple/Indigo */}
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary-soft rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary-soft rounded-full blur-[120px]" />
+
+        {/* Tech Grid */}
+        <div
+          className="absolute inset-0 opacity-[0.05]"
+          style={{
+            backgroundImage: `linear-gradient(hsl(var(--grid-line)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--grid-line)) 1px, transparent 1px)`,
+            backgroundSize: "50px 50px",
+          }}
+        />
+      </div>
+
+      <div className="container mx-auto px-6 lg:px-12 relative z-10">
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
+          {/* --- CONTENT COLUMN (7 Columns) --- */}
+          <div className="lg:col-span-7 text-left">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="flex items-center gap-2 mb-6"
             >
-              <div className="relative">
-                <div className="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-gold flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300">
-                  <Icon
-                    icon="mdi:domain"
-                    className="w-5 h-5 md:w-6 md:h-6 text-gold-foreground"
-                  />
-                </div>
-                <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-primary-foreground/20 blur-sm" />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-heading font-bold text-base md:text-lg header-footer-foreground leading-tight block">
-                  Qualified
-                </span>
-                <span className="text-[10px] md:text-xs header-footer-foreground opacity-70">
-                  Corporate Secretary
-                </span>
-              </div>
-            </motion.a>
+              <div className="h-[1px] w-12 bg-primary" />
+              <span className="text-primary text-xs font-black tracking-[0.4em] uppercase">
+                Trusted Corporate Partner
+              </span>
+            </motion.div>
 
-            {/* Desktop Navigation - Hidden on Mobile & Tablet (< 1024px) */}
-            <div className="hidden lg:flex items-center flex-1 justify-center px-8">
-              <div className="flex items-center bg-accent/50 rounded-full p-1.5 backdrop-blur-sm">
-                {navLinks.map((link) => (
-                  <button
-                    key={link.name}
-                    onClick={() => scrollToSection(link.href)}
-                    className={`relative px-4 xl:px-5 py-2 text-sm font-medium transition-all duration-300 rounded-full ${
-                      isActive(link.href)
-                        ? "text-gold-foreground"
-                        : "header-footer-foreground opacity-80 hover:opacity-100"
-                    }`}
-                  >
-                    {isActive(link.href) && (
-                      <motion.span
-                        layoutId="navPill"
-                        className="absolute inset-0 bg-gold rounded-full shadow-md"
-                        transition={{
-                          type: "spring",
-                          bounce: 0.2,
-                          duration: 0.6,
-                        }}
-                      />
-                    )}
-                    <span className="relative z-10">{link.name}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-5xl md:text-7xl font-extrabold text-foreground leading-[1.05] mb-8"
+            >
+              Corporate, Partnership <br />
+              <span className="gradient-text">& Individual Services</span>{" "}
+              <br />
+              in Sri Lanka
+            </motion.h1>
 
-            {/* Actions - Desktop only */}
-            <div className="hidden lg:flex items-center gap-3 shrink-0">
-              <motion.button
-                onClick={() => scrollToSection("#contact")}
-                className="flex items-center gap-2 px-5 py-2.5 bg-gold text-gold-foreground rounded-full font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-2xl border-l-2 border-border pl-6"
+            >
+              We offer corporate secretarial services, Accounting Services & Tax
+              Services for Companies, Partnership, Individuals, NGO and
+              Association in Sri Lanka.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="flex flex-wrap gap-5 mb-16"
+            >
+              <button
+                onClick={handleScrollToServices}
+                className="group relative overflow-hidden px-8 py-4 bg-primary text-primary-foreground font-bold rounded-full transition-all hover:pr-12 hover:bg-primary/90 active:scale-95 shadow-lg shadow-glow-primary-lg"
               >
-                <Icon icon="mdi:phone-outline" className="w-4 h-4" />
-                Contact
-              </motion.button>
-            </div>
-
-            {/* Mobile/Tablet Menu Button - Visible on screens < 1024px */}
-            <div className="flex items-center lg:hidden">
-              <motion.button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2.5 rounded-xl bg-accent header-footer-foreground hover:bg-accent/80 transition-colors"
-                aria-label="Toggle menu"
-                whileTap={{ scale: 0.9 }}
-              >
+                <span className="relative z-10">Our Services</span>
                 <Icon
-                  icon={isMobileMenuOpen ? "mdi:close" : "mdi:menu"}
-                  className="w-6 h-6"
+                  icon="mdi:arrow-right"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all"
                 />
-              </motion.button>
+              </button>
+
+              <button
+                onClick={handleScrollToContact}
+                className="px-8 py-4 border border-border text-foreground font-bold rounded-full hover:bg-foreground/5 hover:border-primary-strong transition-all active:scale-95"
+              >
+                Contact Us
+              </button>
+            </motion.div>
+
+            {/* Horizontal Stats Bar */}
+            <div className="flex flex-wrap gap-12 py-8 border-t border-border">
+              {stats.map((stat, i) => (
+                <div key={i} className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-card border border-border flex items-center justify-center text-primary">
+                    <Icon icon={stat.icon} className="text-2xl" />
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-foreground leading-none">
+                      {stat.value}
+                    </div>
+                    <div className="text-xs text-muted-foreground uppercase tracking-widest mt-1">
+                      {stat.label}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        </nav>
-      </header>
 
-      {/* Mobile/Tablet Menu Overlay */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[60] lg:hidden"
-            />
+          {/* --- GRAPHIC COLUMN (5 Columns) --- */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative w-full aspect-square max-w-[500px] mx-auto">
+              {/* Main Graphic Backdrop - Purple Glow */}
+              <div className="absolute inset-0 gradient-glow-soft rounded-[40px] blur-3xl opacity-30 animate-pulse" />
 
-            {/* Sidebar Drawer */}
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed top-0 right-0 h-full w-[280px] sm:w-[350px] header-footer-background shadow-2xl z-[70] lg:hidden border-l border-border/20"
-            >
-              <div className="flex flex-col h-full">
-                {/* Mobile Menu Header */}
-                <div className="flex items-center justify-between p-6 border-b border-border/10">
-                  <span className="font-heading font-bold text-xl header-footer-foreground">
-                    Navigation
-                  </span>
-                  <motion.button
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 rounded-xl bg-accent header-footer-foreground"
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <Icon icon="mdi:close" className="w-5 h-5" />
-                  </motion.button>
-                </div>
-
-                {/* Mobile Menu Links */}
-                <nav className="flex-1 p-6 overflow-y-auto">
-                  <ul className="space-y-3">
-                    {navLinks.map((link, index) => (
-                      <motion.li
-                        key={link.name}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.05 }}
-                      >
-                        <button
-                          onClick={() => scrollToSection(link.href)}
-                          className={`w-full flex items-center gap-4 px-4 py-4 rounded-xl text-left font-medium transition-all duration-300 ${
-                            isActive(link.href)
-                              ? "bg-gold text-gold-foreground shadow-md"
-                              : "header-footer-foreground opacity-80 hover:bg-accent hover:opacity-100"
-                          }`}
-                        >
-                          <div
-                            className={`w-2 h-2 rounded-full ${
-                              isActive(link.href)
-                                ? "bg-gold-foreground"
-                                : "bg-gold"
-                            }`}
-                          />
-                          {link.name}
-                        </button>
-                      </motion.li>
+              {/* THE "SECRETARIAL MATRIX" GRAPHIC */}
+              <div className="relative z-10 w-full h-full flex items-center justify-center">
+                {/* Floating UI Elements */}
+                <motion.div
+                  animate={{ y: [0, -15, 0] }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute top-10 right-0 p-5 bg-glass-card border border-primary-soft rounded-3xl shadow-2xl z-20 w-52"
+                >
+                  <div className="h-2 w-12 bg-primary rounded-full mb-3" />
+                  <div className="text-[10px] text-primary font-black uppercase mb-1">
+                    Company Secretary
+                  </div>
+                  <div className="text-xs text-foreground">
+                    Annual Returns Filed
+                  </div>
+                  <div className="mt-3 flex gap-1">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <div
+                        key={i}
+                        className="h-1 w-full bg-primary-subtle rounded-full"
+                      />
                     ))}
-                  </ul>
-                </nav>
+                  </div>
+                </motion.div>
 
-                {/* Mobile Menu Footer */}
-                <div className="p-6 border-t border-border/10">
-                  <motion.button
-                    onClick={() => scrollToSection("#contact")}
-                    className="w-full flex items-center justify-center gap-2 px-5 py-4 bg-gold text-gold-foreground rounded-xl font-bold shadow-md"
-                    whileTap={{ scale: 0.98 }}
+                <motion.div
+                  animate={{ y: [0, 15, 0] }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    delay: 0.5,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute bottom-10 left-0 p-5 bg-glass-card border border-secondary-soft rounded-3xl shadow-2xl z-20 w-52"
+                >
+                  <Icon
+                    icon="mdi:calculator"
+                    className="text-secondary text-3xl mb-2"
+                  />
+                  <div className="text-[10px] text-secondary font-black uppercase mb-1">
+                    Tax Services
+                  </div>
+                  <div className="text-xs text-foreground">
+                    Audit & Assessment
+                  </div>
+                  <div className="mt-3 h-8 flex items-end gap-1">
+                    {[40, 70, 50, 90, 60].map((h, i) => (
+                      <div
+                        key={i}
+                        className="w-full bg-secondary-medium rounded-t-sm"
+                        style={{ height: `${h}%` }}
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+
+                {/* Central Interactive Shield - Purple Theme */}
+                <div className="relative group cursor-pointer">
+                  <div className="absolute inset-0 bg-primary blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity" />
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    className="relative w-48 h-56 bg-card border-2 border-primary-strong rounded-[60px] flex flex-col items-center justify-center overflow-hidden"
                   >
-                    <Icon icon="mdi:phone-outline" className="w-5 h-5" />
-                    Contact Us
-                  </motion.button>
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.1),transparent)]" />
+                    <Icon
+                      icon="mdi:shield-key"
+                      className="text-6xl text-primary mb-4 z-10"
+                    />
+                    <div className="text-foreground font-bold tracking-widest uppercase text-xs z-10">
+                      Compliance
+                    </div>
+                    <div className="text-primary/50 font-mono text-[10px] mt-2 z-10">
+                      SEC-SRI-LANKA-001
+                    </div>
+                  </motion.div>
                 </div>
+
+                {/* Rotating Data Orbitals */}
+                <svg className="absolute w-[120%] h-[120%] pointer-events-none">
+                  <circle
+                    cx="50%"
+                    cy="50%"
+                    r="40%"
+                    fill="none"
+                    stroke="hsl(var(--primary)/0.5)"
+                    strokeWidth="1"
+                    strokeDasharray="10 20"
+                    className="animate-[spin_40s_linear_infinite]"
+                  />
+                  <circle
+                    cx="50%"
+                    cy="50%"
+                    r="45%"
+                    fill="none"
+                    stroke="hsl(var(--secondary)/0.5)"
+                    strokeWidth="1"
+                    strokeDasharray="5 15"
+                    className="animate-[spin_30s_linear_infinite_reverse]"
+                  />
+                </svg>
               </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Background Typography Filler */}
+      <div className="absolute -bottom-10 left-10 opacity-[0.03] select-none pointer-events-none">
+        <h2 className="text-[15vw] font-black text-foreground leading-none italic uppercase">
+          Reliable
+        </h2>
+      </div>
+    </section>
   );
 });
 
-Header.displayName = "Header";
-
-export default Header;
+Hero.displayName = "Hero";
+export default Hero;
