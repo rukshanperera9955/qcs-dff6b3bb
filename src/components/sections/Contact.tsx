@@ -60,16 +60,40 @@ const Contact = memo(() => {
 
       setIsSubmitting(true);
 
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      try {
+        const response = await fetch("http://localhost:5000/api/send-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
 
-      toast({
-        title: "Message Sent!",
-        description:
-          "Thank you for contacting us. We will get back to you soon.",
-      });
+        const result = await response.json();
 
-      reset();
-      setIsSubmitting(false);
+        if (!response.ok) {
+          throw new Error(result.error || "Failed to send message");
+        }
+
+        toast({
+          title: "Message Sent!",
+          description:
+            "Thank you for contacting us. We will get back to you soon.",
+        });
+
+        reset();
+      } catch (error) {
+        toast({
+          title: "Error Detected",
+          description:
+            error instanceof Error
+              ? error.message
+              : "Something went wrong. Please try again later.",
+          variant: "destructive",
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
     },
     [reset]
   );
