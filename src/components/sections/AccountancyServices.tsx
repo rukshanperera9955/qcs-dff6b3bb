@@ -18,26 +18,10 @@ const AccountancyServices = memo(() => {
       id="accountancy"
       className="section-padding bg-glass relative overflow-hidden"
     >
-      {/* Optimized Background Decorations */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Top Right: Vibrant Secondary (Blue/Cyan) Blob */}
-        <div
-          className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-secondary/20 rounded-full blur-[120px] animate-float"
-          style={{ animationDuration: "15s" }}
-        />
+      {/* Background Decorations - PRESERVED FROM ORIGINAL */}
+      <div className="absolute top-1/4 right-0 w-72 h-72 bg-primary-fade rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 left-0 w-56 h-56 bg-gold-fade rounded-full blur-3xl" />
 
-        {/* Middle Left: Primary (Purple/Blue) Blob */}
-        <div
-          className="absolute top-[20%] left-[-10%] w-[450px] h-[450px] bg-primary/20 rounded-full blur-[100px] animate-float-rotate"
-          style={{ animationDuration: "20s" }}
-        />
-
-        {/* Bottom Right: Gold Accent Blob */}
-        <div className="absolute bottom-[-5%] right-[10%] w-[400px] h-[400px] bg-gold/15 rounded-full blur-[110px] animate-pulse-slow" />
-
-        {/* Subtle Grid Pattern to add texture under the glass */}
-        <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] [background-size:40px_40px]" />
-      </div>
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <motion.div

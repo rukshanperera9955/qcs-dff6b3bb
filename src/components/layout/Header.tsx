@@ -142,7 +142,7 @@ const Header = memo(() => {
             <div className="flex items-center lg:hidden">
               <motion.button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2.5 rounded-xl bg-accent header-footer-foreground hover:bg-accent/80 transition-colors"
+                className="p-2.5 rounded-xl bg-gold header-footer-foreground hover:bg-gold/80 transition-colors"
                 aria-label="Toggle menu"
                 whileTap={{ scale: 0.9 }}
               >
@@ -185,7 +185,7 @@ const Header = memo(() => {
                   </span>
                   <motion.button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 rounded-xl bg-accent header-footer-foreground"
+                    className="p-2 rounded-xl bg-gold header-footer-foreground"
                     whileTap={{ scale: 0.9 }}
                   >
                     <Icon icon="mdi:close" className="w-5 h-5" />
@@ -207,7 +207,7 @@ const Header = memo(() => {
                           className={`w-full flex items-center gap-4 px-4 py-4 rounded-xl text-left font-medium transition-all duration-300 ${
                             isActive(link.href)
                               ? "bg-gold text-gold-foreground shadow-md"
-                              : "header-footer-foreground opacity-80 hover:bg-accent hover:opacity-100"
+                              : "header-footer-foreground opacity-80 hover:bg-gold/50 hover:opacity-100"
                           }`}
                         >
                           <div

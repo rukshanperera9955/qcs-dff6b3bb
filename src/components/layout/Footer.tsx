@@ -163,12 +163,7 @@ const Footer = memo(() => {
             © {currentYear} {companyInfo.name}. All rights reserved.
           </p>
           <p className="text-sm header-footer-foreground/60">
-            Designed with{" "}
-            <Icon
-              icon="mdi:heart"
-              className="w-4 h-4 inline text-destructive"
-            />{" "}
-            in Sri Lanka
+            Powered by aurin innovatech
           </p>
         </div>
       </div>
