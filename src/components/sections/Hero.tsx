@@ -16,7 +16,7 @@ const Hero = memo(() => {
   const stats = useMemo(
     () => [
       { value: "100+", label: "Clients Served", icon: "mdi:account-group" },
-      { value: "10+", label: "Years Experience", icon: "mdi:calendar-check" },
+      { value: "15+", label: "Years Experience", icon: "mdi:calendar-check" },
       { value: "100%", label: "Compliance Rate", icon: "mdi:shield-check" },
     ],
     []
@@ -243,8 +243,8 @@ const Hero = memo(() => {
 
       {/* Background Typography Filler */}
       <div className="absolute -bottom-10 left-10 opacity-[0.03] select-none pointer-events-none">
-        <h2 className="text-[15vw] font-black text-foreground leading-none italic uppercase">
-          Reliable
+        <h2 className="text-[12vw] font-black text-foreground leading-none italic uppercase">
+          it is a new era
         </h2>
       </div>
     </section>
