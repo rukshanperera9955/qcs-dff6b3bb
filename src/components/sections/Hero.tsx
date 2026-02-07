@@ -75,9 +75,9 @@ const Hero = memo(() => {
               transition={{ delay: 0.1 }}
               className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-2xl border-l-2 border-border pl-6"
             >
-              We offer corporate secretarial services, Accounting Services & Tax
-              Services for Companies, Partnership, Individuals, NGO and
-              Association in Sri Lanka.
+              We offer corporate Secretarial services, Accounting Services & Tax
+              Services for Companies, Partnership, Individuals, Association , NGO and
+              Others in Sri Lanka.
             </motion.p>
 
             <motion.div
@@ -147,9 +147,9 @@ const Hero = memo(() => {
                   <div className="text-[10px] text-primary font-black uppercase mb-1">
                     Company Secretary
                   </div>
-                  <div className="text-xs text-foreground">
+                  {/* <div className="text-xs text-foreground">
                     Annual Returns Filed
-                  </div>
+                  </div> */}
                   <div className="mt-3 flex gap-1">
                     {[1, 2, 3, 4, 5].map((i) => (
                       <div
@@ -178,7 +178,7 @@ const Hero = memo(() => {
                     Tax Services
                   </div>
                   <div className="text-xs text-foreground">
-                    Audit & Assessment
+                    Accounting & Assessment
                   </div>
                   <div className="mt-3 h-8 flex items-end gap-1">
                     {[40, 70, 50, 90, 60].map((h, i) => (

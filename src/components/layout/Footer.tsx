@@ -60,7 +60,7 @@ const Footer = memo(() => {
             </div>
             <p className="header-footer-foreground/70 text-sm mb-4 leading-relaxed">
               Your trusted partner for corporate secretarial, taxation, and
-              accountancy services in Sri Lanka.
+              accounting services in Sri Lanka.
             </p>
             <div className="flex gap-3">
               {companyInfo.socialLinks.map((social) => (

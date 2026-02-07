@@ -36,7 +36,7 @@ const AccountancyServices = memo(() => {
             Financial Management
           </div>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Accountancy <span className="gradient-text">Services</span>
+            Accounting <span className="gradient-text">Services</span>
           </h2>
           <p className="text-muted-foreground text-lg">
             Professional accounting and bookkeeping services to keep your
@@ -87,7 +87,7 @@ const AccountancyServices = memo(() => {
         >
           <div className="bg-card/40 rounded-2xl border border-glass p-6 md:p-8 shadow-2xl shadow-glow-secondary-sm hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500">
             <h3 className="font-heading font-semibold text-foreground text-xl mb-6 text-center">
-              Why Choose Our Accountancy Services?
+              Why Choose Our Accounting Services?
             </h3>
             <div className="grid sm:grid-cols-2 gap-4">
               {features.map((feature, index) => (

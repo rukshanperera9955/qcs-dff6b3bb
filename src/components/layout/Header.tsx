@@ -90,7 +90,7 @@ const Header = memo(() => {
                   Qualified
                 </span>
                 <span className="text-[10px] md:text-xs header-footer-foreground opacity-70">
-                  Corporate Secretary
+                  Corporate Secretaries
                 </span>
               </div>
             </motion.a>

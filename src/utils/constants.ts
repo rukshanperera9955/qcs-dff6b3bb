@@ -33,7 +33,7 @@ export const mainServices = [
   },
   {
     id: "accountancy",
-    title: "Accountancy Services",
+    title: "Accounting Services",
     icon: "mdi:chart-line",
     description:
       "Professional accounting and bookkeeping services tailored to your business needs.",
@@ -263,7 +263,7 @@ export const taxationServicesOther: ServiceItem[] = [
   { name: "Obtaining Clearance", icon: "mdi:check-decagram" },
 ];
 
-// Accountancy Services Data
+// Accounting Services Data
 export const accountancyServices: ServiceItem[] = [
   {
     name: "Preparation of Monthly Accounts",
@@ -294,14 +294,14 @@ export const accountancyServices: ServiceItem[] = [
 
 // Navigation Links
 export const navLinks = [
-  { name: "Secretarial", href: "#secretarial" },
+  { name: "Secretarial Services", href: "#secretarial" },
+  { name: "Accounting Services", href: "#accountancy" },
   { name: "Taxation", href: "#taxation" },
-  { name: "Accountancy", href: "#accountancy" },
 ];
 
 // Company Info
 export const companyInfo = {
-  name: "Qualified Corporate Secretary",
+  name: "Qualified Corporate Secretaries",
   tagline: "Your Trusted Partner in Business",
   address: "No: 44A, Dhakshinarama Road, Mount Lavinia, Sri Lanka",
   phone: "0777 611 006 / 0707 611 006",
