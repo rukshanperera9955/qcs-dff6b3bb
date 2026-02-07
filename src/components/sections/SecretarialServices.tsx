@@ -231,21 +231,7 @@ const SecretarialServices = memo(() => {
 
             {/* Quick Stats */}
             <div className="grid grid-cols-3 gap-4 mt-6">
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1, duration: 0.5 }}
-                className="bg-card/40 rounded-xl border border-glass p-4 text-center shadow-lg shadow-glow-secondary-sm hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500"
-              >
-                <div className="w-10 h-10 rounded-lg bg-gold-soft flex items-center justify-center mx-auto mb-2">
-                  <Icon icon="mdi:domain" className="w-5 h-5 text-gold" />
-                </div>
-                <p className="text-2xl font-bold text-foreground">500+</p>
-                <p className="text-xs text-muted-foreground">
-                  Companies Formed
-                </p>
-              </motion.div>
+              
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -262,6 +248,21 @@ const SecretarialServices = memo(() => {
                 <p className="text-2xl font-bold text-foreground">15+</p>
                 <p className="text-xs text-muted-foreground">
                   Years Experience
+                </p>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1, duration: 0.5 }}
+                className="bg-card/40 rounded-xl border border-glass p-4 text-center shadow-lg shadow-glow-secondary-sm hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500"
+              >
+                <div className="w-10 h-10 rounded-lg bg-gold-soft flex items-center justify-center mx-auto mb-2">
+                  <Icon icon="mdi:domain" className="w-5 h-5 text-gold" />
+                </div>
+                <p className="text-1xl font-bold text-foreground">Many Of</p>
+                <p className="text-xs text-muted-foreground">
+                  Companies Formed
                 </p>
               </motion.div>
               <motion.div

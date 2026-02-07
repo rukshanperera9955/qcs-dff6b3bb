@@ -116,7 +116,7 @@ export const secretarialServices: ServiceCategory[] = [
     items: [
       { name: "Meeting Scheduling and Notices" },
       { name: "Agenda Preparation" },
-      { name: "Minutes Documentation" },
+      { name: "Minutes Preparing" },
     ],
   },
   {
