@@ -295,8 +295,8 @@ export const accountancyServices: ServiceItem[] = [
 // Navigation Links
 export const navLinks = [
   { name: "Secretarial Services", href: "#secretarial" },
-  { name: "Accounting Services", href: "#accountancy" },
   { name: "Taxation Services", href: "#taxation" },
+  { name: "Accounting Services", href: "#accountancy" },
 ];
 
 // Company Info
