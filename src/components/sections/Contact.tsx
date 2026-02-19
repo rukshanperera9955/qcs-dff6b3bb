@@ -1,7 +1,7 @@
 import { memo, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { companyInfo, mainServices } from "@/utils/constants";
 import { toast } from "@/hooks/use-toast";
@@ -10,6 +10,13 @@ import {
   checkRateLimit,
   type ContactFormData,
 } from "@/utils/security";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const contactMethods = [
   {
@@ -42,6 +49,7 @@ const Contact = memo(() => {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
@@ -369,24 +377,32 @@ const Contact = memo(() => {
                     <div className="relative">
                       <Icon
                         icon="mdi:briefcase-outline"
-                        className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground z-10 pointer-events-none"
                       />
-                      <select
-                        {...register("service")}
-                        id="service"
-                        className="w-full pl-12 pr-10 py-3.5 rounded-xl border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-secondary transition-all appearance-none cursor-pointer"
-                      >
-                        <option value="">Select a service</option>
-                        {mainServices.map((service) => (
-                          <option key={service.id} value={service.id}>
-                            {service.title}
-                          </option>
-                        ))}
-                        <option value="other">Other</option>
-                      </select>
-                      <Icon
-                        icon="mdi:chevron-down"
-                        className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none"
+                      <Controller
+                        control={control}
+                        name="service"
+                        render={({ field }) => (
+                          <Select
+                            onValueChange={field.onChange}
+                            value={field.value}
+                          >
+                            <SelectTrigger
+                              id="service"
+                              className="w-full pl-12 pr-10 py-3.5 h-auto rounded-xl border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-secondary transition-all cursor-pointer"
+                            >
+                              <SelectValue placeholder="Select a service" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-popover border border-border rounded-xl">
+                              {mainServices.map((service) => (
+                                <SelectItem key={service.id} value={service.id}>
+                                  {service.title}
+                                </SelectItem>
+                              ))}
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        )}
                       />
                     </div>
                     {errors.service && (
