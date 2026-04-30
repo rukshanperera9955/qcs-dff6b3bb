@@ -7,6 +7,7 @@ import { scrollToSection as scrollTo } from "@/utils/scrollUtils";
 
 const sectionIds = [
   "home",
+  "about",
   "services",
   "secretarial",
   "taxation",
@@ -96,7 +97,7 @@ const Header = memo(() => {
             </motion.a>
 
             {/* Desktop Navigation - Hidden on Mobile & Tablet (< 1024px) */}
-            <div className="hidden lg:flex items-center flex-1 justify-center px-8">
+            <div className="hidden lg:flex items-center flex-1 justify-end px-8">
               <div className="flex items-center bg-accent/50 rounded-full p-1.5 backdrop-blur-sm">
                 {navLinks.map((link) => (
                   <button

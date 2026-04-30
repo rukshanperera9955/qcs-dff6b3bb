@@ -3,8 +3,10 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
 import ParticleBackground from "@/components/ParticleBackground";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 // Lazy load below-the-fold sections for better performance
+const About = lazy(() => import("@/components/sections/About"));
 const ServicesOverview = lazy(
   () => import("@/components/sections/ServicesOverview")
 );
@@ -43,6 +45,10 @@ const Index = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.03] via-transparent to-primary/[0.03] pointer-events-none" />
 
           <Suspense fallback={<SectionLoader />}>
+            <About />
+          </Suspense>
+
+          <Suspense fallback={<SectionLoader />}>
             <ServicesOverview />
           </Suspense>
 
@@ -65,6 +71,7 @@ const Index = () => {
       </main>
 
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 };

@@ -1,23 +1,12 @@
-import { memo, useState, useEffect, useCallback, useMemo } from "react";
+import { memo, useEffect, useCallback, useMemo } from "react";
 import { Icon } from "@iconify/react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { companyInfo, navLinks } from "@/utils/constants";
 import { scrollToSection } from "@/utils/scrollUtils";
 
 const Footer = memo(() => {
-  const [showBackToTop, setShowBackToTop] = useState(false);
-
   useEffect(() => {
-    const handleScroll = () => {
-      setShowBackToTop(window.scrollY > 400);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToTop = useCallback(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Optional: any other scroll handling if needed
   }, []);
 
   const handleScrollToSection = useCallback((href: string) => {
@@ -168,23 +157,7 @@ const Footer = memo(() => {
         </div>
       </div>
 
-      {/* Back to Top Button */}
-      <AnimatePresence>
-        {showBackToTop && (
-          <motion.button
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            onClick={scrollToTop}
-            className="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-gold text-gold-foreground shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center z-50"
-            aria-label="Back to top"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <Icon icon="mdi:chevron-up" className="w-6 h-6" />
-          </motion.button>
-        )}
-      </AnimatePresence>
+
     </footer>
   );
 });

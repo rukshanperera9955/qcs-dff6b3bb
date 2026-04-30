@@ -178,7 +178,7 @@ const Contact = memo(() => {
         </motion.div>
 
         {/* Main Contact Section */}
-        <div className="grid lg:grid-cols-5 gap-6 lg:gap-8 items-stretch max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-5 gap-6 lg:gap-8 items-stretch max-w-6xl mx-auto mb-16">
           {/* Left Side - Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -464,6 +464,28 @@ const Contact = memo(() => {
             </div>
           </motion.div>
         </div>
+
+        {/* Google Map Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="max-w-6xl mx-auto"
+        >
+          <div className="bg-card/40 rounded-xl border border-glass p-2 shadow-lg hover:shadow-2xl hover:border-secondary-medium transition-all duration-500 overflow-hidden">
+            <iframe
+              title="Google Map Location"
+              src="https://maps.google.com/maps?q=44A,%20Dhakshinarama%20Road,%20Mount%20Lavinia,%20Sri%20Lanka&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="400"
+              style={{ border: 0, borderRadius: '0.5rem' }}
+              allowFullScreen={true}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

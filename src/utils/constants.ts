@@ -17,10 +17,18 @@ export interface ServiceCategory {
 export const mainServices = [
   {
     id: "secretarial",
-    title: "Secretarial Services",
+    title: "Corporate Secretarial Services",
     icon: "mdi:file-document-edit-outline",
     description:
       "Comprehensive corporate secretarial solutions for company formation, compliance, and governance.",
+    color: "primary",
+  },
+  {
+    id: "accountancy",
+    title: "Accounting & Bookkeeping",
+    icon: "mdi:chart-line",
+    description:
+      "Professional accounting and bookkeeping services tailored to your business needs.",
     color: "primary",
   },
   {
@@ -32,11 +40,11 @@ export const mainServices = [
     color: "primary",
   },
   {
-    id: "accountancy",
-    title: "Accounting Services",
-    icon: "mdi:chart-line",
+    id: "advisory",
+    title: "Business Advisory",
+    icon: "mdi:briefcase-outline",
     description:
-      "Professional accounting and bookkeeping services tailored to your business needs.",
+      "Strategic business advisory and consulting to help navigate complex challenges and drive growth.",
     color: "primary",
   },
 ];
@@ -294,6 +302,8 @@ export const accountancyServices: ServiceItem[] = [
 
 // Navigation Links
 export const navLinks = [
+  { name: "Home", href: "#home" },
+  { name: "About Us", href: "#about" },
   { name: "Secretarial Services", href: "#secretarial" },
   { name: "Taxation Services", href: "#taxation" },
   { name: "Accounting Services", href: "#accountancy" },
@@ -307,8 +317,6 @@ export const companyInfo = {
   phone: "0777 611 006 / 0707 611 006",
   email: "wneranga@hotmail.com",
   socialLinks: [
-    { name: "Facebook", icon: "mdi:facebook", url: "#" },
-    { name: "LinkedIn", icon: "mdi:linkedin", url: "#" },
     {
       name: "WhatsApp",
       icon: "mdi:whatsapp",

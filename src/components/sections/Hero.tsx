@@ -6,11 +6,11 @@ import { scrollToSection } from "@/utils/scrollUtils";
 const Hero = memo(() => {
   const handleScrollToServices = useCallback(
     () => scrollToSection("#services"),
-    []
+    [],
   );
   const handleScrollToContact = useCallback(
     () => scrollToSection("#contact"),
-    []
+    [],
   );
 
   const stats = useMemo(
@@ -19,7 +19,7 @@ const Hero = memo(() => {
       { value: "15+", label: "Years Experience", icon: "mdi:calendar-check" },
       { value: "100%", label: "Compliance Rate", icon: "mdi:shield-check" },
     ],
-    []
+    [],
   );
 
   return (
@@ -44,15 +44,15 @@ const Hero = memo(() => {
       </div>
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
-          {/* --- CONTENT COLUMN (7 Columns) --- */}
-          <div className="lg:col-span-7 text-left">
+        <div className="grid lg:grid-cols-12 gap-12 items-stretch">
+          {/* --- CONTENT COLUMN --- */}
+          <div className="lg:col-span-5 text-center lg:text-left flex flex-col items-center lg:items-start py-6 lg:py-10">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="flex items-center gap-2 mb-6"
+              className="flex items-center justify-center lg:justify-start gap-2 mb-6 w-full"
             >
-              <div className="h-[1px] w-12 bg-primary" />
+              <div className="hidden lg:block h-[1px] w-12 bg-primary" />
               <span className="text-primary text-xs font-black tracking-[0.4em] uppercase">
                 Trusted Corporate Partner
               </span>
@@ -61,11 +61,11 @@ const Hero = memo(() => {
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-5xl md:text-7xl font-extrabold text-foreground leading-[1.05] mb-8"
+              className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground leading-[1.1] mb-6"
             >
-              Corporate, Partnership <br />
-              <span className="gradient-text">& Individual Services</span>{" "}
-              <br />
+              Professional Corporate <br className="hidden md:block" />
+              <span className="gradient-text">& Financial Solutions</span>{" "}
+              <br className="hidden md:block" />
               in Sri Lanka
             </motion.h1>
 
@@ -73,18 +73,18 @@ const Hero = memo(() => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-2xl border-l-2 border-border pl-6"
+              className="text-base md:text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl border-l-0 lg:border-l-2 border-border pl-0 lg:pl-5 mx-auto lg:mx-0 px-4 lg:px-0"
             >
-              We offer corporate Secretarial services, Accounting Services & Tax
-              Services for Companies, Partnership, Individuals, Association , NGO and
-              Others in Sri Lanka.
+              We provide reliable company secretarial, accounting, and tax
+              services to help your business stay compliant and grow with
+              confidence.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="flex flex-wrap gap-5 mb-16"
+              className="flex flex-wrap justify-center lg:justify-start gap-5 mt-auto pt-8 w-full"
             >
               <button
                 onClick={handleScrollToServices}
@@ -104,140 +104,45 @@ const Hero = memo(() => {
                 Contact Us
               </button>
             </motion.div>
-
-            {/* Horizontal Stats Bar */}
-            <div className="flex flex-wrap gap-12 py-8 border-t border-border">
-              {stats.map((stat, i) => (
-                <div key={i} className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-card border border-border flex items-center justify-center text-primary">
-                    <Icon icon={stat.icon} className="text-2xl" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-foreground leading-none">
-                      {stat.value}
-                    </div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-widest mt-1">
-                      {stat.label}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
-          {/* --- GRAPHIC COLUMN (5 Columns) --- */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative w-full aspect-square max-w-[500px] mx-auto">
-              {/* Main Graphic Backdrop - Purple Glow */}
-              <div className="absolute inset-0 gradient-glow-soft rounded-[40px] blur-3xl opacity-30 animate-pulse" />
+          {/* --- GRAPHIC COLUMN --- */}
+          <div className="hidden lg:col-span-7 relative mt-10 lg:mt-0 lg:flex items-end justify-center lg:justify-end">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative w-full lg:w-[115%] lg:-right-6 lg:scale-110 origin-bottom-right"
+            >
+              {/* Soft glow behind the image */}
+              <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full animate-pulse-slow" />
 
-              {/* THE "SECRETARIAL MATRIX" GRAPHIC */}
-              <div className="relative z-10 w-full h-full flex items-center justify-center">
-                {/* Floating UI Elements */}
-                <motion.div
-                  animate={{ y: [0, -15, 0] }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="absolute top-10 right-0 p-5 bg-glass-card border border-primary-soft rounded-3xl shadow-2xl z-20 w-52"
-                >
-                  <div className="h-2 w-12 bg-primary rounded-full mb-3" />
-                  <div className="text-[10px] text-primary font-black uppercase mb-1">
-                    Company Secretary
-                  </div>
-                  {/* <div className="text-xs text-foreground">
-                    Annual Returns Filed
-                  </div> */}
-                  <div className="mt-3 flex gap-1">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <div
-                        key={i}
-                        className="h-1 w-full bg-primary-subtle rounded-full"
-                      />
-                    ))}
-                  </div>
-                </motion.div>
+              <img
+                src="/corporate.png"
+                alt="Corporate Services"
+                className="relative z-10 w-full h-auto object-contain drop-shadow-2xl hover:scale-[1.02] transition-transform duration-500"
+              />
+            </motion.div>
+          </div>
+        </div>
 
-                <motion.div
-                  animate={{ y: [0, 15, 0] }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    delay: 0.5,
-                    ease: "easeInOut",
-                  }}
-                  className="absolute bottom-10 left-0 p-5 bg-glass-card border border-secondary-soft rounded-3xl shadow-2xl z-20 w-52"
-                >
-                  <Icon
-                    icon="mdi:calculator"
-                    className="text-secondary text-3xl mb-2"
-                  />
-                  <div className="text-[10px] text-secondary font-black uppercase mb-1">
-                    Tax Services
-                  </div>
-                  <div className="text-xs text-foreground">
-                    Accounting & Assessment
-                  </div>
-                  <div className="mt-3 h-8 flex items-end gap-1">
-                    {[40, 70, 50, 90, 60].map((h, i) => (
-                      <div
-                        key={i}
-                        className="w-full bg-secondary-medium rounded-t-sm"
-                        style={{ height: `${h}%` }}
-                      />
-                    ))}
-                  </div>
-                </motion.div>
-
-                {/* Central Interactive Shield - Purple Theme */}
-                <div className="relative group cursor-pointer">
-                  <div className="absolute inset-0 bg-primary blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity" />
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    className="relative w-48 h-56 bg-card border-2 border-primary-strong rounded-[60px] flex flex-col items-center justify-center overflow-hidden"
-                  >
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.1),transparent)]" />
-                    <Icon
-                      icon="mdi:shield-key"
-                      className="text-6xl text-primary mb-4 z-10"
-                    />
-                    <div className="text-foreground font-bold tracking-widest uppercase text-xs z-10">
-                      Compliance
-                    </div>
-                    <div className="text-primary/50 font-mono text-[10px] mt-2 z-10">
-                      SEC-SRI-LANKA-001
-                    </div>
-                  </motion.div>
+        {/* Horizontal Stats Bar */}
+        <div className="flex flex-wrap justify-center lg:justify-start gap-8 lg:gap-12 py-8 mt-12 lg:mt-16 border-t border-border w-full">
+          {stats.map((stat, i) => (
+            <div key={i} className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-card border border-border flex items-center justify-center text-primary">
+                <Icon icon={stat.icon} className="text-2xl" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-foreground leading-none">
+                  {stat.value}
                 </div>
-
-                {/* Rotating Data Orbitals */}
-                <svg className="absolute w-[120%] h-[120%] pointer-events-none">
-                  <circle
-                    cx="50%"
-                    cy="50%"
-                    r="40%"
-                    fill="none"
-                    stroke="hsl(var(--primary)/0.5)"
-                    strokeWidth="1"
-                    strokeDasharray="10 20"
-                    className="animate-[spin_40s_linear_infinite]"
-                  />
-                  <circle
-                    cx="50%"
-                    cy="50%"
-                    r="45%"
-                    fill="none"
-                    stroke="hsl(var(--secondary)/0.5)"
-                    strokeWidth="1"
-                    strokeDasharray="5 15"
-                    className="animate-[spin_30s_linear_infinite_reverse]"
-                  />
-                </svg>
+                <div className="text-xs text-muted-foreground uppercase tracking-widest mt-1">
+                  {stat.label}
+                </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
 

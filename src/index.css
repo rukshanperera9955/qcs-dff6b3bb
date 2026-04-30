@@ -4,70 +4,72 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Purple/Indigo Design System */
+/* Dark Blue / Gold / White Design System */
 
 @layer base {
   :root {
     /* ===== Background System ===== */
-    --background: 228 35% 6%;
-    --card: 228 28% 9%;
-    --popover: 228 30% 8%;
-    --sidebar-background: 228 35% 6%;
+    --background: 218 60% 2%; /* darker near-black dark blue */
+    --card: 218 50% 4%;
+    --popover: 218 50% 4%;
+    --sidebar-background: 218 70% 5%;
 
     /* ===== Text System ===== */
-    --foreground: 220 15% 88%;
-    --card-foreground: 220 15% 88%;
-    --popover-foreground: 220 15% 88%;
-    --sidebar-foreground: 220 15% 88%;
+    --foreground: 210 20% 90%;
+    --card-foreground: 210 20% 90%;
+    --popover-foreground: 210 20% 90%;
+    --sidebar-foreground: 210 20% 90%;
 
-    /* ===== Brand Colors (Calmed) ===== */
-    --primary: 240 60% 60%;
-    --primary-foreground: 240 100% 97%;
+    /* ===== Brand Colors ===== */
+    /* Primary: Dark Blue #0A1F44 */
+    --primary: 218 76% 15%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 245 45% 55%;
-    --secondary-foreground: 240 100% 97%;
+    /* Secondary: slightly lighter dark blue for layering */
+    --secondary: 218 60% 22%;
+    --secondary-foreground: 0 0% 100%;
 
-    /* Gold replacement → Brand Highlight */
-    --gold: 248 55% 58%;
-    --gold-foreground: 240 100% 97%;
+    /* Gold: #C9A54C */
+    --gold: 40 54% 55%;
+    --gold-foreground: 218 76% 8%;
 
     /* ===== Accent (Background-safe) ===== */
-    --accent: 260 35% 18%;
-    --accent-foreground: 240 20% 90%;
+    --accent: 218 50% 14%;
+    --accent-foreground: 210 20% 90%;
 
     /* ===== Muted UI ===== */
-    --muted: 228 25% 14%;
-    --muted-foreground: 220 10% 65%;
+    --muted: 218 45% 11%;
+    --muted-foreground: 210 12% 58%;
 
     /* ===== Borders & Inputs ===== */
-    --border: 228 20% 18%;
-    --input: 228 20% 18%;
-    --sidebar-border: 228 20% 18%;
+    --border: 218 35% 18%;
+    --input: 218 35% 18%;
+    --sidebar-border: 218 35% 18%;
 
     /* ===== Focus Ring ===== */
-    --ring: 245 60% 65%;
-    --sidebar-ring: 245 60% 65%;
+    --ring: 40 54% 55%;
+    --sidebar-ring: 40 54% 55%;
 
     /* ===== Destructive ===== */
     --destructive: 0 55% 45%;
     --destructive-foreground: 0 0% 100%;
 
     /* ===== Slate ===== */
-    --slate: 220 12% 48%;
+    --slate: 218 15% 48%;
     --slate-foreground: 0 0% 100%;
 
     /* ===== Grid & Overlays ===== */
-    --grid-line: 220 10% 20%;
-    --overlay: 220 20% 4%;
+    --grid-line: 218 20% 16%;
+    --overlay: 218 60% 3%;
 
-    /* ===== Glow (soft premium) ===== */
-    --shadow-glow: 0 0 40px hsl(245 60% 60% / 0.18);
+    /* ===== Glow (gold premium) ===== */
+    --shadow-glow: 0 0 40px hsl(40 54% 55% / 0.16);
 
     --radius: 1rem;
   }
 }
 
-/* Header Static Colors - Updated to Global Palette usage or specific overrides */
+/* Header Static Colors */
 .header-footer-background {
   @apply bg-background/90 backdrop-blur-md border-b border-border/10;
 }
@@ -98,6 +100,8 @@
 
   .btn-hero-primary {
     @apply btn-hero bg-primary text-primary-foreground hover:bg-primary/90 shadow-primary/25;
+    /* Use gold border to make dark-blue button pop */
+    border: 1px solid hsl(var(--gold) / 0.4);
   }
 
   .btn-hero-gold {
@@ -113,76 +117,71 @@
   }
 
   .card-service {
-    @apply bg-card rounded-2xl p-6 shadow-md border border-border/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-primary/20;
+    @apply bg-card rounded-2xl p-6 shadow-md border border-border/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-gold/20;
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-gold;
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      to right,
+      hsl(var(--gold)),
+      #ffffff,
+      hsl(var(--gold) / 0.7)
+    );
     background-size: 200% auto;
     animation: textGradientMove 4s linear infinite;
   }
 
   .glass-effect {
-    @apply bg-background/80 backdrop-blur-md border border-primary-foreground/10;
+    @apply bg-background/80 backdrop-blur-md border border-white/10;
   }
 
-  /* --- New Global Color Classes --- */
+  /* --- Surfaces / Backgrounds --- */
 
-  /* Surfaces / Backgrounds */
   .bg-glass {
     @apply bg-background/80 backdrop-blur-sm;
   }
-  /*
-  .bg-glass-card {
-    @apply bg-card/60 backdrop-blur-xl;
-  }
-    */
-  .bg-glass-card {
-    /* 1. Ultra-Low Opacity: Only 10% to let background colors pop through */
-    background: hsl(var(--background) / 0.1);
 
-    /* 2. Optimized Blur: 20px-30px is the "sweet spot" for performance and realism */
+  .bg-glass-card {
+    background: hsl(var(--background) / 0.1);
     backdrop-filter: blur(25px) saturate(180%);
     -webkit-backdrop-filter: blur(25px) saturate(180%);
-
-    /* 3. Dynamic Border: Uses primary color for a subtle brand-themed "rim" */
-    border: 1px solid hsl(var(--primary) / 0.2);
+    border: 1px solid hsl(var(--gold) / 0.2);
     border-radius: var(--radius);
-
-    /* 4. Layered Shadows: A soft outer glow + a sharp inner highlight */
-    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.3),
-      inset 0 1px 1px hsl(var(--primary) / 0.3);
-
+    box-shadow:
+      0 10px 40px -10px rgba(0, 0, 0, 0.4),
+      inset 0 1px 1px hsl(var(--gold) / 0.25);
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
   }
 
-  /* 5. Refractive Top Edge: Simulates light hitting the top of the glass */
   .bg-glass-card::before {
     content: "";
     position: absolute;
     inset: 0;
     background: linear-gradient(
       135deg,
-      hsl(var(--primary) / 0.4) 0%,
+      hsl(var(--gold) / 0.3) 0%,
       transparent 40%,
       transparent 100%
     );
-    mask: linear-gradient(#fff, #fff) content-box, linear-gradient(#fff, #fff);
+    mask:
+      linear-gradient(#fff, #fff) content-box,
+      linear-gradient(#fff, #fff);
     mask-composite: exclude;
     -webkit-mask-composite: destination-out;
-    padding: 1px; /* The thickness of the glow border */
+    padding: 1px;
     pointer-events: none;
   }
 
-  /* 6. Hover State: Makes the glass "feel" interactive */
   .bg-glass-card:hover {
     background: hsl(var(--background) / 0.15);
-    border-color: hsl(var(--primary) / 0.4);
+    border-color: hsl(var(--gold) / 0.4);
     transform: translateY(-2px);
   }
 
+  /* Primary (Dark Blue) opacity helpers */
   .bg-primary-fade {
     @apply bg-primary/5;
   }
@@ -193,6 +192,7 @@
     @apply bg-primary/20;
   }
 
+  /* Secondary (Mid Blue) opacity helpers */
   .bg-secondary-fade {
     @apply bg-secondary/5;
   }
@@ -212,23 +212,28 @@
     @apply bg-secondary/80;
   }
 
+  /* Gold opacity helpers */
   .bg-gold-fade {
     @apply bg-gold/5;
   }
   .bg-gold-soft {
     @apply bg-gold/10;
   }
+  .bg-gold-subtle {
+    @apply bg-gold/20;
+  }
 
+  /* Classic glass card (white-tinted — works on dark blue bg) */
   .glass-card {
-    background: rgba(255, 255, 255, 0.27);
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(35px);
     -webkit-backdrop-filter: blur(35px);
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-      inset 0 0 0px 0px rgba(255, 255, 255, 0);
+    border: 1px solid rgba(201, 165, 76, 0.25); /* gold-tinted border */
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.04);
     position: relative;
     overflow: hidden;
   }
@@ -243,7 +248,7 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.8),
+      rgba(201, 165, 76, 0.6),
       transparent
     );
   }
@@ -257,13 +262,13 @@
     height: 100%;
     background: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.8),
+      rgba(201, 165, 76, 0.5),
       transparent,
-      rgba(255, 255, 255, 0.3)
+      rgba(201, 165, 76, 0.15)
     );
   }
 
-  /* Borders */
+  /* --- Borders --- */
   .border-glass-faint {
     @apply border-border/10;
   }
@@ -310,11 +315,7 @@
     @apply border-gold/60;
   }
 
-  .bg-gold-subtle {
-    @apply bg-gold/20;
-  }
-
-  /* Shadows */
+  /* --- Shadows --- */
   .shadow-glow-primary-sm {
     @apply shadow-primary/5;
   }
@@ -354,7 +355,7 @@
     @apply shadow-gold/25;
   }
 
-  /* Gradients */
+  /* --- Gradients --- */
   .gradient-fade-primary {
     @apply from-primary/5;
   }
@@ -366,10 +367,10 @@
   }
 
   .gradient-glow-soft {
-    @apply bg-gradient-to-br from-primary/20 to-secondary/20;
+    @apply bg-gradient-to-br from-primary/30 to-secondary/20;
   }
 
-  /* Strokes */
+  /* --- Strokes --- */
   .stroke-primary-soft {
     @apply stroke-primary/10;
   }
@@ -408,7 +409,6 @@
       opacity: 0;
       transform: translateY(30px);
     }
-
     to {
       opacity: 1;
       transform: translateY(0);
@@ -419,7 +419,6 @@
     from {
       opacity: 0;
     }
-
     to {
       opacity: 1;
     }
@@ -430,7 +429,6 @@
       opacity: 0;
       transform: translateX(-20px);
     }
-
     to {
       opacity: 1;
       transform: translateX(0);
@@ -442,15 +440,12 @@
     100% {
       transform: translateY(0) translateX(0);
     }
-
     25% {
       transform: translateY(-20px) translateX(10px);
     }
-
     50% {
       transform: translateY(-10px) translateX(-5px);
     }
-
     75% {
       transform: translateY(-25px) translateX(5px);
     }
@@ -461,7 +456,6 @@
     100% {
       transform: translateY(0) rotate(0deg) scale(1);
     }
-
     50% {
       transform: translateY(-30px) rotate(180deg) scale(1.1);
     }
@@ -473,12 +467,12 @@
       opacity: 0.5;
       transform: scale(1);
     }
-
     50% {
       opacity: 0.8;
       transform: scale(1.15);
     }
   }
+
   @keyframes textGradientMove {
     0% {
       background-position: 0% center;
