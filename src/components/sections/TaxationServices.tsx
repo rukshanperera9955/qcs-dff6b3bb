@@ -1,6 +1,7 @@
-import { memo, useState, useCallback, useMemo } from "react";
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   taxationServicesIndividual,
   taxationServicesPartnership,
@@ -8,182 +9,128 @@ import {
   taxationServicesOther,
 } from "@/utils/constants";
 
-const tabs = [
-  {
-    id: "individual",
-    label: "Individual",
-    icon: "mdi:account-outline",
-    data: taxationServicesIndividual,
-  },
-  {
-    id: "partnership",
-    label: "Partnership",
-    icon: "mdi:account-group-outline",
-    data: taxationServicesPartnership,
-  },
-  {
-    id: "company",
-    label: "Company",
-    icon: "mdi:domain",
-    data: taxationServicesCompany,
-  },
-  {
-    id: "other",
-    label: "NGO & Others",
-    icon: "mdi:charity",
-    data: taxationServicesOther,
-  },
+const categories = [
+  { title: "Individual", items: taxationServicesIndividual },
+  { title: "Partnership", items: taxationServicesPartnership },
+  { title: "Company", items: taxationServicesCompany },
+  { title: "NGO & Others", items: taxationServicesOther },
 ];
 
+const sectionVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.07, duration: 0.45 },
+  }),
+};
+
 const TaxationServices = memo(() => {
-  const [activeTab, setActiveTab] = useState("individual");
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleTabChange = useCallback(
-    (tabId: string) => setActiveTab(tabId),
-    []
-  );
-
-  const activeData = useMemo(
-    () => tabs.find((tab) => tab.id === activeTab)?.data || [],
-    [activeTab]
-  );
+  const handleContactClick = () => {
+    if (location.pathname !== "/") {
+      navigate("/#contact");
+    } else {
+      const element = document.querySelector("#contact");
+      if (element) {
+        const offsetTop =
+          element.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: offsetTop, behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <section
       id="taxation"
-      className="section-padding bg-glass relative overflow-hidden"
+      className="section-padding bg-background relative overflow-hidden"
     >
-      {/* Optimized Background Decorations - PRESERVED FROM ORIGINAL */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Top Right: Vibrant Secondary (Blue/Cyan) Blob */}
-        <div
-          className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-secondary/20 rounded-full blur-[120px] animate-float"
-          style={{ animationDuration: "15s" }}
-        />
-
-        {/* Middle Left: Primary (Purple/Blue) Blob */}
-        <div
-          className="absolute top-[20%] left-[-10%] w-[450px] h-[450px] bg-primary/20 rounded-full blur-[100px] animate-float-rotate"
-          style={{ animationDuration: "20s" }}
-        />
-
-        {/* Bottom Right: Gold Accent Blob */}
-        <div className="absolute bottom-[-5%] right-[10%] w-[400px] h-[400px] bg-gold/15 rounded-full blur-[110px] animate-pulse-slow" />
-
-        {/* Subtle Grid Pattern to add texture under the glass */}
-        <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] [background-size:40px_40px]" />
-      </div>
-
-      <div className="container-custom relative z-10">
-        {/* Section Header */}
+      <div className="container-custom relative z-10 max-w-5xl mx-auto">
+        {/* Title only */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center max-w-3xl mx-auto mb-12"
+          className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gold-soft rounded-full text-gold text-sm font-medium mb-4">
-            <Icon icon="mdi:calculator-variant-outline" className="w-4 h-4" />
-            Tax Compliance
-          </div>
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
             Taxation <span className="gradient-text">Services</span>
           </h2>
-          <p className="text-muted-foreground text-lg">
-            Expert tax advisory and compliance services tailored for
-            individuals, partnerships, companies, and organizations.
-          </p>
         </motion.div>
 
-        {/* Tabs */}
-        <div className="max-w-5xl mx-auto">
-          {/* Tab Navigation */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-wrap justify-center gap-2 mb-8 p-2 bg-card/40 backdrop-blur-sm rounded-2xl border border-glass"
-          >
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => handleTabChange(tab.id)}
-                className={`relative px-6 py-3 rounded-xl font-medium text-sm transition-all duration-300 flex items-center gap-2 ${
-                  activeTab === tab.id
-                    ? "text-gold-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {activeTab === tab.id && (
-                  <motion.div
-                    layoutId="activeTabBg"
-                    className="absolute inset-0 bg-gold rounded-xl shadow-lg shadow-glow-gold-sm"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
-                  />
-                )}
-                <Icon icon={tab.icon} className="w-5 h-5 relative z-10" />
-                <span className="relative z-10 hidden sm:inline">
-                  {tab.label}
-                </span>
-              </button>
-            ))}
-          </motion.div>
-
-          {/* Tab Content */}
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-card/40 rounded-2xl border border-glass p-6 md:p-8 shadow-lg shadow-glow-secondary-sm hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500"
-          >
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {activeData.map((service, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.05, duration: 0.3 }}
-                  className="group p-4 rounded-xl backdrop-blur-sm bg-background border border-glass-subtle hover:border-secondary-medium transition-all duration-300"
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-gold-soft flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all duration-300">
-                      <Icon
-                        icon={service.icon || "mdi:file-document-outline"}
-                        className="w-5 h-5 text-gold"
-                      />
-                    </div>
-                    <div>
-                      <h4 className="font-heading font-medium text-foreground text-sm leading-snug group-hover:text-gold transition-colors">
-                        {service.name}
-                      </h4>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Info Note */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            className="mt-6 p-4 bg-card/40 backdrop-blur-sm rounded-xl border border-glass flex items-start gap-3"
-          >
-            <Icon
-              icon="mdi:information-outline"
-              className="w-5 h-5 text-gold flex-shrink-0 mt-0.5"
-            />
-            <p className="text-sm text-foreground">
-              All taxation services include consultation, preparation, filing,
-              and follow-up with the Inland Revenue Department of Sri Lanka.
-            </p>
-          </motion.div>
+        {/* 4 categories — 2-column responsive grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-12">
+          {categories.map((category, catIndex) => (
+            <motion.div
+              key={catIndex}
+              custom={catIndex}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={sectionVariants}
+            >
+              <h3 className="font-heading font-semibold text-foreground text-xl mb-2">
+                {category.title}
+              </h3>
+              <div className="w-10 h-0.5 bg-gold mb-4" />
+              <ul className="space-y-2">
+                {category.items.map((item, itemIndex) => (
+                  <li
+                    key={itemIndex}
+                    className="flex items-start gap-2.5 text-sm text-foreground"
+                  >
+                    <Icon
+                      icon="mdi:check"
+                      className="w-4 h-4 text-gold flex-shrink-0 mt-0.5"
+                    />
+                    <span className="leading-relaxed">{item.name}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
+
+        {/* Info note */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="mt-10 flex items-start gap-2.5 text-sm text-black"
+        >
+          <Icon
+            icon="mdi:information-outline"
+            className="w-4 h-4 text-gold flex-shrink-0 mt-0.5"
+          />
+          <span>
+            All taxation services include consultation, preparation, filing, and
+            follow-up with the Inland Revenue Department of Sri Lanka.
+          </span>
+        </motion.div>
+
+        {/* Single bottom CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-12 pt-10 border-t border-border text-center"
+        >
+          <p className="text-black mb-5 text-base">
+            Need help with taxation compliance or advisory? Get in touch today.
+          </p>
+          <button
+            onClick={handleContactClick}
+            className="inline-flex items-center gap-2 px-8 py-3 bg-gold text-gold-foreground rounded-full font-semibold text-sm shadow-md hover:shadow-lg hover:brightness-105 transition-all duration-300"
+          >
+            <Icon icon="mdi:message-text-outline" className="w-4 h-4" />
+            Get a Quote
+          </button>
+        </motion.div>
       </div>
     </section>
   );

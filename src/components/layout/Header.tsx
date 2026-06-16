@@ -1,9 +1,11 @@
 import { useState, useEffect, memo, useCallback } from "react";
 import { Icon } from "@iconify/react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
 import { navLinks } from "@/utils/constants";
 import { scrollToSection as scrollTo } from "@/utils/scrollUtils";
+import logo from "@/assets/logo.png";
 
 const sectionIds = [
   "home",
@@ -44,27 +46,44 @@ const Header = memo(() => {
     };
   }, [isMobileMenuOpen]);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const scrollToSection = useCallback((href: string) => {
-    scrollTo(href);
+    if (href.startsWith("#")) {
+      if (location.pathname !== "/") {
+        navigate("/" + href);
+      } else {
+        scrollTo(href);
+      }
+    } else {
+      navigate(href);
+    }
     setIsMobileMenuOpen(false);
-  }, []);
+  }, [location.pathname, navigate]);
 
   const isActive = useCallback(
     (href: string) => {
+      if (href.startsWith("/")) {
+        return location.pathname === href;
+      }
+      if (location.pathname !== "/") {
+        return false;
+      }
       const sectionId = href.replace("#", "");
       return activeSection === sectionId;
     },
-    [activeSection]
+    [activeSection, location.pathname]
   );
 
   return (
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 header-footer-background shadow-lg ${
-          isScrolled ? "py-2" : "py-4"
+          isScrolled ? "py-3" : "py-5"
         }`}
       >
-        <nav className="container-custom px-4 md:px-6">
+        <nav className="w-full px-6 md:px-8 lg:px-12">
           <div className="flex items-center justify-between">
             {/* Logo Section - Consistent across all screens */}
             <motion.a
@@ -77,21 +96,19 @@ const Header = memo(() => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <div className="relative">
-                <div className="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-gold flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300">
-                  <Icon
-                    icon="mdi:domain"
-                    className="w-5 h-5 md:w-6 md:h-6 text-gold-foreground"
-                  />
-                </div>
-                <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-primary-foreground/20 blur-sm" />
+              <div className="relative flex items-center justify-center w-24 h-12 md:w-28 md:h-14 shrink-0">
+                <img
+                  src={logo}
+                  alt="Qualified Corporate Secretaries"
+                  className="absolute top-1/2 -translate-y-1/2 h-20 md:h-24 w-auto object-contain"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="font-heading font-bold text-base md:text-lg header-footer-foreground leading-tight block">
-                  Qualified
+                  QUALIFIED
                 </span>
-                <span className="text-[10px] md:text-xs header-footer-foreground opacity-70">
-                  Corporate Secretaries
+                <span className="text-[10px] md:text-lg header-footer-foreground opacity-70 font-bold">
+                  CORPORATE SECRETARIES
                 </span>
               </div>
             </motion.a>

@@ -1,172 +1,133 @@
-import { memo, useCallback, useMemo } from "react";
+import { memo, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { mainServices } from "@/utils/constants";
 import { scrollToSection } from "@/utils/scrollUtils";
 
+// Map service IDs to their standalone page routes
+const serviceRoutes: Record<string, string> = {
+  secretarial: "/secretarial",
+  taxation: "/taxation",
+  accountancy: "/accountancy",
+  advisory: "/#contact",
+};
+
 const ServicesOverview = memo(() => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleScrollToContact = useCallback(
     () => scrollToSection("#contact"),
     []
   );
-  const handleScrollToSection = useCallback(
-    (id: string) => scrollToSection(`#${id}`),
-    []
-  );
 
-  const cardVariants = useMemo(
-    () => ({
-      hidden: { opacity: 0, y: 30 },
-      visible: (i: number) => ({
-        opacity: 1,
-        y: 0,
-        transition: { delay: i * 0.1, duration: 0.5 },
-      }),
-    }),
-    []
+  const handleServiceClick = useCallback(
+    (id: string) => {
+      const route = serviceRoutes[id];
+      if (!route) return;
+      if (route.startsWith("/#")) {
+        if (location.pathname !== "/") {
+          navigate(route);
+        } else {
+          scrollToSection(route.replace("/", ""));
+        }
+      } else {
+        navigate(route);
+      }
+    },
+    [navigate, location.pathname]
   );
-
-  const getColorClasses = useCallback((color: string) => {
-    switch (color) {
-      case "primary":
-        return {
-          bg: "bg-gold-soft",
-          text: "text-gold",
-          hoverText: "group-hover:text-gold",
-        };
-      case "gold":
-        return {
-          bg: "bg-gold-soft",
-          text: "text-gold",
-          hoverText: "group-hover:text-gold",
-        };
-      case "indigo":
-        return {
-          bg: "bg-gold-soft",
-          text: "text-gold",
-          hoverText: "group-hover:text-gold",
-        };
-      default:
-        return {
-          bg: "bg-gold-soft",
-          text: "text-gold",
-          hoverText: "group-hover:text-gold",
-        };
-    }
-  }, []);
 
   return (
     <section
       id="services"
-      className="section-padding bg-glass relative overflow-hidden"
+      className="section-padding bg-background relative"
     >
-      {/* Optimized Background Decorations - PRESERVED FROM ORIGINAL */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Top Right: Vibrant Secondary (Blue/Cyan) Blob */}
-        <div
-          className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-secondary/20 rounded-full blur-[120px] animate-float"
-          style={{ animationDuration: "15s" }}
-        />
+      <div className="container-custom relative z-10 max-w-5xl mx-auto">
 
-        {/* Middle Left: Primary (Purple/Blue) Blob */}
-        <div
-          className="absolute top-[20%] left-[-10%] w-[450px] h-[450px] bg-primary/20 rounded-full blur-[100px] animate-float-rotate"
-          style={{ animationDuration: "20s" }}
-        />
-
-        {/* Bottom Right: Gold Accent Blob */}
-        <div className="absolute bottom-[-5%] right-[10%] w-[400px] h-[400px] bg-gold/15 rounded-full blur-[110px] animate-pulse-slow" />
-
-        {/* Subtle Grid Pattern to add texture under the glass */}
-        <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] [background-size:40px_40px]" />
-      </div>
-
-      <div className="container-custom relative z-10">
-        {/* Section Header */}
+        {/* ── Classic section header ── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center max-w-3xl mx-auto mb-12"
+          className="mb-14"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gold-soft rounded-full text-gold text-sm font-medium mb-4">
-            <Icon icon="mdi:briefcase-outline" className="w-4 h-4" />
-            What We Offer
+          {/* Top rule */}
+          <div className="flex items-center gap-4 mb-6">
+            <div className="flex-1 h-px bg-border" />
+            <span className="text-xs font-semibold tracking-[0.3em] uppercase text-black">
+              What We Offer
+            </span>
+            <div className="flex-1 h-px bg-border" />
           </div>
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Our Professional <span className="gradient-text">Services</span>
+
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground text-center leading-tight">
+            Our Professional{" "}
+            <span className="gradient-text">Services</span>
           </h2>
-          <p className="text-muted-foreground text-lg">
-            Comprehensive business solutions tailored for companies,
-            partnerships, individuals, NGOs, and associations across Sri Lanka.
-          </p>
         </motion.div>
 
-        {/* Service Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {mainServices.map((service, index) => {
-            const colors = getColorClasses(service.color);
-
-            return (
-              <motion.div
-                key={service.id}
-                custom={index}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={cardVariants}
-                className="group"
+        {/* ── Service list — classic ruled rows ── */}
+        <div className="divide-y divide-border border-t border-border">
+          {mainServices.map((service, index) => (
+            <motion.div
+              key={service.id}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.08, duration: 0.4 }}
+            >
+              <button
+                onClick={() => handleServiceClick(service.id)}
+                className="group w-full text-left py-8 flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-10 hover:bg-accent/30 transition-colors duration-200 px-2 -mx-2 rounded-sm"
               >
-                <button
-                  onClick={() => handleScrollToSection(service.id)}
-                  className="w-full text-left h-full bg-card/40 rounded-xl p-6 border border-glass shadow-lg shadow-glow-secondary-sm hover:shadow-2xl hover:border-secondary-strong hover:shadow-glow-secondary-lg transition-all duration-500"
-                >
-                  <div
-                    className={`w-14 h-14 rounded-xl ${colors.bg} flex items-center justify-center mb-5 group-hover:bg-secondary-subtle group-hover:scale-110 transition-all duration-300`}
-                  >
-                    <Icon icon={service.icon} className="w-7 h-7 text-gold" />
-                  </div>
+                {/* Index number */}
+                <span className="text-xs font-bold text-black/50 tracking-widest pt-1 w-6 flex-shrink-0 select-none">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
 
-                  <h3
-                    className={`font-heading text-lg font-semibold text-foreground mb-2 ${colors.hoverText} transition-colors`}
-                  >
+                {/* Title + description */}
+                <div className="flex-1">
+                  <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2 group-hover:text-gold transition-colors duration-200">
                     {service.title}
                   </h3>
-
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                  <p className="text-black text-sm md:text-base leading-relaxed max-w-2xl">
                     {service.description}
                   </p>
+                </div>
 
-                  <div
-                    className={`inline-flex items-center gap-2 text-sm font-medium ${colors.text}`}
-                  >
-                    Learn More
-                    <Icon
-                      icon="mdi:arrow-right"
-                      className="w-4 h-4 group-hover:translate-x-1 transition-transform"
-                    />
-                  </div>
-                </button>
-              </motion.div>
-            );
-          })}
+                {/* Arrow CTA */}
+                <div className="flex items-center gap-1.5 text-sm font-semibold text-gold flex-shrink-0 sm:pt-1.5">
+                  <span className="hidden sm:inline">View</span>
+                  <Icon
+                    icon="mdi:arrow-right"
+                    className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
+                  />
+                </div>
+              </button>
+            </motion.div>
+          ))}
         </div>
 
-        {/* Bottom CTA */}
+        {/* ── Bottom CTA ── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.5 }}
-          className="text-center mt-12"
+          className="mt-14 flex flex-col sm:flex-row items-center justify-between gap-6 pt-8 border-t border-border"
         >
-          <p className="text-muted-foreground mb-4">
-            Need help choosing the right service?
+          <p className="text-black text-sm text-center sm:text-left">
+            Not sure which service fits your needs?
           </p>
-          <button onClick={handleScrollToContact} className="btn-hero-primary">
-            <Icon icon="mdi:message-text-outline" className="w-5 h-5" />
+          <button
+            onClick={handleScrollToContact}
+            className="inline-flex items-center gap-2 px-7 py-3 bg-gold text-gold-foreground rounded-full font-semibold text-sm shadow-md hover:shadow-lg hover:brightness-105 transition-all duration-300 flex-shrink-0"
+          >
             Get Free Consultation
+            <Icon icon="mdi:arrow-right" className="w-4 h-4" />
           </button>
         </motion.div>
       </div>

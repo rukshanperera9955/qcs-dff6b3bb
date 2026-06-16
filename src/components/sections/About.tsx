@@ -8,12 +8,6 @@ const About = memo(() => {
       id="about"
       className="section-padding bg-background relative overflow-hidden"
     >
-      {/* Background Decorations */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] bg-gold/10 rounded-full blur-[100px]" />
-        <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px]" />
-      </div>
-
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <motion.div
@@ -41,7 +35,7 @@ const About = memo(() => {
             transition={{ duration: 0.6 }}
             className="relative"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-glow-secondary-md group aspect-[4/3] bg-card/40 border border-glass">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-glow-secondary-md group aspect-[4/3] bg-card border border-glass">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent z-10 opacity-60 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-40" />
 
               <img
@@ -50,7 +44,7 @@ const About = memo(() => {
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
 
-              <div className="absolute bottom-6 left-6 z-20 bg-background/90 backdrop-blur-md p-4 rounded-xl border border-glass shadow-lg">
+              <div className="absolute bottom-6 left-6 z-20 bg-card/95 backdrop-blur-md p-4 rounded-xl border border-glass shadow-lg">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-lg bg-gold-soft flex items-center justify-center">
                     <Icon
@@ -62,7 +56,7 @@ const About = memo(() => {
                     <p className="font-heading font-bold text-foreground">
                       Trusted Partner
                     </p>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-black">
                       In Business Growth
                     </p>
                   </div>
@@ -81,7 +75,7 @@ const About = memo(() => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="space-y-5 text-muted-foreground text-base md:text-lg">
+            <div className="space-y-5 text-black text-base md:text-lg">
               <p>
                 <strong className="text-foreground font-semibold">
                   QCS (Qualified Corporate Services)
@@ -105,7 +99,7 @@ const About = memo(() => {
                 tailored solutions that meet each client’s unique needs.
               </p>
 
-              <div className="bg-card/40 border border-glass rounded-xl p-5 mt-8 shadow-sm">
+              <div className="bg-card border border-glass rounded-xl p-5 mt-8 shadow-sm">
                 <p className="text-foreground font-heading font-semibold italic flex items-start gap-3">
                   <Icon
                     icon="mdi:format-quote-open"

@@ -1,4 +1,5 @@
-import { lazy, Suspense } from "react";
+import { useEffect, lazy, Suspense } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
@@ -6,19 +7,11 @@ import ParticleBackground from "@/components/ParticleBackground";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 // Lazy load below-the-fold sections for better performance
-const About = lazy(() => import("@/components/sections/About"));
 const ServicesOverview = lazy(
   () => import("@/components/sections/ServicesOverview")
 );
-const SecretarialServices = lazy(
-  () => import("@/components/sections/SecretarialServices")
-);
-const TaxationServices = lazy(
-  () => import("@/components/sections/TaxationServices")
-);
-const AccountancyServices = lazy(
-  () => import("@/components/sections/AccountancyServices")
-);
+
+
 const Contact = lazy(() => import("@/components/sections/Contact"));
 
 // Loading fallback component
@@ -29,6 +22,22 @@ const SectionLoader = () => (
 );
 
 const Index = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const timer = setTimeout(() => {
+        const element = document.querySelector(location.hash);
+        if (element) {
+          const offsetTop =
+            element.getBoundingClientRect().top + window.pageYOffset - 80;
+          window.scrollTo({ top: offsetTop, behavior: "smooth" });
+        }
+      }, 200);
+      return () => clearTimeout(timer);
+    }
+  }, [location]);
+
   return (
     <div className="min-h-screen bg-background relative">
       {/* Attractive Navy Blue Background Overlay */}
@@ -45,23 +54,7 @@ const Index = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.03] via-transparent to-primary/[0.03] pointer-events-none" />
 
           <Suspense fallback={<SectionLoader />}>
-            <About />
-          </Suspense>
-
-          <Suspense fallback={<SectionLoader />}>
             <ServicesOverview />
-          </Suspense>
-
-          <Suspense fallback={<SectionLoader />}>
-            <SecretarialServices />
-          </Suspense>
-
-          <Suspense fallback={<SectionLoader />}>
-            <TaxationServices />
-          </Suspense>
-
-          <Suspense fallback={<SectionLoader />}>
-            <AccountancyServices />
           </Suspense>
 
           <Suspense fallback={<SectionLoader />}>

@@ -303,10 +303,10 @@ export const accountancyServices: ServiceItem[] = [
 // Navigation Links
 export const navLinks = [
   { name: "Home", href: "#home" },
-  { name: "About Us", href: "#about" },
-  { name: "Secretarial Services", href: "#secretarial" },
-  { name: "Taxation Services", href: "#taxation" },
-  { name: "Accounting Services", href: "#accountancy" },
+  { name: "About Us", href: "/about" },
+  { name: "Secretarial Services", href: "/secretarial" },
+  { name: "Taxation Services", href: "/taxation" },
+  { name: "Accounting Services", href: "/accountancy" },
 ];
 
 // Company Info

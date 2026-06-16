@@ -111,10 +111,8 @@ const Contact = memo(() => {
       id="contact"
       className="section-padding bg-glass relative overflow-hidden"
     >
-      {/* Background Decorations - PRESERVED FROM ORIGINAL */}
+      {/* Background Decorations */}
       <div className="absolute inset-0 bg-gradient-to-br gradient-fade-primary via-transparent to-gold/5" />
-      <div className="absolute top-20 right-10 w-72 h-72 bg-primary-soft rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-10 w-72 h-72 bg-gold-soft rounded-full blur-3xl" />
 
       <div className="container-custom relative z-10">
         {/* Section Header */}
@@ -132,7 +130,7 @@ const Contact = memo(() => {
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Let's Start a <span className="gradient-text">Conversation</span>
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-black text-lg">
             Ready to streamline your corporate services? We're here to help you
             every step of the way.
           </p>
@@ -160,7 +158,7 @@ const Contact = memo(() => {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               className="group"
             >
-              <div className="h-full bg-card/40 rounded-xl p-6 border border-glass shadow-lg shadow-glow-secondary-sm hover:shadow-2xl hover:border-secondary-strong hover:shadow-glow-secondary-lg transition-all duration-500">
+              <div className="h-full bg-card rounded-xl p-6 border border-glass shadow-lg shadow-glow-secondary-sm hover:shadow-2xl hover:border-secondary-strong hover:shadow-glow-secondary-lg transition-all duration-500">
                 <div className="flex flex-col items-center text-center">
                   <div className="w-14 h-14 rounded-xl bg-gold-soft flex items-center justify-center mb-5 group-hover:bg-secondary-subtle group-hover:scale-110 transition-all duration-300">
                     <Icon icon={method.icon} className="w-7 h-7 text-gold" />
@@ -168,7 +166,7 @@ const Contact = memo(() => {
                   <h4 className="font-heading font-semibold text-foreground text-lg mb-2 group-hover:text-gold transition-colors">
                     {method.label}
                   </h4>
-                  <p className="text-muted-foreground text-sm">
+                  <p className="text-black text-sm">
                     {method.value}
                   </p>
                 </div>
@@ -187,7 +185,7 @@ const Contact = memo(() => {
             transition={{ duration: 0.5 }}
             className="lg:col-span-2"
           >
-            <div className="h-full bg-card/40 rounded-xl border border-glass p-6 md:p-8 shadow-lg shadow-glow-secondary-sm hover:shadow-2xl hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500 flex flex-col">
+            <div className="h-full bg-card rounded-xl border border-glass p-6 md:p-8 shadow-lg shadow-glow-secondary-sm hover:shadow-2xl hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500 flex flex-col">
               <h3 className="font-heading text-xl font-semibold text-foreground mb-6">
                 Why Work With Us?
               </h3>
@@ -254,7 +252,7 @@ const Contact = memo(() => {
             transition={{ duration: 0.5 }}
             className="lg:col-span-3"
           >
-            <div className="h-full bg-card/40 rounded-xl border border-glass p-6 md:p-8 shadow-lg shadow-glow-secondary-sm hover:shadow-2xl hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500 flex flex-col">
+            <div className="h-full bg-card rounded-xl border border-glass p-6 md:p-8 shadow-lg shadow-glow-secondary-sm hover:shadow-2xl hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500 flex flex-col">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-14 h-14 rounded-xl bg-gold-soft flex items-center justify-center">
                   <Icon
@@ -266,7 +264,7 @@ const Contact = memo(() => {
                   <h3 className="font-heading font-semibold text-foreground text-xl">
                     Send Us a Message
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
+                  <p className="text-black text-sm leading-relaxed">
                     We'll get back to you within 24 hours
                   </p>
                 </div>
@@ -288,7 +286,7 @@ const Contact = memo(() => {
                     <div className="relative">
                       <Icon
                         icon="mdi:account-outline"
-                        className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black"
                       />
                       <input
                         {...register("name")}
@@ -317,7 +315,7 @@ const Contact = memo(() => {
                     <div className="relative">
                       <Icon
                         icon="mdi:email-outline"
-                        className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black"
                       />
                       <input
                         {...register("email")}
@@ -348,7 +346,7 @@ const Contact = memo(() => {
                     <div className="relative">
                       <Icon
                         icon="mdi:phone-outline"
-                        className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black"
                       />
                       <input
                         {...register("phone")}
@@ -377,7 +375,7 @@ const Contact = memo(() => {
                     <div className="relative">
                       <Icon
                         icon="mdi:briefcase-outline"
-                        className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground z-10 pointer-events-none"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black z-10 pointer-events-none"
                       />
                       <Controller
                         control={control}
@@ -473,7 +471,7 @@ const Contact = memo(() => {
           transition={{ duration: 0.5 }}
           className="max-w-6xl mx-auto"
         >
-          <div className="bg-card/40 rounded-xl border border-glass p-2 shadow-lg hover:shadow-2xl hover:border-secondary-medium transition-all duration-500 overflow-hidden">
+          <div className="bg-card rounded-xl border border-glass p-2 shadow-lg hover:shadow-2xl hover:border-secondary-medium transition-all duration-500 overflow-hidden">
             <iframe
               title="Google Map Location"
               src="https://maps.google.com/maps?q=44A,%20Dhakshinarama%20Road,%20Mount%20Lavinia,%20Sri%20Lanka&t=&z=15&ie=UTF8&iwloc=&output=embed"

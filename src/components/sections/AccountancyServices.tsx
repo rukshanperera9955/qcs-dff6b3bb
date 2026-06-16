@@ -1,109 +1,96 @@
-import { memo, useMemo } from "react";
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { accountancyServices } from "@/utils/constants";
 
-const features = [
-  "Accurate financial record keeping",
-  "Compliance with SLFRS standards",
-  "Timely reporting and submissions",
-  "Experienced accounting professionals",
-  "Cloud-based accounting solutions",
-  "Regular financial health reviews",
-];
+const sectionVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.07, duration: 0.45 },
+  }),
+};
 
 const AccountancyServices = memo(() => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleContactClick = () => {
+    if (location.pathname !== "/") {
+      navigate("/#contact");
+    } else {
+      const element = document.querySelector("#contact");
+      if (element) {
+        const offsetTop =
+          element.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: offsetTop, behavior: "smooth" });
+      }
+    }
+  };
+
   return (
     <section
       id="accountancy"
-      className="section-padding bg-glass relative overflow-hidden"
+      className="section-padding bg-background relative overflow-hidden"
     >
-      {/* Background Decorations - PRESERVED FROM ORIGINAL */}
-      <div className="absolute top-1/4 right-0 w-72 h-72 bg-primary-fade rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 left-0 w-56 h-56 bg-gold-fade rounded-full blur-3xl" />
-
-      <div className="container-custom relative z-10">
-        {/* Section Header */}
+      <div className="container-custom relative z-10 max-w-5xl mx-auto">
+        {/* Title only */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center max-w-3xl mx-auto mb-12"
+          className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gold-soft rounded-full text-gold text-sm font-medium mb-4">
-            <Icon icon="mdi:chart-line" className="w-4 h-4" />
-            Financial Management
-          </div>
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
             Accounting <span className="gradient-text">Services</span>
           </h2>
-          <p className="text-muted-foreground text-lg">
-            Professional accounting and bookkeeping services to keep your
-            financial records accurate and up-to-date.
-          </p>
         </motion.div>
 
-        {/* Services Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {/* Services — 2-column responsive grid, plain text */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-12">
           {accountancyServices.map((service, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="group"
+              variants={sectionVariants}
             >
-              <div className="h-full bg-card/40 rounded-xl p-6 border border-glass shadow-lg shadow-glow-secondary-sm hover:shadow-2xl hover:border-secondary-strong hover:shadow-glow-secondary-lg transition-all duration-500">
-                <div className="w-14 h-14 rounded-xl bg-gold-soft flex items-center justify-center mb-5 group-hover:bg-secondary-subtle group-hover:scale-110 transition-all duration-300">
-                  <Icon
-                    icon={service.icon || "mdi:book-open-outline"}
-                    className="w-7 h-7 text-gold"
-                  />
-                </div>
-
-                <h3 className="font-heading font-semibold text-foreground text-lg mb-2 group-hover:text-gold transition-colors">
-                  {service.name}
-                </h3>
-
-                {service.description && (
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {service.description}
-                  </p>
-                )}
-              </div>
+              <h3 className="font-heading font-semibold text-foreground text-xl mb-2">
+                {service.name}
+              </h3>
+              <div className="w-10 h-0.5 bg-gold mb-3" />
+              {service.description && (
+                <p className="text-black text-sm leading-relaxed">
+                  {service.description}
+                </p>
+              )}
             </motion.div>
           ))}
         </div>
 
-        {/* Features List */}
+        {/* Single bottom CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          className="mt-12 max-w-4xl mx-auto"
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-16 pt-10 border-t border-border text-center"
         >
-          <div className="bg-card/40 rounded-2xl border border-glass p-6 md:p-8 shadow-2xl shadow-glow-secondary-sm hover:border-secondary-medium hover:shadow-glow-secondary-md transition-all duration-500">
-            <h3 className="font-heading font-semibold text-foreground text-xl mb-6 text-center">
-              Why Choose Our Accounting Services?
-            </h3>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {features.map((feature, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-3 p-3 rounded-lg backdrop-blur-sm bg-background border border-glass-subtle hover:border-secondary-medium transition-all duration-300"
-                >
-                  <Icon
-                    icon="mdi:check-circle"
-                    className="w-5 h-5 text-gold flex-shrink-0"
-                  />
-                  <span className="text-foreground text-sm">{feature}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <p className="text-black mb-5 text-base">
+            Need help with accounting or bookkeeping? Get in touch today.
+          </p>
+          <button
+            onClick={handleContactClick}
+            className="inline-flex items-center gap-2 px-8 py-3 bg-gold text-gold-foreground rounded-full font-semibold text-sm shadow-md hover:shadow-lg hover:brightness-105 transition-all duration-300"
+          >
+            <Icon icon="mdi:message-text-outline" className="w-4 h-4" />
+            Get a Quote
+          </button>
         </motion.div>
       </div>
     </section>

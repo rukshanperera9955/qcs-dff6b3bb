@@ -1,17 +1,30 @@
 import { memo, useEffect, useCallback, useMemo } from "react";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
+import { useNavigate, useLocation } from "react-router-dom";
 import { companyInfo, navLinks } from "@/utils/constants";
 import { scrollToSection } from "@/utils/scrollUtils";
+import logo from "@/assets/logo.png";
 
 const Footer = memo(() => {
   useEffect(() => {
     // Optional: any other scroll handling if needed
   }, []);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleScrollToSection = useCallback((href: string) => {
-    scrollToSection(href);
-  }, []);
+    if (href.startsWith("#")) {
+      if (location.pathname !== "/") {
+        navigate("/" + href);
+      } else {
+        scrollToSection(href);
+      }
+    } else {
+      navigate(href);
+    }
+  }, [location.pathname, navigate]);
 
   const quickLinks = useMemo(
     () => [
@@ -32,10 +45,11 @@ const Footer = memo(() => {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-11 h-11 rounded-xl bg-gold flex items-center justify-center shadow-md">
-                <Icon
-                  icon="mdi:domain"
-                  className="w-6 h-6 text-gold-foreground"
+              <div className="relative flex items-center justify-center w-24 h-24 shrink-0">
+                <img
+                  src={logo}
+                  alt="Qualified Corporate Secretaries"
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div>
@@ -43,7 +57,7 @@ const Footer = memo(() => {
                   Qualified
                 </span>
                 <span className="text-xs header-footer-foreground/70">
-                  Corporate Secretary
+                  CORPORATE SECRETARY
                 </span>
               </div>
             </div>
