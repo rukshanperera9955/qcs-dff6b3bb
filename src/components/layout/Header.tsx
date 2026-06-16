@@ -79,8 +79,10 @@ const Header = memo(() => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 header-footer-background shadow-lg ${
-          isScrolled ? "py-3" : "py-5"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${
+          isScrolled
+            ? "bg-background/20 backdrop-blur-md border-border/20 shadow-md py-3"
+            : "bg-white border-border/50 shadow-sm py-5"
         }`}
       >
         <nav className="w-full px-6 md:px-8 lg:px-12">
