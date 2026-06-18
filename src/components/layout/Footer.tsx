@@ -41,17 +41,15 @@ const Footer = memo(() => {
     <footer className="header-footer-background header-footer-foreground relative">
       {/* Main Footer Content */}
       <div className="container-custom section-padding pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 items-start">
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <div className="relative flex items-center justify-center w-24 h-24 shrink-0">
-                <img
-                  src={logo}
-                  alt="Qualified Corporate Secretaries"
-                  className="w-full h-full object-contain"
-                />
-              </div>
+              <img
+                src={logo}
+                alt="Qualified Corporate Secretaries"
+                className="w-16 h-16 object-contain shrink-0"
+              />
               <div>
                 <span className="font-heading font-bold text-lg block leading-tight header-footer-foreground">
                   Qualified
@@ -65,20 +63,6 @@ const Footer = memo(() => {
               Your trusted partner for corporate secretarial, taxation, and
               accounting services in Sri Lanka.
             </p>
-            <div className="flex gap-3">
-              {companyInfo.socialLinks.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-primary-foreground/10 flex items-center justify-center header-footer-foreground/70 hover:bg-gold hover:text-gold-foreground transition-all duration-300"
-                  aria-label={social.name}
-                >
-                  <Icon icon={social.icon} className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -154,6 +138,13 @@ const Footer = memo(() => {
                 />
                 <span>{companyInfo.email}</span>
               </li>
+              <li className="flex items-center gap-3 text-sm header-footer-foreground/70">
+                <Icon
+                  icon="mdi:email-outline"
+                  className="w-5 h-5 text-gold flex-shrink-0"
+                />
+                <span>info@qcs.lk</span>
+              </li>
             </ul>
           </div>
         </div>
@@ -166,7 +157,15 @@ const Footer = memo(() => {
             © {currentYear} {companyInfo.name}. All rights reserved.
           </p>
           <p className="text-sm header-footer-foreground/60">
-            Powered by aurin innovatech
+            Powered by{" "}
+            <a
+              href="https://www.facebook.com/auriniInovations"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold transition-colors duration-200"
+            >
+              aurin innovatech
+            </a>
           </p>
         </div>
       </div>

@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
-import ParticleBackground from "@/components/ParticleBackground";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 // Lazy load below-the-fold sections for better performance
@@ -40,9 +39,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background relative">
-      {/* Attractive Navy Blue Background Overlay */}
-
-      <ParticleBackground />
       <Header />
 
       <main className="relative z-10">

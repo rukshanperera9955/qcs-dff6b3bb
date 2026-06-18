@@ -67,7 +67,7 @@ const Hero = memo(() => {
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground leading-[1.1] mb-6"
           >
             Professional Corporate <br className="hidden md:block" />
-            <span className="gradient-text">&amp; Financial Solutions</span>{" "}
+            <span className="gradient-text">Financial Solutions</span>{" "}
             <br className="hidden md:block" />
             in Sri Lanka
           </motion.h1>

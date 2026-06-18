@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
+import ImageSlider from "@/components/ImageSlider";
 
 const About = memo(() => {
   return (
@@ -27,7 +28,7 @@ const About = memo(() => {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left Column: Image / Visual */}
+          {/* Left Column: Image Slider */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -35,33 +36,8 @@ const About = memo(() => {
             transition={{ duration: 0.6 }}
             className="relative"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-glow-secondary-md group aspect-[4/3] bg-card border border-glass">
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent z-10 opacity-60 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-40" />
-
-              <img
-                src="/about.png"
-                alt="About QCS"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-
-              <div className="absolute bottom-6 left-6 z-20 bg-card/95 backdrop-blur-md p-4 rounded-xl border border-glass shadow-lg">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-lg bg-gold-soft flex items-center justify-center">
-                    <Icon
-                      icon="mdi:shield-check"
-                      className="w-6 h-6 text-gold"
-                    />
-                  </div>
-                  <div>
-                    <p className="font-heading font-bold text-foreground">
-                      Trusted Partner
-                    </p>
-                    <p className="text-xs text-black">
-                      In Business Growth
-                    </p>
-                  </div>
-                </div>
-              </div>
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-glow-secondary-md group border border-glass">
+              <ImageSlider />
             </div>
             {/* Decorative Elements */}
             <div className="absolute -top-6 -left-6 w-24 h-24 border-t-2 border-l-2 border-gold rounded-tl-3xl opacity-50" />
@@ -106,7 +82,7 @@ const About = memo(() => {
                     className="w-8 h-8 text-gold flex-shrink-0 opacity-50"
                   />
                   <span>
-                    "At QCS, we don't just provide services — we become your
+                    "At QCS, we don't just provide services, we become your
                     trusted business partner."
                   </span>
                 </p>

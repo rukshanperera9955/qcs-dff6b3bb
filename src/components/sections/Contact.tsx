@@ -69,7 +69,7 @@ const Contact = memo(() => {
       setIsSubmitting(true);
 
       try {
-        const response = await fetch("http://localhost:5000/api/send-email", {
+        const response = await fetch("/api/send-email", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -77,10 +77,20 @@ const Contact = memo(() => {
           body: JSON.stringify(data),
         });
 
-        const result = await response.json();
+        const text = await response.text();
+        let result: { error?: string; success?: boolean } = {};
+        if (text) {
+          try {
+            result = JSON.parse(text);
+          } catch {
+            // Non-JSON response (e.g. a server/proxy error page)
+          }
+        }
 
         if (!response.ok) {
-          throw new Error(result.error || "Failed to send message");
+          throw new Error(
+            result.error || `Request failed with status ${response.status}`
+          );
         }
 
         toast({
@@ -224,7 +234,7 @@ const Contact = memo(() => {
               {/* Social Links */}
               <div className="pt-6 border-t border-glass mt-6">
                 <h4 className="font-heading font-semibold text-foreground text-base mb-4">
-                  Follow Us
+                  Connect With Us
                 </h4>
                 <div className="flex gap-3">
                   {companyInfo.socialLinks.map((social) => (
@@ -383,7 +393,7 @@ const Contact = memo(() => {
                         render={({ field }) => (
                           <Select
                             onValueChange={field.onChange}
-                            value={field.value}
+                            value={field.value ?? ""}
                           >
                             <SelectTrigger
                               id="service"

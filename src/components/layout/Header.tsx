@@ -7,15 +7,7 @@ import { navLinks } from "@/utils/constants";
 import { scrollToSection as scrollTo } from "@/utils/scrollUtils";
 import logo from "@/assets/logo.png";
 
-const sectionIds = [
-  "home",
-  "about",
-  "services",
-  "secretarial",
-  "taxation",
-  "accountancy",
-  "contact",
-];
+const sectionIds = ["home", "services", "contact"];
 
 const Header = memo(() => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -70,6 +62,14 @@ const Header = memo(() => {
       if (location.pathname !== "/") {
         return false;
       }
+      // "Home" represents the whole landing page, so keep it selected on "/"
+      // regardless of scroll position. The other nav items are separate
+      // routes, so once the scroll-spy moves past #home (into #services /
+      // #contact) nothing would match and the highlight would vanish as you
+      // scroll to the bottom.
+      if (href === "#home") {
+        return true;
+      }
       const sectionId = href.replace("#", "");
       return activeSection === sectionId;
     },
@@ -81,7 +81,7 @@ const Header = memo(() => {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${
           isScrolled
-            ? "bg-background/20 backdrop-blur-md border-border/20 shadow-md py-3"
+            ? "bg-background/40 backdrop-blur-lg border-border/20 shadow-md py-3"
             : "bg-white border-border/50 shadow-sm py-5"
         }`}
       >

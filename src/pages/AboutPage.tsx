@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import ParticleBackground from "@/components/ParticleBackground";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import About from "@/components/sections/About";
 
@@ -14,7 +13,6 @@ const SectionLoader = () => (
 const AboutPage = () => {
   return (
     <div className="min-h-screen bg-background relative">
-      <ParticleBackground />
       <Header />
 
       <main className="relative z-10 pt-24 pb-12">

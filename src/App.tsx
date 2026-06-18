@@ -4,6 +4,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import Preloader from "@/components/Preloader";
+import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import AboutPage from "./pages/AboutPage";
 import SecretarialPage from "./pages/SecretarialPage";
@@ -15,10 +17,15 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+    <Preloader />
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename="/">
+      <BrowserRouter
+        basename="/"
+        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+      >
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<AboutPage />} />
@@ -34,3 +41,4 @@ const App = () => (
 );
 
 export default App;
+
